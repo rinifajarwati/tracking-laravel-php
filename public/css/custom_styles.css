@@ -1,0 +1,21 @@
+.spinner-container {
+    width: 100%;
+    height: 100%;
+    z-index: 9000;
+}
+
+.floating-button {
+    z-index: 2000;
+}
+
+.min-w-200 {
+    min-width: 200px;
+}
+
+#datepicker-range {
+    border-radius: 0 5.6px 5.6px 0;
+}
+input[disabled] {
+    background-color: #ffffff; 
+    color: #000000;
+  }

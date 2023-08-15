@@ -1,6 +1,6 @@
 /*!
-    * Start Bootstrap - SB Admin Pro v2.0.5 (https://shop.startbootstrap.com/product/sb-admin-pro)
-    * Copyright 2013-2023 Start Bootstrap
+    * Start Bootstrap - SB Admin Pro v2.0.4 (https://shop.startbootstrap.com/product/sb-admin-pro)
+    * Copyright 2013-2022 Start Bootstrap
     * Licensed under SEE_LICENSE (https://github.com/StartBootstrap/sb-admin-pro/blob/master/LICENSE)
     */
     window.addEventListener('DOMContentLoaded', event => {
@@ -18,6 +18,15 @@
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
     });
+
+    // Activate Bootstrap scrollspy for the sticky nav component
+    const stickyNav = document.body.querySelector('#stickyNav');
+    if (stickyNav) {
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#stickyNav',
+            offset: 82,
+        });
+    }
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');

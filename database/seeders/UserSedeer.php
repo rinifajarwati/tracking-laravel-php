@@ -15,8 +15,18 @@ class UserSedeer extends Seeder
     {
         //
         User::create([
+            'uid'=>'123456789',
+            'name'=>'Developer',
             'email'=>'dev@developer.com',
-            'password'=>'developer'
+            'password'=>'developer',
+            'position_uid'=>'staff'
+        ]);
+        User::create([
+            'uid'=>'987654321',
+            'name'=>'Technician',
+            'email'=>'technician@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'staff'
         ]);
 
     }
