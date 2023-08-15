@@ -15,7 +15,7 @@ class AuthControllers extends Controller
         return view('Auth.login.index',  $data);
     }
 
-    public function authentocate(){
+    public function authenticate(){
         $validator = request()->validate([
             'email'=>'required|email:dns',
             'password'=>'required|min:6'

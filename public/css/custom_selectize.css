@@ -1,0 +1,7 @@
+.selectize-input {
+    padding: 0.875rem 1.125rem !important;
+}
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    line-height: 1 !important;
+}
