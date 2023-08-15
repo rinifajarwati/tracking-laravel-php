@@ -11,7 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    protected $guarded = ['uid'];
+    protected $with = ['userPermissions'];
     /**
      * The attributes that are mass assignable.
      *
@@ -42,4 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function userPermissions()
+    {
+        return $this->hasMany(UserPermission::class, 'user_uid', 'uid');
+    }
 }

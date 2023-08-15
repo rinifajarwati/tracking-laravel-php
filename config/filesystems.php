@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'public_uploads_file' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/pdf/file',
+            'url' => env('APP_URL') . '/assets/pdf/file',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*
