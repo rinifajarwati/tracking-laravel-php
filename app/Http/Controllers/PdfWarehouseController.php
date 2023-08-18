@@ -62,7 +62,7 @@ class PdfWarehouseController extends Controller
             }
         }
 
-        File::delete(public_path($tempPdf));
+        File::delete($tempPdf);
 
         $outputFilename = 'merged.pdf';
         $pdf->Output($outputFilename, 'D');
