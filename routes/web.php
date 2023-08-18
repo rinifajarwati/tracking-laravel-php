@@ -60,39 +60,39 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/warehouse-approved-logistics/{uid}', [WarehouseControllers::class, 'approvedLogistics']);
     Route::get('/pdf-warehouse/{warehouse}', [WarehouseControllers::class, 'showPdf']);
 
-    Route::get('/generate-pdf', [PdfWarehouseController::class, 'generatePDF']);
-   
+    Route::get('/generate-pdf/{warehouse}', [PdfWarehouseController::class, 'generatePDF']);
+
 
     //rma
-    Route::resource('rma', RmaControllers ::class);
-    Route::get('/datatables/rma',[RmaControllers::class, 'datatables']);
+    Route::resource('rma', RmaControllers::class);
+    Route::get('/datatables/rma', [RmaControllers::class, 'datatables']);
     Route::put('/rma-approved-sales/{uid}', [RmaControllers::class, 'approved']);
-    Route::get('/datatables/rma-technician',[RmaControllers::class, 'datatablesTechnician']);
+    Route::get('/datatables/rma-technician', [RmaControllers::class, 'datatablesTechnician']);
     Route::put('/rma-approved-technician/{uid}', [RmaControllers::class, 'approvedTechnician']);
-    Route::get('/datatables/rma-qc',[RmaControllers::class, 'datatablesQc']);
+    Route::get('/datatables/rma-qc', [RmaControllers::class, 'datatablesQc']);
     Route::put('/rma-approved-qc/{uid}', [RmaControllers::class, 'approvedQc']);
     Route::get('/pdf-rma/{uid}', [RmaControllers::class, 'showPdf']);
-   
+
 
     //letter retur (surat retur)
-    Route::resource('letter-retur', LetterReturControllers ::class);
-    Route::get('/datatables/letter-retur',[LetterReturControllers::class, 'datatables']);
+    Route::resource('letter-retur', LetterReturControllers::class);
+    Route::get('/datatables/letter-retur', [LetterReturControllers::class, 'datatables']);
     Route::put('/letter-retur-approved-sales/{uid}', [LetterReturControllers::class, 'approved']);
-    Route::get('/datatables/letter-retur-warehouse',[LetterReturControllers::class, 'datatablesWarehouse']);
+    Route::get('/datatables/letter-retur-warehouse', [LetterReturControllers::class, 'datatablesWarehouse']);
     Route::put('/letter-retur-approved-warehouse/{uid}', [LetterReturControllers::class, 'approvedWarehouse']);
-    Route::get('/datatables/letter-retur-marketing',[LetterReturControllers::class, 'datatablesMarketing']);
+    Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
     Route::put('/letter-retur-approved-marketing-ppic/{uid}', [LetterReturControllers::class, 'approvedMarketingPPIC']);
     Route::get('/pdf-letter-retur/{uid}', [LetterReturControllers::class, 'showPdf']);
-    
+
     //delivery order
-    Route::resource('delivery-order', DeliveryOrderControllers ::class);
-    Route::get('/datatables/delivery-order',[DeliveryOrderControllers::class, 'datatables']);
+    Route::resource('delivery-order', DeliveryOrderControllers::class);
+    Route::get('/datatables/delivery-order', [DeliveryOrderControllers::class, 'datatables']);
     Route::put('/do-sales1-approved/{uid}', [DeliveryOrderControllers::class, 'approved']);
     Route::put('/do-sales2-approved/{uid}', [DeliveryOrderControllers::class, 'approvedSales']);
-    Route::get('/datatables/delivery-order-qc',[DeliveryOrderControllers::class, 'datatablesQc']);
+    Route::get('/datatables/delivery-order-qc', [DeliveryOrderControllers::class, 'datatablesQc']);
     Route::put('/do-qc-approved/{uid}', [DeliveryOrderControllers::class, 'approvedQc']);
-    Route::get('/datatables/delivery-order-logistics',[DeliveryOrderControllers::class, 'datatablesLogistics']);
+    Route::get('/datatables/delivery-order-logistics', [DeliveryOrderControllers::class, 'datatablesLogistics']);
     Route::put('/do-logistics-approved/{uid}', [DeliveryOrderControllers::class, 'approvedLogistics']);
     Route::put('/do-logistics-security-approved/{uid}', [DeliveryOrderControllers::class, 'approvedSecurity']);
     Route::put('/do-logistics-customer-approved/{uid}', [DeliveryOrderControllers::class, 'approvedCustomer']);
@@ -103,5 +103,3 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
     Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
 });
-
-

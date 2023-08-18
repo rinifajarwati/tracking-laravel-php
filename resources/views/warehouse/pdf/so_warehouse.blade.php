@@ -36,14 +36,27 @@
                     </tr>
 
                     {{-- Signature --}}
-                    
                     <tr>
-                        <td> <img class="signature-img" src="{{ asset($signature_created) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_approved) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_path) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_warehouse) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_logistics) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_created) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_approved) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_path) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_warehouse) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_logistics) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
 
+                    </tr>
+
+                    {{-- Sign Text 2 --}}
+                    <tr>
+                        <td>{{ $created_name }}</td>
+                        <td>{{ $approved_name }}</td>
+                        <td>{{ $ppic_name }}</td>
+                        <td>{{ $warehouse_name }}</td>
+                        <td>{{ $logistics_name }}</td>
                     </tr>
                 </table>
             </div>

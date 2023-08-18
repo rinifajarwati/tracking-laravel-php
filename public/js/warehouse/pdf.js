@@ -1,3 +1,3 @@
 const pdfBtn = (warehouse) => {
-    window.location.href=`/pdf-warehouse/${warehouse}`
+    window.location.href=`/generate-pdf/${warehouse}`
 }
