@@ -62,6 +62,12 @@ return [
             'url' => env('APP_URL') . '/assets/pdf/file',
             'visibility' => 'public',
         ],
+        'file_img'=>[
+        'driver'=>'local',
+        'root'=>public_path('assets'). 'gambar/file',
+        'url'=>env('APP_URL').'assets/gambar/file',
+        'visibility'=>'public'
+         ],
 
     ],
 

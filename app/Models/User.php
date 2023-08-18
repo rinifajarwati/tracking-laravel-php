@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'img'
     ];
 
     /**
@@ -47,5 +48,9 @@ class User extends Authenticatable
     public function userPermissions()
     {
         return $this->hasMany(UserPermission::class, 'user_uid', 'uid');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

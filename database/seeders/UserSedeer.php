@@ -19,14 +19,16 @@ class UserSedeer extends Seeder
             'name'=>'Developer',
             'email'=>'dev@developer.com',
             'password'=>'developer',
-            'position_uid'=>'staff'
+            'position_uid'=>'staff',
+            'division_uid'=>'it'
         ]);
         User::create([
             'uid'=>'987654321',
             'name'=>'Technician',
             'email'=>'technician@developer.com',
             'password'=>'developer',
-            'position_uid'=>'staff'
+            'position_uid'=>'staff',
+            'division_uid'=>'technician',
         ]);
 
     }
