@@ -24,23 +24,31 @@ class addsignaturecontroller extends Controller
     {
         $user = User::find(Auth::id());
     
-        if ($request->hasFile('img')) {
-            $oldFotoProfil = $user->img;
+        // if ($request->hasFile('img')) {
+            // $oldFotoProfil = $user->img;
     
             // Menghapus foto profil lama jika ada
-            if ($oldFotoProfil !== null) {
-                Storage::delete('public\assetsgambar\file' . $oldFotoProfil);
+            // if ($oldFotoProfil !== null) {
+            //     Storage::delete('public_uploads_img' . $oldFotoProfil);
+            // }
+            $user = User::find(Auth::id());
+            if (request()->hasFile('img')) {
+                $file = request()->file('img');
+                $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                Storage::disk('public_uploads_img')->put($fileName, file_get_contents($file));
+                $user->img = $fileName;
             }
+
+            // $fotoProfil = $request->file('img');
+            // $filename = time() . '_' . $fotoProfil->getClientOriginalName();
     
-            $fotoProfil = $request->file('img');
-            $filename = time() . '_' . $fotoProfil->getClientOriginalName();
-    
-            // Menyimpan foto profil baru
-            $path = $fotoProfil->storeAs('public\assetsgambar\file', $filename);
-            $user->img = $filename;
-        }
+            // // Menyimpan foto profil baru
+            // $path = $fotoProfil->storeAs('public\assetsgambar\file', $filename);
+            // $user->img = $filename;
+        // }
     
         $user->save();
+        // $user->update(request()->except('img'));
     
         return redirect()->back()->with('success', 'Gambar berhasil diupdate!');
     }
