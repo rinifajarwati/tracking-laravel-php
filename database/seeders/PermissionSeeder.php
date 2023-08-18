@@ -25,6 +25,11 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name'=>'warehouse',
+            'description'=>'Access to all pages'
+        ]);
+
+        Permission::create([
             'name'=>'logistics',
             'description'=>'Access to all pages'
         ]);
@@ -35,12 +40,17 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name'=>'warehouse',
-            'description'=>'Access to all pages'
+            'name'=>'technician',
+            'description'=>'Access to minimal pages'
         ]);
 
         Permission::create([
-            'name'=>'technician',
+            'name'=>'qc',
+            'description'=>'Access to minimal pages'
+        ]);
+
+        Permission::create([
+            'name'=>'marketing',
             'description'=>'Access to minimal pages'
         ]);
     }

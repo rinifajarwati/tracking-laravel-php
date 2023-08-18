@@ -56,10 +56,35 @@ return [
             'throw' => false,
         ],
 
+        //warehouse
         'public_uploads_file' => [
             'driver' => 'local',
             'root' => public_path('assets') . '/pdf/file',
             'url' => env('APP_URL') . '/assets/pdf/file',
+            'visibility' => 'public',
+        ],
+
+        //rma
+        'public_uploads_rma' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/pdf/rma',
+            'url' => env('APP_URL') . '/assets/pdf/rma',
+            'visibility' => 'public',
+        ],
+
+        //retur letter
+        'public_uploads_letter_retur' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/pdf/letter-retur',
+            'url' => env('APP_URL') . '/assets/pdf/letter-retur',
+            'visibility' => 'public',
+        ],
+
+        //retur letter
+        'public_uploads_delivery_order' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/pdf/delivery-order',
+            'url' => env('APP_URL') . '/assets/pdf/delivery-order',
             'visibility' => 'public',
         ],
 

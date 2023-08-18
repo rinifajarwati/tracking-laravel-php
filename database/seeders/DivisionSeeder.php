@@ -39,5 +39,20 @@ class DivisionSeeder extends Seeder
             'name'=> 'Warehouse'
         ]);
 
+        Division::create([
+            'uid' => 'technician',
+            'name'=> 'Technician'
+        ]);
+
+        Division::create([
+            'uid' => 'qc',
+            'name'=> 'QC'
+        ]);
+
+        Division::create([
+            'uid' => 'marketing',
+            'name'=> 'Marketing'
+        ]);
+
     }
 }
