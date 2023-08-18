@@ -38,6 +38,10 @@ class DivisionSeeder extends Seeder
             'uid' => 'warehouse',
             'name'=> 'Warehouse'
         ]);
+        Division::create([
+            'uid' => 'technician',
+            'name'=> 'Technician'
+        ]);
 
     }
 }

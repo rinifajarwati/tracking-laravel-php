@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
+use App\Http\Controllers\addsignaturecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,11 @@ Route::group(['middleware' => ['auth']], function () {
     // warehouse
     Route::resource('warehouse', WarehouseControllers::class);
     Route::get('/datatables/warehouse', [WarehouseControllers::class, 'datatables']);
+
+    //account 
+    Route::resource('signatureuser', addsignaturecontroller::class);
+    Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
+    Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
 });
 
 
