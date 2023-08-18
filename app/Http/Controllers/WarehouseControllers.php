@@ -99,37 +99,37 @@ class WarehouseControllers extends Controller
     public function datatables()
     {
         $user = auth()->user()->uid;
-        
+
         return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
     public function approved(string $uid)
     {
         try {
-            $input=[
-                'status' =>'Approval-PPIC',
+            $input = [
+                'status' => 'Approval-PPIC',
                 'ppic_name' => auth()->user()->uid,
                 'ppic_date' => Carbon::now(),
             ];
             // $input = ['status' => 'Approval-PPIC'];
-       
+
             Warehouse::where('uid', $uid)->update($input);
             return back()->with(['alertSuccess' => 'Successfully For Approved file']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
-    
+
     public function datatablesWarehouse()
-    {   
+    {
         return Warehouse::all();
     }
 
     public function approvedWarehouse(string $uid)
     {
         try {
-            $input=[
-                'status' =>'Approval-Warehouse',
+            $input = [
+                'status' => 'Approval-Warehouse',
                 'warehouse_name' => auth()->user()->uid,
                 'warehouse_date' => Carbon::now(),
             ];
@@ -141,20 +141,20 @@ class WarehouseControllers extends Controller
     }
 
     public function datatablesLogistics()
-    {   
+    {
         return Warehouse::all();
     }
 
     public function approvedLogistics(string $uid)
     {
         try {
-            $input=[
-                'status' =>'Approval-Logistics',
+            $input = [
+                'status' => 'Approval-Logistics',
                 'logistics_name' => auth()->user()->uid,
                 'logistics_date' => Carbon::now(),
             ];
             // $input = ['status' => 'Approval-PPIC'];
-       
+
             Warehouse::where('uid', $uid)->update($input);
             return back()->with(['alertSuccess' => 'Successfully For Approved file']);
         } catch (Throwable $e) {
@@ -162,15 +162,16 @@ class WarehouseControllers extends Controller
         }
     }
 
-    public function showPdf(string $uid)
+    public function showPdf(Warehouse $warehouse)
     {
-        $pdf = Warehouse::where("uid", $uid)->get();
+        $fileName = $warehouse->user?->img ?: "N/A";
+        $signature_path = 'assetsgambar/file/' . $fileName;
 
         $data = [
-            "title" => "Warehouse | IMI Tracking",
-            "pdf" => $pdf,
+            'ppic_name' => $warehouse->user?->name ?: "N/A",
+            'signature_path' => $signature_path,
         ];
-        return view('warehouse.pdf.so_warehouse', $data);
-    }
 
+        return view('warehouse.pdf.so_warehouse',$data);
+    }
 }

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->id();
             $table->string('uid')->unique();
             $table->string('name')->unique();
+            $table->string('img')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -42,7 +43,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('position_uid');
             $table->string('division_uid');
-           
             $table->foreign(['position_uid'])->references(['uid'])->on('positions');
             $table->foreign(['division_uid'])->references(['uid'])->on('divisions');
         });

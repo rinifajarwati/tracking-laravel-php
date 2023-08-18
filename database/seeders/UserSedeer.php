@@ -19,8 +19,8 @@ class UserSedeer extends Seeder
             'name'=>'Developer',
             'email'=>'dev@developer.com',
             'password'=>'developer',
-            'position_uid'=>'coordinator',
-            'division_uid'=>'it',
+            'position_uid'=>'staff',
+            'division_uid'=>'it'
         ]);
 
 

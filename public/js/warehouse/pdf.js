@@ -1,3 +1,3 @@
-const pdfBtn = (uid) => {
-    window.location.href=`/pdf-warehouse/${uid}`
+const pdfBtn = (warehouse) => {
+    window.location.href=`/pdf-warehouse/${warehouse}`
 }

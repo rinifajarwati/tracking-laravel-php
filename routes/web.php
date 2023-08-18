@@ -8,6 +8,7 @@ use App\Http\Controllers\LetterReturControllers;
 use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\RmaControllers;
 use App\Http\Controllers\WarehouseControllers;
+use App\Http\Controllers\addsignaturecontroller;
 use App\Models\DeliveryOrder;
 use App\Models\Rma;
 
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/warehouse-approved-warehouse/{uid}', [WarehouseControllers::class, 'approvedWarehouse']);
     Route::get('/datatables/warehouse-approved-logistics', [WarehouseControllers::class, 'datatablesLogistics']);
     Route::put('/warehouse-approved-logistics/{uid}', [WarehouseControllers::class, 'approvedLogistics']);
-    Route::get('/pdf-warehouse/{uid}', [WarehouseControllers::class, 'showPdf']);
+    Route::get('/pdf-warehouse/{warehouse}', [WarehouseControllers::class, 'showPdf']);
 
     Route::get('/generate-pdf', [PdfWarehouseController::class, 'generatePDF']);
    
@@ -94,7 +95,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/do-logistics-security-approved/{uid}', [DeliveryOrderControllers::class, 'approvedSecurity']);
     Route::put('/do-logistics-customer-approved/{uid}', [DeliveryOrderControllers::class, 'approvedCustomer']);
     Route::get('/pdf-delivery-order/{uid}', [DeliveryOrderControllers::class, 'showPdf']);
-   
+
+    //account 
+    Route::resource('signatureuser', addsignaturecontroller::class);
+    Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
+    Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
 });
 
 
