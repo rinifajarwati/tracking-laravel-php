@@ -103,6 +103,35 @@ class WarehouseControllers extends Controller
         return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
+    public function approvedSalesStaff(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Made-By',
+                'sales_staff_name' => auth()->user()->uid,
+                'sales_staff_date' => Carbon::now(),
+            ];
+            Warehouse::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved filey']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+    public function approvedSalesCoor(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Approved-By',
+                'sales_coor_name' => auth()->user()->uid,
+                'sales_coor_date' => Carbon::now(),
+            ];
+            // dd($input);
+            Warehouse::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
     public function approved(string $uid)
     {
         try {
@@ -111,10 +140,8 @@ class WarehouseControllers extends Controller
                 'ppic_name' => auth()->user()->uid,
                 'ppic_date' => Carbon::now(),
             ];
-            // $input = ['status' => 'Approval-PPIC'];
-
             Warehouse::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved filey']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -164,14 +191,27 @@ class WarehouseControllers extends Controller
 
     public function showPdf(Warehouse $warehouse)
     {
-        $fileName = $warehouse->user?->img ?: "N/A";
+        $fileNameCreated = $warehouse->user?->img ?: "N/A";
+        $fileNameApproved = $warehouse->SCName?->img ?: "N/A";
+        $fileName = $warehouse->PName?->img ?: "N/A";
+        $fileNameWarehouse = $warehouse->WName?->img ?: "N/A";
+        $fileNameLogistics = $warehouse->LName?->img ?: "N/A";
+        $signature_created = 'assetsgambar/file/' . $fileNameCreated;
+        $signature_approved = 'assetsgambar/file/' . $fileNameApproved;
         $signature_path = 'assetsgambar/file/' . $fileName;
+        $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
+        $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
 
         $data = [
-            'ppic_name' => $warehouse->user?->name ?: "N/A",
+            'ppic_name' => $warehouse->PName?->name ?: "N/A",
+            'warehouse_name' => $warehouse->WName?->name ?: "N/A",
+            'logistics_name' => $warehouse->LName?->name ?: "N/A",
+            'signature_created' => $signature_created,
+            'signature_approved' => $signature_approved,
             'signature_path' => $signature_path,
+            'signature_warehouse' => $signature_warehouse,
+            'signature_logistics' => $signature_logistics,
         ];
-
         return view('warehouse.pdf.so_warehouse',$data);
     }
 }

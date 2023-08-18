@@ -66,7 +66,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_uid');
             $table->string('created_date');
-            $table->enum('status', ['Created', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Made-By', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
+            $table->string('sales_staff_name')->nullable();
+            $table->string('sales_staff_date')->nullable();
+            $table->string('sales_coor_name')->nullable();
+            $table->string('sales_coor_date')->nullable();
             $table->string('ppic_name')->nullable();
             $table->string('ppic_date')->nullable();
             $table->string('warehouse_name')->nullable();

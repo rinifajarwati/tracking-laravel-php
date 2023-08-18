@@ -9,7 +9,7 @@ class Warehouse extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'PName', 'WName', 'LName'];
+    protected $with = ['user', 'SCName', 'PName', 'WName', 'LName'];
 
     public $timestamps = false;
 
@@ -21,6 +21,11 @@ class Warehouse extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_uid', 'uid');
+    }
+
+    public function SCName()
+    {
+        return $this->belongsTo(User::class, 'sales_coor_name', 'uid');
     }
 
     public function PName(){

@@ -38,11 +38,12 @@
                     {{-- Signature --}}
                     
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td> <img class="signature-img" src="{{ asset($signature_created) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_approved) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
                         <td> <img class="signature-img" src="{{ asset($signature_path) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
-                        <td></td>
-                        <td></td>
+                        <td> <img class="signature-img" src="{{ asset($signature_warehouse) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_logistics) }}" alt="Signature" style="width: 100px; height: auto;"> </td>
+
                     </tr>
                 </table>
             </div>
