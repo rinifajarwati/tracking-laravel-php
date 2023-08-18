@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('warehouse', WarehouseControllers::class);
     Route::get('/datatables/warehouse', [WarehouseControllers::class, 'datatables']);
     Route::put('/warehouse-approved/{uid}', [WarehouseControllers::class, 'approved']);
+    Route::put('/warehouse-approved-sales-staff/{uid}', [WarehouseControllers::class, 'approvedSalesStaff']);
+    Route::put('/warehouse-approved-sales-coor/{uid}', [WarehouseControllers::class, 'approvedSalesCoor']);
     Route::get('/datatables/warehouse-approved-warehouse', [WarehouseControllers::class, 'datatablesWarehouse']);
     Route::put('/warehouse-approved-warehouse/{uid}', [WarehouseControllers::class, 'approvedWarehouse']);
     Route::get('/datatables/warehouse-approved-logistics', [WarehouseControllers::class, 'datatablesLogistics']);

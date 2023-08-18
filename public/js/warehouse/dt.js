@@ -31,7 +31,15 @@ listDataWarehouse.bootstrapTable({
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`
                 if(row.status === "Created"){
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.warehouse}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnStaff('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`
+                }else if(row.status === "Made-By"){
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`
+                }else if(row.status === "Approved-By"){
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnPpic('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`
                 }else{
@@ -72,6 +80,12 @@ listDataWarehouse.bootstrapTable({
                 if(value === "Created"){
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
                 }
+                if(value === "Made-By"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                }
+                if(value === "Approved-By"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                }
                 if(value === "Approval-PPIC"){
                     buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
@@ -101,6 +115,22 @@ listDataWarehouse.bootstrapTable({
         {
             title: "Created Date",
             field: "created_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Approved By",
+            field: "sales_coor_name",
+            sortable: true,
+            formatter(value, row){
+                return row.s_c_name ? row.s_c_name.name : null;
+            },
+        },
+        {
+            title: "Approved Date",
+            field: "sales_coor_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;
