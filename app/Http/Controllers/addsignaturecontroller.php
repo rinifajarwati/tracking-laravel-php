@@ -20,6 +20,19 @@ class addsignaturecontroller extends Controller
         return view('signatureuser.index', $data);
     }
 
+    public function show() {
+        {
+            
+            // Mengambil seluruh data user dari database
+            
+            $users = addsignature::all();
+        
+            // Tampilkan data user dalam view
+            return view('signatureuser.index', compact('users'));
+            
+        }
+    }
+
     public function uploadPDF(Request $request)
     {
         $user = User::find(Auth::id());

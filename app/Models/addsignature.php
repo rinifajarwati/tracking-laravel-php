@@ -9,7 +9,5 @@ class addsignature extends Model
 {
     use HasFactory;
     protected $table = 'users';
-    protected $fillable = [
-        'img'
-];
+    protected $guarded=['id'];
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
 use App\Http\Controllers\addsignaturecontroller;
+use App\Http\Controllers\AdduserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('signatureuser', addsignaturecontroller::class);
     Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
     Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
+
+    //create account
+    Route::resource('newuser', AdduserController::class);
+    Route::get('/datatables/newuser', [AdduserController::class, 'datatables']);
+
+
 });
 
 
