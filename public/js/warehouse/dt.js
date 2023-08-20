@@ -18,6 +18,37 @@ listDataWarehouse.bootstrapTable({
     },
     columns: [
         {
+            title: "Action",
+            field: "uid",
+            sortable:true,
+            formatter:(value, row) => {
+                const fields = {
+
+                };
+                const obj = encodeURIComponent(JSON.stringify(fields));
+                let buttons = "";
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
+                <i class="fa-solid fa-file-pdf"></i>
+                </button>`
+                if(row.status === "Created"){
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnStaff('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`
+                }else if(row.status === "Made-By"){
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`
+                }else if(row.status === "Approved-By"){
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnPpic('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`
+                }else{
+
+                }
+                return `<div class="d-flex space-x">${buttons}</div>`;
+            }
+        },
+        {
             title: "No SO",
             field: "no_so",
             sortable: true,
@@ -41,85 +72,116 @@ listDataWarehouse.bootstrapTable({
             },
         },
         {
+            title:"Status",
+            field:"status",
+            sortable: true,
+            formatter: (value, row) => {
+                let buttonHtml = '';
+                if(value === "Created"){
+                    buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
+                }
+                if(value === "Made-By"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                }
+                if(value === "Approved-By"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                }
+                if(value === "Approval-PPIC"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                }
+                if(value === "Approval-Warehouse"){
+                    buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
+                }
+                if(value === "Approval-Logistics"){
+                    buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
+                }
+                if(value === "Cancel"){
+                    buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`
+                }
+                if(value === "Reject"){
+                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`
+                }
+                if(value === "Closed"){
+                    buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`
+                }
+                return buttonHtml;
+            }
+        },
+        {
             title: "Created Name",
             field: "user.name",
             sortable: true,
         },
         {
-            title: "Created At",
-            field: "created_at",
+            title: "Created Date",
+            field: "created_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;
             },
         },
         {
-            title: "Status",
-            class: "text-nowrap",
-            field: "created_at",
+            title: "Approved By",
+            field: "sales_coor_name",
             sortable: true,
-            formatter: (value, row) => {
-                const type = value;
-
-                var addClass = "badge bg-red";
-                var text = "N/A";
-
-                if (row.created_at) {
-                    addClass = "badge bg-teal";
-                    text = "Created";
-                }
-                if (row.accepted_at) {
-                    addClass = "badge bg-green";
-                    text = "Accepted";
-                }
-                if (row.rejected_at) {
-                    addClass = "badge bg-red";
-                    text = "Rejected";
-                }
-                if (row.purchased_at) {
-                    addClass = "badge bg-cyan";
-                    text = "Purchased";
-                }
-                if (row.received_at) {
-                    addClass = "badge bg-orange";
-                    text = "Received";
-                }
-                if (row.closed_at) {
-                    addClass = "badge bg-gray-600";
-                    text = "Closed";
-                }
-
-                const badge = `<span class="${addClass}">${text}</span>`;
-
-                return badge;
+            formatter(value, row){
+                return row.s_c_name ? row.s_c_name.name : null;
             },
         },
         {
-            title: "Action",
-            field: "uid",
+            title: "Approved Date",
+            field: "sales_coor_date",
             sortable: true,
             formatter: (value, row) => {
-                const fields = {
-                    "#edit_division_item_name": row.name
-                };
-                const obj = encodeURIComponent(JSON.stringify(fields));
-
-                let buttons = "";
-                // buttons += `
-                //     <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="editDivisionModal('${row.uid}', '${obj}','edit_division_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                //         <i class="far fa-edit fa-fw"></i>
-                //     </button>
-                // `
-                // buttons += `
-                //     <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="deleteDivisionModal('${row.uid}', '${row.name}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                //         <i class="far fa-trash-can fa-fw"></i>
-                //     </button>
-                // `
-                return `
-                <div class="d-flex space-x">
-                    ${buttons}
-                </div>
-            `;
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "PPIC Name",
+            field: "ppic_name",
+            formatter(value, row){
+                return row.p_name ? row.p_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "PPIC Date",
+            field: "ppic_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Warehouse Name",
+            field: "warehouse_name",
+            formatter(value, row){
+                return row.w_name ? row.w_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Warehouse Date",
+            field: "warehouse_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Logistics Name",
+            field: "logistics_name",
+            formatter(value, row){
+              return row.l_name ? row.l_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Logistics Date",
+            field: "logistics_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
             },
         },
     ],

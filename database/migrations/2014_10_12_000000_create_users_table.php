@@ -43,7 +43,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('position_uid');
             $table->string('division_uid');
-
             $table->foreign(['position_uid'])->references(['uid'])->on('positions');
             $table->foreign(['division_uid'])->references(['uid'])->on('divisions');
         });
@@ -66,7 +65,84 @@ return new class extends Migration
             $table->string('file');
             $table->string('description');
             $table->string('user_uid');
-            $table->string('created_at');
+            $table->string('created_date');
+            $table->enum('status', ['Created', 'Made-By', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
+            $table->string('sales_staff_name')->nullable();
+            $table->string('sales_staff_date')->nullable();
+            $table->string('sales_coor_name')->nullable();
+            $table->string('sales_coor_date')->nullable();
+            $table->string('ppic_name')->nullable();
+            $table->string('ppic_date')->nullable();
+            $table->string('warehouse_name')->nullable();
+            $table->string('warehouse_date')->nullable();
+            $table->string('logistics_name')->nullable();
+            $table->string('logistics_date')->nullable();
+
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('rmas', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->string('no_spk');
+            $table->string('file');
+            $table->string('description');
+            $table->string('user_uid');
+            $table->string('created_date');
+            $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Reject'])->default('Created');
+            $table->string('sales_name')->nullable();
+            $table->string('sales_date')->nullable();
+            $table->string('technician_name')->nullable();
+            $table->string('technician_date')->nullable();
+            $table->string('qc_name')->nullable();
+            $table->string('qc_date')->nullable();
+
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('letter_returs', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->string('no_sj');
+            $table->string('file');
+            $table->string('description');
+            $table->string('user_uid');
+            $table->string('created_date');
+            $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-PPIC-Marketing', 'Cancel', 'Reject'])->default('Created');
+            $table->string('sales_name')->nullable();
+            $table->string('sales_date')->nullable();
+            $table->string('warehouse_name')->nullable();
+            $table->string('warehouse_date')->nullable();
+            $table->string('marketing_name')->nullable();
+            $table->string('marketing_date')->nullable();
+            $table->string('ppic_marketing_name')->nullable();
+            $table->string('ppic_marketing_date')->nullable();
+
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('delivery_orders', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->string('no_so');
+            $table->string('no_sj');
+            $table->string('file');
+            $table->string('description');
+            $table->string('user_uid');
+            $table->string('created_date');
+            $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Security', 'Approval-Customer'])->default('Created');
+            $table->string('sales1_name')->nullable();
+            $table->string('sales1_date')->nullable();
+            $table->string('sales2_name')->nullable();
+            $table->string('sales2_date')->nullable();
+            $table->string('qc_name')->nullable();
+            $table->string('qc_date')->nullable();
+            $table->string('logistics_name')->nullable();
+            $table->string('logistics_date')->nullable();
+            $table->string('logistics_security_name')->nullable();
+            $table->string('logistics_security_date')->nullable();
+            $table->string('logistics_customer_name')->nullable();
+            $table->string('logistics_customer_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -82,5 +158,8 @@ return new class extends Migration
         Schema::dropIfExists('positions');
         Schema::dropIfExists('permissions');
         Schema::dropIfExists('user_permissions');
+        Schema::dropIfExists('warehouses');
+        Schema::dropIfExists('rmas');
+        Schema::dropIfExists('letter_returs');
     }
 };

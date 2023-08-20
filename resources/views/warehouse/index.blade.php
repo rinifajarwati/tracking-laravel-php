@@ -74,8 +74,26 @@
         </div>
     </main>
     @include('warehouse.modals.add_new_warehouse')
+    @include('warehouse.modals.approval_sales_staff')
+    @include('warehouse.modals.approval_sales_coor')
+    @include('warehouse.modals.approval_ppic_warehouse')
+    @include('warehouse.modals.approval_warehouse')
+    @include('warehouse.modals.approval_logistics_warehouse')
 
     <script src="/js/warehouse/_init.js"></script>
-    <script src="/js/warehouse/dt.js"></script>
+    <script src="/js/warehouse/pdf.js"></script>
     <script src="/js/functions/spinner.js"></script>
+
+    @if (auth()->user()->division_uid === 'sales')
+        <script src="/js/warehouse/dt.js"></script>
+        <script src="/js/warehouse/approval.js"></script>
+        <script src="/js/warehouse/approval-sales-staff.js"></script>
+        <script src="/js/warehouse/approval-sales-coor.js"></script>
+    @elseif(auth()->user()->division_uid === 'warehouse')
+        <script src="/js/warehouse/dt-warehouse.js"></script>
+        <script src="/js/warehouse/approval_warehouse.js"></script>
+    @elseif(auth()->user()->division_uid === 'logistics')
+        <script src="/js/warehouse/dt-logistics.js"></script>
+        <script src="/js/warehouse/approval_logistics.js"></script>
+    @endif
 @endsection

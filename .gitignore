@@ -2,6 +2,12 @@
 /node_modules
 /public/build
 /public/hot
+/public/assets/pdf/delivery-order/placeholder.txt
+/public/assets/pdf/file/placeholder.txt
+/public/assets/pdf/letter-retur/placeholder.txt
+/public/assets/pdf/rma/placeholder.txt
+/public/assets/pdf/temp-pdf/placeholder.txt
+/public/assetsgambar/file/placeholder.txt
 /public/storage
 /storage/*.key
 /vendor
