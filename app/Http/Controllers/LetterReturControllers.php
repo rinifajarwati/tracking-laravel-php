@@ -19,7 +19,7 @@ class LetterReturControllers extends Controller
     {
         //
         $data = [
-            "title" => "Letter Retur | IMI Tracking",
+            "title" => "Surat Retur | IMI Tracking",
         ];
         return view('letter_retur.index', $data);
     }
@@ -48,19 +48,20 @@ class LetterReturControllers extends Controller
                 'description' => request('description'),
                 'file' => request('file'),
                 'created_date' => Carbon::now(),
+                'status' => 'Created',
             ];
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_letter_retur')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
             LetterRetur::create($payload);
-            return back()->with(['alertSuccess' => 'Successfully create file!']);
+            return back()->with(['alertSuccess' => 'Successfully create Surat Retur!']);
         } catch (Throwable $th) {
             dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
-                return back()->with(['alertError' => 'file already Registered!']);
+                return back()->with(['alertError' => 'Surat retur already Registered!']);
             }
-            return back()->with(['alertError' => 'Failed to add new file!']);
+            return back()->with(['alertError' => 'Failed to add new surat retur!']);
         };
     }
 
@@ -103,22 +104,6 @@ class LetterReturControllers extends Controller
         return LetterRetur::where('user_uid', $user)->get()->toArray();
     }
 
-    public function approved(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Approval-Sales',
-                'sales_name' => auth()->user()->uid,
-                'sales_date' => Carbon::now(),
-            ];
-
-            LetterRetur::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Letter Retur']);
-        } catch (Throwable $e) {
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
-    }
-
     //apporved warehouse
     public function datatablesWarehouse()
     {
@@ -136,7 +121,7 @@ class LetterReturControllers extends Controller
             // $input = ['status' => 'Approval-PPIC'];
 
             LetterRetur::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Retur Letter']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Surat Retur']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -144,21 +129,21 @@ class LetterReturControllers extends Controller
 
     //marketing
     public function datatablesMarketing()
-    {   
+    {
         return LetterRetur::all();
     }
 
     public function approvedMarketing(string $uid)
     {
         try {
-            $input=[
-                'status' =>'Approval-Marketing',
+            $input = [
+                'status' => 'Approval-Marketing',
                 'marketing_name' => auth()->user()->uid,
                 'marketing_date' => Carbon::now(),
             ];
-       
+
             LetterRetur::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Letter Retur']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Surat Retur']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -167,28 +152,41 @@ class LetterReturControllers extends Controller
     public function approvedMarketingPPIC(string $uid)
     {
         try {
-            $input=[
-                'status' =>'Approval-PPIC-Marketing',
+            $input = [
+                'status' => 'Approval-PPIC-Marketing',
                 'ppic_marketing_name' => auth()->user()->uid,
                 'ppic_marketing_date' => Carbon::now(),
             ];
-       
+
             LetterRetur::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Surat Retur']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
 
-      //pdf letter retur
-      public function showPdf(string $uid)
-      {
-          $pdf = LetterRetur::where("uid", $uid)->get();
-          
-          $data = [
-              "title" => "Letter Retur | IMI Tracking",
-              "pdf" => $pdf,
-          ];
-          return view('letter_retur.pdf.letter_retur', $data);
-      }
+    //pdf letter retur
+    public function showPdf(LetterRetur $letterRetur)
+    {
+        $fileNameSales = $letterRetur->user?->img ?: "N/A";
+        $fileNameWarehouse = $letterRetur->WName?->img ?: "N/A";
+        $fileNameMarketing = $letterRetur->MName?->img ?: "N/A";
+        $fileNamePpicMarketing = $letterRetur->MPName?->img ?: "N/A";
+        $signature_sales = 'assetsgambar/file/' . $fileNameSales;
+        $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
+        $signature_marketing = 'assetsgambar/file/' . $fileNameMarketing;
+        $signature_marketing_ppic = 'assetsgambar/file/' . $fileNamePpicMarketing;
+        
+        $data = [
+            'sales_name' => $letterRetur->user?->name ?: "N/A",
+            'warehouse_name' => $letterRetur->WName?->name ?: "N/A",
+            'marketing_name' => $letterRetur->MName?->name ?: "N/A",
+            'marketing_ppic_name' => $letterRetur->MPName?->name ?: "N/A",
+            'signature_sales' => $signature_sales,
+            'signature_warehouse' => $signature_warehouse,
+            'signature_marketing' => $signature_marketing,
+            'signature_marketing_ppic' =>  $signature_marketing_ppic,
+        ];
+        return view('letter_retur.pdf.letter_retur', $data);
+    }
 }

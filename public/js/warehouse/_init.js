@@ -1,10 +1,7 @@
 //ppic(Sales coordinator)
 const listDataWarehouse = $("#warehouse_list_data_table");
-// Approved sales staff
-const approvedSalesStaffForm = $("#approved_sales_staff_level_item_form");
-const approvedSalesStaffListModal = $("#approved_sales_staff_item_modal");
 
-// Approved sales staff
+// Approved sales coordinator
 const approvedSalesCoorForm = $("#approved_sales_coor_level_item_form");
 const approvedSalesCoorListModal = $("#approved_sales_coor_item_modal");
 

@@ -29,14 +29,10 @@ listDataDo.bootstrapTable({
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
                 if (row.status === "Created") {
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnSales('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
-                } else if (row.status === "Approval-Sales") {
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnSales('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
-                <i class="fas fa-check fa-fw"></i>
-                </button>`;
-                } else {
+                }else {
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
@@ -78,9 +74,6 @@ listDataDo.bootstrapTable({
                 if (value === "Created") {
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Sales") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
-                }
                 if (value === "Approval-Coor") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
@@ -93,7 +86,7 @@ listDataDo.bootstrapTable({
                 if (value === "Approval-Security") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if (value === "Approva-Customer") {
+                if (value === "Approval-Customer") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
@@ -122,24 +115,7 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "Sales 1 Name",
-            field: "sales1_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.sales_name ? row.sales_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales 1 Date",
-            field: "sales1_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Sales 2 Name",
+            title: "Sales Coor Name",
             field: "sales2_name",
             formatter(value, row) {
                 console.log(row);
@@ -148,7 +124,7 @@ listDataDo.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Sales 2 Date",
+            title: "Sales Coor Date",
             field: "sales2_date",
             sortable: true,
             formatter: (value, row) => {
@@ -207,13 +183,13 @@ listDataDo.bootstrapTable({
             title: "Logistics Customer Name",
             field: "logistics_customer_name",
             formatter(value, row) {
-                //   return row.l_name ? row.l_name.name : null;
+                  return row.customer_name ? row.customer_name.name : null;
             },
             sortable: true,
         },
         {
             title: "Logistics Customer Date",
-            field: "logistics_customer_name",
+            field: "logistics_customer_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

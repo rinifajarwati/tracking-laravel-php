@@ -74,9 +74,6 @@ listDataLetterReturMarketing.bootstrapTable({
                 if (value === "Created") {
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Sales") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
-                }
                 if (value === "Approval-Warehouse") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
@@ -106,23 +103,6 @@ listDataLetterReturMarketing.bootstrapTable({
         {
             title: "Created Date",
             field: "created_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Sales Name",
-            field: "sales_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.s_name ? row.s_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales Date",
-            field: "sales_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

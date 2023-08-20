@@ -1,3 +1,3 @@
-const pdfBtn = (uid) => {
-    window.location.href=`/pdf-letter-retur/${uid}`
+const pdfBtn = (letterRetur) => {
+    window.location.href=`/generate-pdf-letter-retur/${letterRetur}`
 }

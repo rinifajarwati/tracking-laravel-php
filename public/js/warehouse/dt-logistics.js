@@ -72,9 +72,6 @@ logisticsApproved.bootstrapTable({
                 if(value === "Created"){
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
                 }
-                if(value === "Made-By"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
-                }
                 if(value === "Approved-By"){
                     buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
@@ -113,7 +110,7 @@ logisticsApproved.bootstrapTable({
             },
         },
         {
-            title: "Approved By",
+            title: "Coordinator Sales",
             field: "sales_coor_name",
             sortable: true,
             formatter(value, row){

@@ -33,9 +33,20 @@
 
                     {{-- Signature --}}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td> <img class="signature-img" src="{{ asset($signature_sales) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_technician) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+                        <td> <img class="signature-img" src="{{ asset($signature_qc) }}" alt="Signature"
+                                style="width: 100px; height: auto;"> </td>
+
+                    </tr>
+
+                     {{-- Sign Text 2 --}}
+                     <tr>
+                        <td>{{ $sales_name }}</td>
+                        <td>{{ $technician_name }}</td>
+                        <td>{{ $qc_name }}</td>
                     </tr>
                 </table>
             </div>

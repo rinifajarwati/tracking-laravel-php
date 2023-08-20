@@ -49,6 +49,7 @@ class RmaControllers extends Controller
                 'description' => request('description'),
                 'file' => request('file'),
                 'created_date' => Carbon::now(),
+                'status' => 'Created',
             ];
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -57,7 +58,6 @@ class RmaControllers extends Controller
             Rma::create($payload);
             return back()->with(['alertSuccess' => 'Successfully create RMA!']);
         } catch (Throwable $th) {
-            dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
                 return back()->with(['alertError' => 'RMA already Registered!']);
             }
@@ -102,22 +102,6 @@ class RmaControllers extends Controller
         $user = auth()->user()->uid;
         return Rma::where('user_uid', $user)->get()->toArray();
     }
-    public function approved(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Approval-Sales',
-                'sales_name' => auth()->user()->uid,
-                'sales_date' => Carbon::now(),
-            ];
-            // $input = ['status' => 'Approval-PPIC'];
-
-            Rma::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
-        } catch (Throwable $e) {
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
-    }
 
     //approved technician
     public function datatablesTechnician()
@@ -135,7 +119,7 @@ class RmaControllers extends Controller
             ];
 
             Rma::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file RMA']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -151,26 +135,36 @@ class RmaControllers extends Controller
     {
         try {
             $input = [
-                'status' => 'Approval-Technician',
+                'status' => 'Approval-Qc',
                 'qc_name' => auth()->user()->uid,
                 'qc_date' => Carbon::now(),
             ];
 
             Rma::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file RMA']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
 
     //pdf rma
-    public function showPdf(string $uid)
+    public function showPdf(Rma $rma)
     {
-        $pdf = Rma::where("uid", $uid)->get();
-        
+        $fileNameSales = $rma->user?->img ?: "N/A";
+        $fileNameTechnician = $rma->TName?->img ?: "N/A";
+        $fileNameQc = $rma->QName?->img ?: "N/A";
+
+        $signature_sales = 'assetsgambar/file/' . $fileNameSales;
+        $signature_technician = 'assetsgambar/file/' . $fileNameTechnician;
+        $signature_qc = 'assetsgambar/file/' . $fileNameQc;
+
         $data = [
-            "title" => "RMA | IMI Tracking",
-            "pdf" => $pdf,
+            'sales_name' => $rma->user?->name ?: "N/A",
+            'technician_name' => $rma->TName?->name ?: "N/A",
+            'qc_name' => $rma->QName?->name ?: "N/A",
+            'signature_sales' => $signature_sales,
+            'signature_technician' => $signature_technician,
+            'signature_qc' => $signature_qc,
         ];
         return view('rma.pdf.rma', $data);
     }

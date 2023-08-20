@@ -9,7 +9,7 @@ class LetterRetur extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'SName', 'WName', 'MName', 'MPName'];
+    protected $with = ['user', 'WName', 'MName', 'MPName'];
     
     public $timestamps = false;
 
@@ -21,10 +21,6 @@ class LetterRetur extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_uid', 'uid');
-    }
-
-    public function SName(){
-        return $this->belongsTo(User::class, 'sales_name', 'uid');
     }
     
     public function WName(){

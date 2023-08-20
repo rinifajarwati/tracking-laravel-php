@@ -1,3 +1,3 @@
-const pdfBtn = (uid) => {
-    window.location.href=`/pdf-rma/${uid}`
+const pdfBtn = (rma) => {
+    window.location.href=`/generate-pdf-rma/${rma}`
 }

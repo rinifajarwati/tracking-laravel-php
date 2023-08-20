@@ -49,6 +49,7 @@ class DeliveryOrderControllers extends Controller
                 'description' => request('description'),
                 'file' => request('file'),
                 'created_date' => Carbon::now(),
+                'status' => 'Created',
             ];
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -102,23 +103,6 @@ class DeliveryOrderControllers extends Controller
         $user = auth()->user()->uid;
 
         return DeliveryOrder::where('user_uid', $user)->get()->toArray();
-    }
-
-
-    public function approved(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Approval-Sales',
-                'sales1_name' => auth()->user()->uid,
-                'sales1_date' => Carbon::now(),
-            ];
-
-            DeliveryOrder::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Delivery Order']);
-        } catch (Throwable $e) {
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
     }
 
     public function approvedSales(string $uid)
@@ -205,21 +189,45 @@ class DeliveryOrderControllers extends Controller
                 'logistics_customer_date' => Carbon::now(),
             ];
             DeliveryOrder::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Delivery Ordera']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Delivery Order']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
 
-          //pdf Delivery Order
-          public function showPdf(string $uid)
-          {
-              $pdf = DeliveryOrder::where("uid", $uid)->get();
-              
-              $data = [
-                  "title" => "Delivery Order | IMI Tracking",
-                  "pdf" => $pdf,
-              ];
-              return view('delivery_order.pdf.delivery_order', $data);
-          }
+    //pdf Delivery Order
+    public function showPdf(DeliveryOrder $deliveryOrder)
+    {
+        $fileNameSales = $deliveryOrder->user?->img ?: "N/A";
+        $fileNameSalesCoor = $deliveryOrder->SalesName2?->img ?: "N/A";
+        $fileNameQc = $deliveryOrder->QcName?->img ?: "N/A";
+        $fileNameLogistics = $deliveryOrder->LogisticsName?->img ?: "N/A";
+        $fileNameLogisticsSecurity = $deliveryOrder->SecurityName?->img ?: "N/A";
+        $fileNameLogisticsCustomer =$deliveryOrder->CustomerName?->img ?: "N/A";
+
+        $signature_sales = 'assetsgambar/file/' . $fileNameSales;
+        $signature_sales_coor = 'assetsgambar/file/' . $fileNameSalesCoor;
+        $signature_qc = 'assetsgambar/file/' . $fileNameQc;
+        $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
+        $signature_logistics_security = 'assetsgambar/file/' . $fileNameLogisticsSecurity;
+        $signature_logistics_customer = 'assetsgambar/file/' . $fileNameLogisticsCustomer;
+
+        $data = [
+            'sales_name' => $deliveryOrder->user?->name ?: "N/A",
+            'sales_coor_name' => $deliveryOrder->SalesName2?->name ?: "N/A",
+            'qc_name' => $deliveryOrder->QcName?->name ?: "N/A",
+            'logistics_name' => $deliveryOrder->LogisticsName?->Name ?: "N/A",
+            'logistics_security_name' => $deliveryOrder->SecurityName?->name ?: "N/A",
+            'logistics_customer_name' => $deliveryOrder->CustomerName?->name ?: "N/A",
+
+            'signature_sales' => $signature_sales,
+            'signature_sales_coor' => $signature_sales_coor,
+            'signature_qc' => $signature_qc,
+            'signature_logistics' => $signature_logistics,
+            'signature_logistics_security' => $signature_logistics_security,
+            'signature_logistics_customer' => $signature_logistics_customer,
+
+        ];
+        return view('delivery_order.pdf.delivery_order', $data);
+    }
 }
