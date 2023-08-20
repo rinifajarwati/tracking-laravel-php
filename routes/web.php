@@ -100,7 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
     //account 
     Route::resource('signatureuser', addsignaturecontroller::class);
     Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
-    Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    // Route::post('/datatables/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);  
+    Route::get('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
     Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
 
     //create account
