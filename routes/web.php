@@ -9,8 +9,7 @@ use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\RmaControllers;
 use App\Http\Controllers\WarehouseControllers;
 use App\Http\Controllers\addsignaturecontroller;
-use App\Models\DeliveryOrder;
-use App\Models\Rma;
+use App\Http\Controllers\AdduserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,5 +100,13 @@ Route::group(['middleware' => ['auth']], function () {
     //account 
     Route::resource('signatureuser', addsignaturecontroller::class);
     Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
-    Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    // Route::post('/datatables/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);  
+    Route::get('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
+
+    //create account
+    Route::resource('newuser', AdduserController::class);
+    Route::get('/datatables/newuser', [AdduserController::class, 'datatables']);
+
+
 });
