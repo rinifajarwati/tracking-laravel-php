@@ -169,10 +169,6 @@
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                     Account
                 </a>
-                <a class="dropdown-item" href="account-user">
-                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                    Tambah akun
-                </a>
                 <form action="/logout" method="post">
                     <button type="submit" class="dropdown-item">
                         <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
