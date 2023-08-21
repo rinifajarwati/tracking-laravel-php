@@ -98,15 +98,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf-delivery-order/{uid}', [DeliveryOrderControllers::class, 'showPdf']);
 
     //account 
-    Route::resource('signatureuser', addsignaturecontroller::class);
-    Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
-    // Route::post('/datatables/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);  
-    Route::get('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
-    Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
+    Route::resource('signatureuser', addsignaturecontroller::class);  
+    Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
 
     //create account
     Route::resource('newuser', AdduserController::class);
-    Route::get('/datatables/newuser', [AdduserController::class, 'datatables']);
+    Route::get('/newuser', [AdduserController::class, 'datatables']);
 
 
 });

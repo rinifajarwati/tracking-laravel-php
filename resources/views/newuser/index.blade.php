@@ -1,3 +1,5 @@
+@extends('layouts.content')    
+@section('body_content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    @extends('layouts.content')
-    
-    @section('body_content')
         <main>
             <header class="page-header page-header-dark pb-10">
                 <div class="container-xl px-4">
@@ -72,8 +71,7 @@
         <script src="/javascript/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="/js/datatables/datatables-simple-demo.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
-    @endsection
-    
+        <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>  
 </body>
 </html>
+@endsection

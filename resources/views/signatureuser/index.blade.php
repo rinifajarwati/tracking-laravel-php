@@ -1,5 +1,6 @@
 
-
+@extends('layouts.content')
+@section('body_content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,8 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
-    </head>
+</head>
 <body>
-    @extends('layouts.content')
-    @section('body_content')
     <main>
         <header class="page-header page-header-dark pb-10">
             <div class="container-xl px-4">
@@ -70,12 +69,13 @@
             </div>
         </div>
     </main>
-        @include('signatureuser.models.add_signature_user')
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/javascript/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="/js/datatables/datatables-simple-demo.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
-@endsection
+    @include('newuser.modals.add_new_user')
+    <script src="/js/functions/spinner.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/javascript/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="/js/datatables/datatables-simple-demo.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 </body>
 </html>
+@endsection
