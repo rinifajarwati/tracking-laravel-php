@@ -24,9 +24,9 @@ class PdfLetterReturController extends Controller
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $letterRetur->user?->name ?: "N/A",
-            'warehouse_name' => $letterRetur->SCName?->name ?: "N/A",
-            'marketing_name' => $letterRetur->PName?->name ?: "N/A",
-            'marketing_ppic_name' => $letterRetur->WName?->name ?: "N/A",
+            'warehouse_name' => $letterRetur->WName?->name ?: "N/A",
+            'marketing_name' => $letterRetur->MName?->name ?: "N/A",
+            'marketing_ppic_name' => $letterRetur->MPName?->name ?: "N/A",
             'signature_sales' => $signature_sales,
             'signature_warehouse' => $signature_warehouse,
             'signature_marketing' => $signature_marketing,

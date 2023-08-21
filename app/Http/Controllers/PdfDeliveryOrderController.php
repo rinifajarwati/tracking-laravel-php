@@ -30,7 +30,7 @@ class PdfDeliveryOrderController extends Controller
             'sales_name' => $deliveryOrder->user?->name ?: "N/A",
             'sales_coor_name' => $deliveryOrder->SalesName2?->name ?: "N/A",
             'qc_name' => $deliveryOrder->QcName?->name ?: "N/A",
-            'logistics_name' => $deliveryOrder->LogisticsName?->Name ?: "N/A",
+            'logistics_name' => $deliveryOrder->LogisticsName?->name ?: "N/A",
             'logistics_security_name' => $deliveryOrder->SecurityName?->name ?: "N/A",
             'logistics_customer_name' => $deliveryOrder->CustomerName?->name ?: "N/A",
 

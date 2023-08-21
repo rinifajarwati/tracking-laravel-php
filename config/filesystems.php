@@ -67,7 +67,7 @@ return [
         'public_uploads_img'=>[
         'driver'=>'local',
         'root'=>public_path('assets'). 'gambar/file',
-        'url'=>env('APP_URL').'assets/gambar/file',
+        'url'=>env('APP_URL').'assetsgambar/file',
         'visibility'=>'public'
          ],
 

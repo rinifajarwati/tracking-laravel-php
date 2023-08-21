@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Models\Rma;
 use App\Models\DeliveryOrder;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use App\Http\Controllers\PdfRmaController;
 use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
 use App\Http\Controllers\addsignaturecontroller;
+use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\LetterReturControllers;
 use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\DeliveryOrderControllers;
@@ -109,5 +111,15 @@ Route::group(['middleware' => ['auth']], function () {
     //account 
     Route::resource('signatureuser', addsignaturecontroller::class);
     Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
-    Route::post('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    // Route::post('/datatables/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);  
+    Route::get('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
+
+    //create account
+    Route::resource('account-user', AccountController::class);
+    Route::get('/datatables/account-user', [AccountController::class, 'datatables']);
+    // Route::resource('newuser', AdduserController::class);
+    // Route::get('/datatables/newuser', [AdduserController::class, 'datatables']);
+
+
 });
