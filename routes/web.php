@@ -11,6 +11,7 @@ use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
 use App\Http\Controllers\addsignaturecontroller;
 use App\Http\Controllers\AdduserController;
+use App\Http\Controllers\CreatenewuserController;
 use App\Http\Controllers\LetterReturControllers;
 use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\DeliveryOrderControllers;
@@ -109,17 +110,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/generate-pdf-delivery-order/{deliveryOrder}', [PdfDeliveryOrderController::class, 'generatePDF']);
 
     //account 
-    Route::resource('signatureuser', addsignaturecontroller::class);
-    Route::get('/datatables/signatureuser', [addsignaturecontroller::class, 'datatables']);
-    // Route::post('/datatables/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);  
-    Route::get('/signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
-    Route::post('/signatureuser', [addsignaturecontroller::class, 'show']);
+    Route::resource('signatureuser', addsignaturecontroller::class);  
+    Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
 
-    //create account
+    //create signatture
     Route::resource('account-user', AccountController::class);
     Route::get('/datatables/account-user', [AccountController::class, 'datatables']);
-    // Route::resource('newuser', AdduserController::class);
-    // Route::get('/datatables/newuser', [AdduserController::class, 'datatables']);
 
+    //create account
+    Route::resource('create-user', CreatenewuserController::class);
+    Route::get('/datatables/create-user', [CreatenewuserController::class, 'datatables']);
 
 });

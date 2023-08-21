@@ -60,7 +60,7 @@
                 <div class="card-body">
                     @if (auth()->user()->division_uid === 'sales')
                         <button
-                            class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
+                            class="btn btn-primary btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
                             type="button" data-bs-toggle="modal" data-bs-target="#add_new_warehouse_modal">
                             <i class="fas fa-plus fa-fw"></i>
                         </button>

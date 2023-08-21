@@ -22,5 +22,16 @@
             </a>
         </nav>
     </div>
-
+    <div class="collapse  {{ Request::is('create-user')? 'show' : '' }}"
+        id="collapseLayoutsFirst" data-bs-parent="#accordionSidenav">
+        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+            {{-- Menu (role) --}}
+            <a class="nav-link {{ Request::is('create-user') ? 'active' : '' }}" href="/create-user">
+                <div class="nav-link-icon">
+                    <i class="fa-solid fa-users-between-lines"></i>
+                </div>
+                Create new account
+            </a>
+        </nav>
+    </div>
 
