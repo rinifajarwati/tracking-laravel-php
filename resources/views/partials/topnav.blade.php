@@ -165,13 +165,9 @@
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="signatureuser">
+                <a class="dropdown-item" href="account-user">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                     Account
-                </a>
-                <a class="dropdown-item" href="newuser">
-                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                    Tambah akun
                 </a>
                 <form action="/logout" method="post">
                     <button type="submit" class="dropdown-item">

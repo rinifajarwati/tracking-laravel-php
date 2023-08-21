@@ -9,9 +9,9 @@
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"> <i class="fa-solid fa-users-between-lines"></i></div>
-                                Warehouse
+                                SO Gudang
                             </h1>
-                            <div class="page-header-subtitle">Example dashboard overview and content summary
+                            <div class="page-header-subtitle">
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="card-header py-2">
                     <div class="row">
                         <div class="me-auto col-auto my-auto">
-                            List
+                            List SO Gudang
                         </div>
                         <div class="ms-auto col-auto">
                             <div class="dropdown no-caret">
@@ -58,12 +58,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <button
-                        class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
-                        type="button" data-bs-toggle="modal" data-bs-target="#add_new_warehouse_modal">
-                        <i class="fas fa-plus fa-fw"></i>
-                    </button>
-
+                    @if (auth()->user()->division_uid === 'sales')
+                        <button
+                            class="btn btn-primary btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
+                            type="button" data-bs-toggle="modal" data-bs-target="#add_new_warehouse_modal">
+                            <i class="fas fa-plus fa-fw"></i>
+                        </button>
+                    @endif
                     <div class="container">
                         @include('partials.alert')
 
@@ -74,7 +75,6 @@
         </div>
     </main>
     @include('warehouse.modals.add_new_warehouse')
-    @include('warehouse.modals.approval_sales_staff')
     @include('warehouse.modals.approval_sales_coor')
     @include('warehouse.modals.approval_ppic_warehouse')
     @include('warehouse.modals.approval_warehouse')
@@ -87,7 +87,6 @@
     @if (auth()->user()->division_uid === 'sales')
         <script src="/js/warehouse/dt.js"></script>
         <script src="/js/warehouse/approval.js"></script>
-        <script src="/js/warehouse/approval-sales-staff.js"></script>
         <script src="/js/warehouse/approval-sales-coor.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse')
         <script src="/js/warehouse/dt-warehouse.js"></script>

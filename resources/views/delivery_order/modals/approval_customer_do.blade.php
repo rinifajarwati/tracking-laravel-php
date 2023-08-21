@@ -2,11 +2,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">approved data</h5>
+                <h5 class="modal-title">approved data delivery order</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
             </div>
             <form action="/do-logistics-customer-approved/${uid}" method="post" autocomplete="off"
-                id="approved_do_security_item_form">
+                id="approved_do_customer_item_form">
                 @method('put')
                 @csrf
                 <div class="modal-body">

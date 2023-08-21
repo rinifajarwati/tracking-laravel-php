@@ -1,8 +1,5 @@
 const listDataDo = $("#delivery_order_list_data_table");
 
-const approvedDoSales1Form = $("#approved_do_sales1_item_form");
-const approvedDoSales1ListModal = $("#approved_do_sales1_item_modal");
-
 const approvedDoSales2Form = $("#approved_do_sales2_item_form");
 const approvedDoSales2ListModal = $("#approved_do_sales2_item_modal");
 

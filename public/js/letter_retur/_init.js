@@ -1,10 +1,6 @@
 //(Sales coordinator)
 const listDataLetterRetur = $("#letter_retur_list_data_table");
 
-// Approved Sales
-const approvedSalesForm = $("#approved_sales_item_form");
-const approvedSalesListModal = $("#approved_sales_item_modal");
-
 //Warehouse
 const listDataLetterReturWarehouse = $("#letter_retur_list_data_table");
 

@@ -11,7 +11,7 @@
                                 <div class="page-header-icon"> <i class="fa-solid fa-users-between-lines"></i></div>
                                 RMA
                             </h1>
-                            <div class="page-header-subtitle">Example dashboard overview and content summary
+                            <div class="page-header-subtitle">
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="card-header py-2">
                     <div class="row">
                         <div class="me-auto col-auto my-auto">
-                            List
+                            List RMA
                         </div>
                         <div class="ms-auto col-auto">
                             <div class="dropdown no-caret">
@@ -58,11 +58,13 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <button
-                        class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
-                        type="button" data-bs-toggle="modal" data-bs-target="#add_new_rma_modal">
-                        <i class="fas fa-plus fa-fw"></i>
-                    </button>
+                    @if (auth()->user()->division_uid === 'sales')
+                        <button
+                            class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
+                            type="button" data-bs-toggle="modal" data-bs-target="#add_new_rma_modal">
+                            <i class="fas fa-plus fa-fw"></i>
+                        </button>
+                    @endif
 
                     <div class="container">
                         @include('partials.alert')
@@ -75,7 +77,6 @@
     </main>
 
     @include('rma.modals.add_new_rma')
-    @include('rma.modals.approval_sales_rma')
     @include('rma.modals.approval_technician_rma')
     @include('rma.modals.approval_qc_rma')
 
@@ -83,10 +84,8 @@
     <script src="/js/rma/pdf.js"></script>
     <script src="/js/functions/spinner.js"></script>
 
-    <script src="/js/functions/spinner.js"></script>
     @if (auth()->user()->division_uid === 'sales')
         <script src="/js/rma/dt.js"></script>
-        <script src="/js/rma/approval.js"></script>
     @elseif(auth()->user()->division_uid === 'technician')
         <script src="/js/rma/dt-technician.js"></script>
         <script src="/js/rma/approval-technician.js"></script>

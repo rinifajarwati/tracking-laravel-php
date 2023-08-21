@@ -64,7 +64,7 @@ class PdfWarehouseController extends Controller
 
         File::delete($tempPdf);
 
-        $outputFilename = 'merged.pdf';
+        $outputFilename = 'SO-Gudang.pdf';
         $pdf->Output($outputFilename, 'D');
 
         return 'PDFs merged successfully.';

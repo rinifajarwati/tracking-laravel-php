@@ -1,15 +1,22 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Models\Rma;
+use App\Models\DeliveryOrder;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthControllers;
-use App\Http\Controllers\DeliveryOrderControllers;
-use App\Http\Controllers\DivisionControllers;
-use App\Http\Controllers\LetterReturControllers;
-use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\RmaControllers;
+use App\Http\Controllers\AuthControllers;
+use App\Http\Controllers\PdfRmaController;
+use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
 use App\Http\Controllers\addsignaturecontroller;
 use App\Http\Controllers\AdduserController;
+use App\Http\Controllers\CreatenewuserController;
+use App\Http\Controllers\LetterReturControllers;
+use App\Http\Controllers\PdfWarehouseController;
+use App\Http\Controllers\DeliveryOrderControllers;
+use App\Http\Controllers\PdfLetterReturController;
+use App\Http\Controllers\PdfDeliveryOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,8 +77,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/rma-approved-technician/{uid}', [RmaControllers::class, 'approvedTechnician']);
     Route::get('/datatables/rma-qc', [RmaControllers::class, 'datatablesQc']);
     Route::put('/rma-approved-qc/{uid}', [RmaControllers::class, 'approvedQc']);
-    Route::get('/pdf-rma/{uid}', [RmaControllers::class, 'showPdf']);
+    Route::get('/pdf-rma/{rma}', [RmaControllers::class, 'showPdf']);
 
+    Route::get('/generate-pdf-rma/{rma}', [PdfRmaController::class, 'generatePDF']);
 
     //letter retur (surat retur)
     Route::resource('letter-retur', LetterReturControllers::class);
@@ -82,7 +90,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
     Route::put('/letter-retur-approved-marketing-ppic/{uid}', [LetterReturControllers::class, 'approvedMarketingPPIC']);
-    Route::get('/pdf-letter-retur/{uid}', [LetterReturControllers::class, 'showPdf']);
+    Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
+
+    Route::get('/generate-pdf-letter-retur/{letterRetur}', [PdfLetterReturController::class, 'generatePDF']);
 
     //delivery order
     Route::resource('delivery-order', DeliveryOrderControllers::class);
@@ -95,16 +105,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/do-logistics-approved/{uid}', [DeliveryOrderControllers::class, 'approvedLogistics']);
     Route::put('/do-logistics-security-approved/{uid}', [DeliveryOrderControllers::class, 'approvedSecurity']);
     Route::put('/do-logistics-customer-approved/{uid}', [DeliveryOrderControllers::class, 'approvedCustomer']);
-    Route::get('/pdf-delivery-order/{uid}', [DeliveryOrderControllers::class, 'showPdf']);
+    Route::get('/pdf-delivery-order/{deliveryOrder}', [DeliveryOrderControllers::class, 'showPdf']);
+
+    Route::get('/generate-pdf-delivery-order/{deliveryOrder}', [PdfDeliveryOrderController::class, 'generatePDF']);
 
     //account 
     Route::resource('signatureuser', addsignaturecontroller::class);  
     Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
     Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
 
-    //create account
-    Route::resource('newuser', AdduserController::class);
-    Route::get('/newuser', [AdduserController::class, 'datatables']);
+    //create signatture
+    Route::resource('account-user', AccountController::class);
+    Route::get('/datatables/account-user', [AccountController::class, 'datatables']);
 
+    //create account
+    Route::resource('create-user', CreatenewuserController::class);
+    Route::get('/datatables/create-user', [CreatenewuserController::class, 'datatables']);
 
 });

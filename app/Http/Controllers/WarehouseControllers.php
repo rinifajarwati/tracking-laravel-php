@@ -20,7 +20,7 @@ class WarehouseControllers extends Controller
     {
 
         $data = [
-            "title" => "Warehouse | IMI Tracking",
+            "title" => "SO Gudang | IMI Tracking",
         ];
         return view('warehouse.index', $data);
     }
@@ -49,6 +49,7 @@ class WarehouseControllers extends Controller
                 'description' => request('description'),
                 'file' => request('file'),
                 'created_date' => Carbon::now(),
+                'status' => 'Created',
             ];
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -99,24 +100,9 @@ class WarehouseControllers extends Controller
     public function datatables()
     {
         $user = auth()->user()->uid;
-
         return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
-    public function approvedSalesStaff(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Made-By',
-                'sales_staff_name' => auth()->user()->uid,
-                'sales_staff_date' => Carbon::now(),
-            ];
-            Warehouse::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved filey']);
-        } catch (Throwable $e) {
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
-    }
     public function approvedSalesCoor(string $uid)
     {
         try {
@@ -132,6 +118,7 @@ class WarehouseControllers extends Controller
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
+
     public function approved(string $uid)
     {
         try {
@@ -141,7 +128,7 @@ class WarehouseControllers extends Controller
                 'ppic_date' => Carbon::now(),
             ];
             Warehouse::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved filey']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file SO Gudang']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -161,7 +148,7 @@ class WarehouseControllers extends Controller
                 'warehouse_date' => Carbon::now(),
             ];
             Warehouse::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file SO Gudang']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -180,7 +167,6 @@ class WarehouseControllers extends Controller
                 'logistics_name' => auth()->user()->uid,
                 'logistics_date' => Carbon::now(),
             ];
-            // $input = ['status' => 'Approval-PPIC'];
 
             Warehouse::where('uid', $uid)->update($input);
             return back()->with(['alertSuccess' => 'Successfully For Approved file']);
@@ -196,6 +182,7 @@ class WarehouseControllers extends Controller
         $fileName = $warehouse->PName?->img ?: "N/A";
         $fileNameWarehouse = $warehouse->WName?->img ?: "N/A";
         $fileNameLogistics = $warehouse->LName?->img ?: "N/A";
+        
         $signature_created = 'assetsgambar/file/' . $fileNameCreated;
         $signature_approved = 'assetsgambar/file/' . $fileNameApproved;
         $signature_path = 'assetsgambar/file/' . $fileName;
