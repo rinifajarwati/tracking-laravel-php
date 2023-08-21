@@ -10,7 +10,7 @@
     <title>{{ $title }}</title>
 
     {{-- Website icon --}}
-    <link rel="icon" type="image/x-icon" href="/assets/img/LOGO_MEDIALYS_ICON.png" style="height: 7rem" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/logo_interskala.jpeg" style="height: 7rem" />
 
     {{-- Important styles --}}
     <link rel="stylesheet" href="/css/datatables.css" />

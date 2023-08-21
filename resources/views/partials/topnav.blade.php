@@ -10,7 +10,7 @@
     <!-- * * * * * * When using an image, we recommend the SVG format.-->
     <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
     <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">
-        <img src="/assets/img/LOGO_MEDIALYS-removebg.png" style="height: 3rem" />
+        <img src="/assets/img/logo_interskala.jpeg" style="height: 3rem" />
     </a>
 
     <!-- Navbar Items-->

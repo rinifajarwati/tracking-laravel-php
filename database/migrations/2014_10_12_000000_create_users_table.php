@@ -65,16 +65,16 @@ return new class extends Migration
             $table->string('file');
             $table->string('description');
             $table->string('user_uid');
-            $table->string('created_date');
+            $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
             $table->string('sales_coor_name')->nullable();
-            $table->string('sales_coor_date')->nullable();
+            $table->timestamp('sales_coor_date')->nullable();
             $table->string('ppic_name')->nullable();
-            $table->string('ppic_date')->nullable();
+            $table->timestamp('ppic_date')->nullable();
             $table->string('warehouse_name')->nullable();
-            $table->string('warehouse_date')->nullable();
+            $table->timestamp('warehouse_date')->nullable();
             $table->string('logistics_name')->nullable();
-            $table->string('logistics_date')->nullable();
+            $table->timestamp('logistics_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -86,12 +86,12 @@ return new class extends Migration
             $table->string('file');
             $table->string('description');
             $table->string('user_uid');
-            $table->string('created_date');
+            $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Reject'])->default('Created');
             $table->string('technician_name')->nullable();
-            $table->string('technician_date')->nullable();
+            $table->timestamp('technician_date')->nullable();
             $table->string('qc_name')->nullable();
-            $table->string('qc_date')->nullable();
+            $table->timestamp('qc_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -103,14 +103,14 @@ return new class extends Migration
             $table->string('file');
             $table->string('description');
             $table->string('user_uid');
-            $table->string('created_date');
+            $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-PPIC-Marketing', 'Cancel', 'Reject'])->default('Created');
             $table->string('warehouse_name')->nullable();
-            $table->string('warehouse_date')->nullable();
+            $table->timestamp('warehouse_date')->nullable();
             $table->string('marketing_name')->nullable();
-            $table->string('marketing_date')->nullable();
+            $table->timestamp('marketing_date')->nullable();
             $table->string('ppic_marketing_name')->nullable();
-            $table->string('ppic_marketing_date')->nullable();
+            $table->timestamp('ppic_marketing_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -123,18 +123,18 @@ return new class extends Migration
             $table->string('file');
             $table->string('description');
             $table->string('user_uid');
-            $table->string('created_date');
+            $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Security', 'Approval-Customer'])->default('Created');
             $table->string('sales2_name')->nullable();
-            $table->string('sales2_date')->nullable();
+            $table->timestamp('sales2_date')->nullable();
             $table->string('qc_name')->nullable();
-            $table->string('qc_date')->nullable();
+            $table->timestamp('qc_date')->nullable();
             $table->string('logistics_name')->nullable();
-            $table->string('logistics_date')->nullable();
+            $table->timestamp('logistics_date')->nullable();
             $table->string('logistics_security_name')->nullable();
-            $table->string('logistics_security_date')->nullable();
+            $table->timestamp('logistics_security_date')->nullable();
             $table->string('logistics_customer_name')->nullable();
-            $table->string('logistics_customer_date')->nullable();
+            $table->timestamp('logistics_customer_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });

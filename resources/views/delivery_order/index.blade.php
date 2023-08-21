@@ -8,7 +8,7 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
-                                <div class="page-header-icon"> <i class="fa-solid fa-users-between-lines"></i></div>
+                                <div class="page-header-icon"><i data-feather="activity"></i></div>
                                 Delivery Order
                             </h1>
                             <div class="page-header-subtitle">

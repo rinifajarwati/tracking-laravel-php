@@ -10,7 +10,12 @@ class LetterRetur extends Model
     use HasFactory;
     protected $guarded = ["id"];
     protected $with = ['user', 'WName', 'MName', 'MPName'];
-    
+    protected $casts = [
+        'created_date' => 'datetime',
+        'warehouse_date' => 'datetime',
+        'marketing_date' => 'datetime',
+        'ppic_marketing_date' => 'datetime',
+    ];
     public $timestamps = false;
 
     public function getRouteKeyName()
