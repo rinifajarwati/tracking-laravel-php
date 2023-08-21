@@ -28,7 +28,7 @@ listDataLetterReturWarehouse.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
-                if (row.status === "Approval-Sales") {
+                if (row.status === "Created") {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
@@ -69,9 +69,6 @@ listDataLetterReturWarehouse.bootstrapTable({
                 if (value === "Created") {
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Sales") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
-                }
                 if (value === "Approval-Warehouse") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
@@ -101,23 +98,6 @@ listDataLetterReturWarehouse.bootstrapTable({
         {
             title: "Created Date",
             field: "created_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Sales Name",
-            field: "sales_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.s_name ? row.s_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales Date",
-            field: "sales_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

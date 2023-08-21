@@ -31,10 +31,6 @@ listDataWarehouse.bootstrapTable({
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`
                 if(row.status === "Created"){
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnStaff('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
-                    <i class="fas fa-check fa-fw"></i>
-                    </button>`
-                }else if(row.status === "Made-By"){
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`
@@ -80,9 +76,6 @@ listDataWarehouse.bootstrapTable({
                 if(value === "Created"){
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
                 }
-                if(value === "Made-By"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
-                }
                 if(value === "Approved-By"){
                     buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
@@ -121,7 +114,7 @@ listDataWarehouse.bootstrapTable({
             },
         },
         {
-            title: "Approved By",
+            title: "Coordinator Sales",
             field: "sales_coor_name",
             sortable: true,
             formatter(value, row){

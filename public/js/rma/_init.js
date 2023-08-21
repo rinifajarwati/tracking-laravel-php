@@ -1,8 +1,5 @@
 const listDataRma = $("#rma_list_data_table");
 
-// Approved Sales
-const approvedSalesForm = $("#approved_sales_item_form");
-const approvedSalesListModal = $("#approved_sales_item_modal");
 
 const listDataRmaTechnician = $("#rma_list_data_table");
 // Approved Technician

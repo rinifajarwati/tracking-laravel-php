@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">approved data</h5>
+                <h5 class="modal-title">approved data delivery order</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
             </div>
             <form action="/do-logistics-approved/${uid}" method="post" autocomplete="off"

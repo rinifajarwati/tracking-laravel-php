@@ -25,7 +25,7 @@ listDataRmaQC.bootstrapTable({
                 const fields = {};
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
-                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
                 if (row.status === "Approval-Technician") {
@@ -98,23 +98,6 @@ listDataRmaQC.bootstrapTable({
         {
             title: "Created Date",
             field: "created_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Sales Name",
-            field: "sales_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.s_name ? row.s_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales Date",
-            field: "sales_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

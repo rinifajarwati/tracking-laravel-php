@@ -28,12 +28,7 @@ listDataRma.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
-                if (row.status === "Created") {
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
-                    <i class="fas fa-check fa-fw"></i>
-                    </button>`;
-                } else {
-                }
+
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
         },
@@ -69,9 +64,6 @@ listDataRma.bootstrapTable({
                 if (value === "Created") {
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Sales") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
-                }
                 if (value === "Approval-Technician") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
@@ -104,23 +96,6 @@ listDataRma.bootstrapTable({
             },
         },
         {
-            title: "Sales Name",
-            field: "sales_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.s_name ? row.s_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales Date",
-            field: "sales_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
             title: "Technician Name",
             field: "Technician_name",
             formatter(value, row) {
@@ -140,8 +115,8 @@ listDataRma.bootstrapTable({
             title: "Qc Name",
             field: "qc_name",
             formatter(value, row) {
-                //   return row.l_name ? row.l_name.name : null;
-            },
+                return row.q_name ? row.q_name.name : null;
+          },
             sortable: true,
         },
         {

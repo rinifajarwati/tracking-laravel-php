@@ -165,11 +165,11 @@
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="signatureuser">
+                <a class="dropdown-item" href="account-user">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                     Account
                 </a>
-                <a class="dropdown-item" href="newuser">
+                <a class="dropdown-item" href="account-user">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                     Tambah akun
                 </a>

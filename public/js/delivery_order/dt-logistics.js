@@ -85,9 +85,6 @@ listDataDoLogistics.bootstrapTable({
                 if (value === "Created") {
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Sales") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
-                }
                 if (value === "Approval-Coor") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
@@ -129,24 +126,7 @@ listDataDoLogistics.bootstrapTable({
             },
         },
         {
-            title: "Sales 1 Name",
-            field: "sales1_name",
-            formatter(value, row) {
-                console.log(row);
-                return row.sales_name ? row.sales_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Sales 1 Date",
-            field: "sales1_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Sales 2 Name",
+            title: "Sales Coor Name",
             field: "sales2_name",
             formatter(value, row) {
                 console.log(row);
@@ -155,7 +135,7 @@ listDataDoLogistics.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Sales 2 Date",
+            title: "Sales Coor Date",
             field: "sales2_date",
             sortable: true,
             formatter: (value, row) => {
@@ -214,7 +194,7 @@ listDataDoLogistics.bootstrapTable({
             title: "Logistics Customer Name",
             field: "logistics_customer_name",
             formatter(value, row) {
-                //   return row.l_name ? row.l_name.name : null;
+                  return row.customer_name ? row.customer_name.name : null;
             },
             sortable: true,
         },
