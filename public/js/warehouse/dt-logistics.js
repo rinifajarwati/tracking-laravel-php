@@ -30,6 +30,10 @@ logisticsApproved.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`
+
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
+                <i class="fas fa-book-medical fa-fw"></i>
+                </button>`;
                 if(row.status === "Approval-Warehouse"){
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
@@ -43,11 +47,6 @@ logisticsApproved.bootstrapTable({
         {
             title: "No SO",
             field: "no_so",
-            sortable: true,
-        },
-        {
-            title: "Description",
-            field: "description",
             sortable: true,
         },
         {
@@ -110,7 +109,7 @@ logisticsApproved.bootstrapTable({
             },
         },
         {
-            title: "Coordinator Sales",
+            title: "Sales",
             field: "sales_coor_name",
             sortable: true,
             formatter(value, row){

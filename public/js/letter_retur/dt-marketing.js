@@ -28,16 +28,23 @@ listDataLetterReturMarketing.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
-                if (row.status === "Approval-Warehouse") {
+                if (
+                    row.status === "Approval-Warehouse" &&
+                    auth_division === "sales" &&
+                    auth_position === "staff"
+                ) {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
-                } else if(row.status === "Approval-Marketing") {
+                } else if (
+                    row.status === "Approval-Marketing" &&
+                    auth_division === "scm" &&
+                    auth_position === "coordinator"
+                ) {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnMPpic('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
-                } else{
-
+                } else {
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
@@ -80,7 +87,7 @@ listDataLetterReturMarketing.bootstrapTable({
                 if (value === "Approval-Marketing") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-PPIC-Marketing") {
+                if (value === "Approval-SCM") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
@@ -128,7 +135,7 @@ listDataLetterReturMarketing.bootstrapTable({
             title: "Marketing Name",
             field: "marketing_name",
             formatter(value, row) {
-                  return row.m_name ? row.m_name.name : null;
+                return row.m_name ? row.m_name.name : null;
             },
             sortable: true,
         },
@@ -141,16 +148,16 @@ listDataLetterReturMarketing.bootstrapTable({
             },
         },
         {
-            title: "Marketing PPIC Name",
-            field: "ppic_marketing_name",
+            title: "SCM Name",
+            field: "scm_name",
             formatter(value, row) {
-                  return row.m_p_name ? row.m_p_name.name : null;
+                return row.s_c_m_name ? row.s_c_m_name.name : null;
             },
             sortable: true,
         },
         {
-            title: "Marketing PPIC Date",
-            field: "ppic_marketing_date",
+            title: "SCM Date",
+            field: "scm_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

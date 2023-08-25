@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
+use App\Models\WarehouseSn;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
@@ -19,12 +20,17 @@ class PdfWarehouseController extends Controller
         $fileName = $warehouse->PName?->img ?: "N/A";
         $fileNameWarehouse = $warehouse->WName?->img ?: "N/A";
         $fileNameLogistics = $warehouse->LName?->img ?: "N/A";
+
         $signature_created = 'assetsgambar/file/' . $fileNameCreated;
         $signature_approved = 'assetsgambar/file/' . $fileNameApproved;
         $signature_path = 'assetsgambar/file/' . $fileName;
         $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
         $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
 
+        $description = $warehouse->description;
+        $delivery_notes = $warehouse->delivery_notes;
+        $warehouseUid = $warehouse->uid;
+        $warehouseSN = WarehouseSn::where("warehouse_uid", $warehouseUid)->get();
         $data = [
             'title' => 'Contoh PDF',
             'created_name' => $warehouse->user?->name ?: "N/A",
@@ -32,11 +38,16 @@ class PdfWarehouseController extends Controller
             'ppic_name' => $warehouse->PName?->name ?: "N/A",
             'warehouse_name' => $warehouse->WName?->name ?: "N/A",
             'logistics_name' => $warehouse->LName?->name ?: "N/A",
+
             'signature_created' => $signature_created,
             'signature_approved' => $signature_approved,
             'signature_path' => $signature_path,
             'signature_warehouse' => $signature_warehouse,
             'signature_logistics' => $signature_logistics,
+
+            'description_warehouse' => $description,
+            'delivery_notes_warehouse' => $delivery_notes,
+            'warehouseSN' => $warehouseSN,
         ];
         $pdf = Pdf::loadView('warehouse.pdf.so_warehouse', $data);
 
@@ -65,7 +76,7 @@ class PdfWarehouseController extends Controller
         File::delete($tempPdf);
 
         $outputFilename = 'SO-Gudang.pdf';
-        $pdf->Output($outputFilename, 'D');
+        $pdf->Output($outputFilename, 'I');
 
         return 'PDFs merged successfully.';
     }

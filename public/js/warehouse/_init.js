@@ -1,10 +1,28 @@
 //ppic(Sales coordinator)
 const listDataWarehouse = $("#warehouse_list_data_table");
 
+
+// Add FamiliesData
+const addWarehouseDataModal = $("#add_new_warehouse_modal");
+const addWarehouseDataItemSN = $("#add_serial_number");
+const addWarehouseDataItemWeight = $("#add_weight");
+const addWarehouseDataItemKoli = $("#add_koli");
+const addWarehouseDataItemGdg = $("#add_gdg");
+const addWarehouseDataItemKubikasi = $("#add_kubikasi");
+const addWarehoseDataOptionsTbody = $("#add_warehouse_tbody");
+
+// Edit Role components
+const editWarehouseForm = $("#edit_warehouse_item_form");
+const editWarehouseListModal = $("#edit_warehouse_item_modal");
+const editWarehouseModalSpinner = $("#edit_overtime_application_modal_spinner");
+const editWarehouseNameInput = $("#edit_overtime_application_item_name");
+
+const listDataWarehouseSales = $("#warehouse_list_data_table");
 // Approved sales coordinator
 const approvedSalesCoorForm = $("#approved_sales_coor_level_item_form");
 const approvedSalesCoorListModal = $("#approved_sales_coor_item_modal");
 
+const listDataWarehousePpic = $("#warehouse_list_data_table");
 // Approved PPIC
 const approvedPPICForm = $("#approved_ppic_level_item_form");
 const approvedPPICListModal = $("#approved_ppic_item_modal");

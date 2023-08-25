@@ -14,9 +14,42 @@
     <main>
         <div class="container">
 
+            <!-- Receipt patient data -->
+            <div class="wrapper patient-data">
+                <table class="table-patient-data">
+                    <tr>
+                        <td class="col-1">Description</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $description_warehouse }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="wrapper receipt-details">
+                <table class="table-receipt-details">
+                    <thead>
+                        <tr>
+                            <th class="col-2">Serial Number </th>
+                            <th class="col-3">Weight</th>
+                            <th class="col-3">Koli</th>
+                            <th class="col-4">GDG</th>
+                            <th class="col-5">Kubikasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($warehouseSN as $item)
+                            <tr class="item-list">
+                                <td class="col-2">{{ $item['serial_number'] }}</td>
+                                <td class="col-3">{{ $item['weight'] }}</td>
+                                <td class="col-3">{{ $item['koli'] }}</td>
+                                <td class="col-4">{{ $item['gdg'] }}</td>
+                                <td class="col-5">{{ $item['kubikasi'] }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <!-- Receipt signature -->
             <div class="wrapper">
-
                 <table class="table">
                     {{-- Sign Text 1 --}}
                     <tr>

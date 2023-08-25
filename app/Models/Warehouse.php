@@ -10,6 +10,13 @@ class Warehouse extends Model
     use HasFactory;
     protected $guarded = ["id"];
     protected $with = ['user', 'SCName', 'PName', 'WName', 'LName'];
+    protected $casts = [
+        'created_date' => 'datetime',
+        'sales_coor_date' => 'datetime',
+        'ppic_date' => 'datetime',
+        'warehouse_date' => 'datetime',
+        'logistics_date' => 'datetime',
+    ];
 
     public $timestamps = false;
 
@@ -17,7 +24,7 @@ class Warehouse extends Model
     {
         return 'uid';
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_uid', 'uid');
@@ -28,15 +35,18 @@ class Warehouse extends Model
         return $this->belongsTo(User::class, 'sales_coor_name', 'uid');
     }
 
-    public function PName(){
+    public function PName()
+    {
         return $this->belongsTo(User::class, 'ppic_name', 'uid');
     }
 
-    public function WName(){
+    public function WName()
+    {
         return $this->belongsTo(User::class, 'warehouse_name', 'uid');
     }
 
-    public function LName(){
+    public function LName()
+    {
         return $this->belongsTo(User::class, 'logistics_name', 'uid');
     }
 }

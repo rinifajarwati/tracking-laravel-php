@@ -66,6 +66,19 @@ listDataDo.bootstrapTable({
             },
         },
         {
+            title: "No Resi",
+            field: "uid",
+            sortable: true,
+            formatter: (value, row) => {
+                const urlFile = "/assets/img/no-resi/" + row.img;
+                return (
+                    '<a href ="' +
+                    urlFile +
+                    '" class="badge bg-info text-decoration-none" target="_blank">Lihat Foto</a>'
+                );
+            },
+        },
+        {
             title: "Status",
             field: "status",
             sortable: true,

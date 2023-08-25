@@ -11,7 +11,11 @@ class Rma extends Model
     protected $guarded = ["id"];
     
     protected $with = ['user', 'SName', 'TName', 'QName'];
-
+    protected $casts = [
+        'created_date' => 'datetime',
+        'technician_date' => 'datetime',
+        'qc_date' => 'datetime',
+    ];
     public $timestamps = false;
 
     public function getRouteKeyName()

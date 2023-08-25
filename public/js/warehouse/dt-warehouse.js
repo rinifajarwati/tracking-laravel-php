@@ -1,5 +1,5 @@
 warehouseApproved.bootstrapTable({
-    url: 'datatables/warehouse-approved-warehouse',
+    url: "datatables/warehouse-approved-warehouse",
     showColumns: true,
     showColumnsToggleAll: true,
     showRefresh: true,
@@ -20,34 +20,34 @@ warehouseApproved.bootstrapTable({
         {
             title: "Action",
             field: "uid",
-            sortable:true,
-            formatter:(value, row) => {
-                const fields = {
-
-                };
+            sortable: true,
+            formatter: (value, row) => {
+                const fields = {};
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
-                </button>`
-                if(row.status === "Approval-PPIC"){
+                </button>`;
+
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
+                <i class="fas fa-book-medical fa-fw"></i>
+                </button>`;
+                if (row.status === "Approval-PPIC" && auth_ === "coordinator") {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
-                    </button>`
-                }else{
-                    
+                    </button>`;
+
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_warehouse_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                <i class="far fa-edit fa-fw"></i>
+                </button>`;
+                } else {
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;
-            }
+            },
         },
         {
-            title: "No SO",
+            title: "No SOa",
             field: "no_so",
-            sortable: true,
-        },
-        {
-            title: "Description",
-            field: "description",
             sortable: true,
         },
         {
@@ -64,37 +64,37 @@ warehouseApproved.bootstrapTable({
             },
         },
         {
-            title:"Status",
-            field:"status",
+            title: "Status",
+            field: "status",
             sortable: true,
             formatter: (value, row) => {
-                let buttonHtml = '';
-                if(value === "Created"){
-                    buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
+                let buttonHtml = "";
+                if (value === "Created") {
+                    buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
-                if(value === "Approved-By"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                if (value === "Approved-By") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
                 }
-                if(value === "Approval-PPIC"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                if (value === "Approval-PPIC") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
                 }
-                if(value === "Approval-Warehouse"){
-                    buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
+                if (value === "Approval-Warehouse") {
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if(value === "Approval-Logistics"){
-                    buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
+                if (value === "Approval-Logistics") {
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if(value === "Cancel"){
-                    buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`
+                if (value === "Cancel") {
+                    buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
                 }
-                if(value === "Reject"){
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`
+                if (value === "Reject") {
+                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`;
                 }
-                if(value === "Closed"){
-                    buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`
+                if (value === "Closed") {
+                    buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`;
                 }
                 return buttonHtml;
-            }
+            },
         },
         {
             title: "Created Name",
@@ -110,10 +110,10 @@ warehouseApproved.bootstrapTable({
             },
         },
         {
-            title: "Coordinator Sales",
+            title: "Sales",
             field: "sales_coor_name",
             sortable: true,
-            formatter(value, row){
+            formatter(value, row) {
                 return row.s_c_name ? row.s_c_name.name : null;
             },
         },
@@ -128,7 +128,7 @@ warehouseApproved.bootstrapTable({
         {
             title: "PPIC Name",
             field: "ppic_name",
-            formatter(value, row){
+            formatter(value, row) {
                 return row.p_name ? row.p_name.name : null;
             },
             sortable: true,
@@ -144,7 +144,7 @@ warehouseApproved.bootstrapTable({
         {
             title: "Warehouse Name",
             field: "warehouse_name",
-            formatter(value, row){
+            formatter(value, row) {
                 return row.w_name ? row.w_name.name : null;
             },
             sortable: true,
@@ -160,8 +160,8 @@ warehouseApproved.bootstrapTable({
         {
             title: "Logistics Name",
             field: "logistics_name",
-            formatter(value, row){
-              return row.l_name ? row.l_name.name : null;
+            formatter(value, row) {
+                return row.l_name ? row.l_name.name : null;
             },
             sortable: true,
         },

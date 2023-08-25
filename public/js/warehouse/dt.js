@@ -30,28 +30,16 @@ listDataWarehouse.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`
-                if(row.status === "Created"){
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
-                    <i class="fas fa-check fa-fw"></i>
-                    </button>`
-                }else if(row.status === "Approved-By"){
-                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnPpic('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
-                    <i class="fas fa-check fa-fw"></i>
-                    </button>`
-                }else{
 
-                }
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
+                <i class="fas fa-book-medical fa-fw"></i>
+                </button>`
                 return `<div class="d-flex space-x">${buttons}</div>`;
             }
         },
         {
             title: "No SO",
             field: "no_so",
-            sortable: true,
-        },
-        {
-            title: "Description",
-            field: "description",
             sortable: true,
         },
         {
@@ -114,7 +102,7 @@ listDataWarehouse.bootstrapTable({
             },
         },
         {
-            title: "Coordinator Sales",
+            title: "Sales",
             field: "sales_coor_name",
             sortable: true,
             formatter(value, row){
