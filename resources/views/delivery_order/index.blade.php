@@ -86,6 +86,9 @@
     @if (auth()->user()->division_uid === 'sales')
         <script src="/js/delivery_order/dt.js"></script>
         <script src="/js/delivery_order/approval-sales-coor.js"></script>
+    @elseif(auth()->user()->division_uid === 'qc' && auth()->user()->position_uid === 'staff')
+        <script src="/js/delivery_order/dt.js"></script>
+        <script src="/js/delivery_order/approval-sales-coor.js"></script>
     @elseif(auth()->user()->division_uid === 'qc')
         <script src="/js/delivery_order/dt-qc.js"></script>
         <script src="/js/delivery_order/approval-qc.js"></script>

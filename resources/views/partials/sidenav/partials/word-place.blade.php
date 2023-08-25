@@ -25,7 +25,6 @@
 
         @php $checks = ['developer', 'sales', 'technician', 'qc']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
-       
             <a class="nav-link {{ Request::is('rma') ? 'active' : '' }}" href="/rma">
                 <div class="nav-link-icon">
                     <i class="fa-solid fa-file-pdf"></i>
@@ -36,7 +35,6 @@
 
         @php $checks = ['developer', 'sales', 'qc', 'logistics']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
-       
             <a class="nav-link {{ Request::is('delivery-order') ? 'active' : '' }}" href="/delivery-order">
                 <div class="nav-link-icon">
                     <i class="fa-solid fa-file-pdf"></i>
@@ -45,7 +43,7 @@
             </a>
         @endif
 
-        @php $checks = ['developer','sales', 'warehouse', 'marketing']; @endphp
+        @php $checks = ['developer','sales', 'warehouse', 'scm', 'technician']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
             <a class="nav-link {{ Request::is('letter-retur') ? 'active' : '' }}" href="/letter-retur">
                 <div class="nav-link-icon">

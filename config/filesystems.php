@@ -87,11 +87,19 @@ return [
             'visibility' => 'public',
         ],
 
-        //retur letter
+        //delivery order
         'public_uploads_delivery_order' => [
             'driver' => 'local',
             'root' => public_path('assets') . '/pdf/delivery-order',
             'url' => env('APP_URL') . '/assets/pdf/delivery-order',
+            'visibility' => 'public',
+        ],
+
+        //img resi
+        'public_uploads_img_resi' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/img/no-resi',
+            'url' => env('APP_URL') . '/assets/img/no-resi',
             'visibility' => 'public',
         ],
 

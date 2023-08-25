@@ -41,7 +41,7 @@
                             style="width: 100px; height: auto;"> </td>
                     <td> <img class="signature-img" src="{{ asset($signature_marketing) }}" alt="Signature"
                             style="width: 100px; height: auto;"> </td>
-                    <td> <img class="signature-img" src="{{ asset($signature_marketing_ppic) }}" alt="Signature"
+                    <td> <img class="signature-img" src="{{ asset($signature_scm) }}" alt="Signature"
                             style="width: 100px; height: auto;"> </td>
                     </tr>
 
@@ -50,7 +50,8 @@
                         <td>{{ $sales_name }}</td>
                         <td>{{ $warehouse_name }}</td>
                         <td>{{ $marketing_name }}</td>
-                        <td>{{ $marketing_ppic_name }}</td>
+                        <td>{{ $scm_name }}</td>
+                        <td></td>
                     </tr>
                 </table>
             </div>

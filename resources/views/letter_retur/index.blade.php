@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (auth()->user()->division_uid === 'sales')
+                    @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
                         <button
                             class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
                             type="button" data-bs-toggle="modal" data-bs-target="#add_new_letter_retur_modal">
@@ -85,14 +85,20 @@
     <script src="/js/letter_retur/_init.js"></script>
     <script src="/js/letter_retur/pdf.js"></script>
 
-    @if (auth()->user()->division_uid === 'sales')
+    <script>
+        const auth_position = {!! json_encode($auth_position, JSON_HEX_TAG) !!}
+    </script>
+    <script>
+        const auth_division = {!! json_encode($auth_division, JSON_HEX_TAG) !!}
+    </script>
+    @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
         <script src="/js/letter_retur/dt.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse')
         <script src="/js/letter_retur/dt-warehouse.js"></script>
         <script src="/js/letter_retur/approval-warehouse.js"></script>
-    @elseif(auth()->user()->division_uid === 'marketing')
-        <script src="/js/letter_retur/dt-marketing.js"></script>
-        <script src="/js/letter_retur/approval-marketing.js"></script>
-        <script src="/js/letter_retur/approval-ppic-marketing.js"></script>
     @endif
+
+    <script src="/js/letter_retur/dt-marketing.js"></script>
+    <script src="/js/letter_retur/approval-marketing.js"></script>
+    <script src="/js/letter_retur/approval-ppic-marketing.js"></script>
 @endsection

@@ -45,12 +45,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name'=>'qc',
-            'description'=>'Access to minimal pages'
-        ]);
-
-        Permission::create([
-            'name'=>'marketing',
+            'name'=>'scm',
             'description'=>'Access to minimal pages'
         ]);
     }

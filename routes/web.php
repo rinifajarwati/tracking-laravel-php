@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf/{warehouse}', [PdfWarehouseController::class, 'generatePDF']);
 
+    // route table selected sales
+    Route::get('/datatables/warehouse-sales', [WarehouseControllers::class, 'datatablesSales']);
+    Route::get('/datatables/warehouse-ppic', [WarehouseControllers::class, 'datatablesPpic']);
 
     //rma
     Route::resource('rma', RmaControllers::class);
@@ -89,7 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/letter-retur-approved-warehouse/{uid}', [LetterReturControllers::class, 'approvedWarehouse']);
     Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
-    Route::put('/letter-retur-approved-marketing-ppic/{uid}', [LetterReturControllers::class, 'approvedMarketingPPIC']);
+    Route::put('/letter-retur-approved-scm/{uid}', [LetterReturControllers::class, 'approvedSCM']);
     Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
 
     Route::get('/generate-pdf-letter-retur/{letterRetur}', [PdfLetterReturController::class, 'generatePDF']);

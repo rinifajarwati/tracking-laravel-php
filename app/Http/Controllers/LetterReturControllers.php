@@ -20,6 +20,8 @@ class LetterReturControllers extends Controller
         //
         $data = [
             "title" => "Surat Retur | IMI Tracking",
+            "auth_position" => auth()->user()->position_uid,
+            "auth_division" => auth()->user()->division_uid,
         ];
         return view('letter_retur.index', $data);
     }
@@ -149,13 +151,13 @@ class LetterReturControllers extends Controller
         }
     }
 
-    public function approvedMarketingPPIC(string $uid)
+    public function approvedSCM(string $uid)
     {
         try {
             $input = [
-                'status' => 'Approval-PPIC-Marketing',
-                'ppic_marketing_name' => auth()->user()->uid,
-                'ppic_marketing_date' => Carbon::now(),
+                'status' => 'Approval-SCM',
+                'scm_name' => auth()->user()->uid,
+                'scm_date' => Carbon::now(),
             ];
 
             LetterRetur::where('uid', $uid)->update($input);

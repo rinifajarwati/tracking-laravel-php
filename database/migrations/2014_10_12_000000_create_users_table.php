@@ -60,10 +60,11 @@ return new class extends Migration
 
         Schema::create('warehouses', function(Blueprint $table){
             $table->id();
-            $table->string('uid');
+            $table->string('uid')->unique();
             $table->string('no_so');
             $table->string('file');
-            $table->string('description');
+            $table->text('description');
+            $table->string('sales_name');
             $table->string('user_uid');
             $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
@@ -77,6 +78,21 @@ return new class extends Migration
             $table->timestamp('logistics_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('warehouse_sns', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->text('serial_number');
+            $table->double('weight');
+            $table->double('koli');
+            $table->double('gdg');
+            $table->double('kubikasi');
+            $table->string('user_uid');
+            $table->string('warehouse_uid');
+
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['warehouse_uid'])->references(['uid'])->on('warehouses');
         });
 
         Schema::create('rmas', function(Blueprint $table){
@@ -104,13 +120,13 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-PPIC-Marketing', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Cancel', 'Reject'])->default('Created');
             $table->string('warehouse_name')->nullable();
             $table->timestamp('warehouse_date')->nullable();
             $table->string('marketing_name')->nullable();
             $table->timestamp('marketing_date')->nullable();
-            $table->string('ppic_marketing_name')->nullable();
-            $table->timestamp('ppic_marketing_date')->nullable();
+            $table->string('scm_name')->nullable();
+            $table->timestamp('scm_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -121,6 +137,7 @@ return new class extends Migration
             $table->string('no_so');
             $table->string('no_sj');
             $table->string('file');
+            $table->string('img');
             $table->string('description');
             $table->string('user_uid');
             $table->timestamp('created_date');
@@ -153,5 +170,6 @@ return new class extends Migration
         Schema::dropIfExists('warehouses');
         Schema::dropIfExists('rmas');
         Schema::dropIfExists('letter_returs');
+        Schema::dropIfExists('warehouse_sns');
     }
 };

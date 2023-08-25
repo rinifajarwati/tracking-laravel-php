@@ -15,22 +15,22 @@ class PdfLetterReturController extends Controller
         $fileNameSales = $letterRetur->user?->img ?: "N/A";
         $fileNameWarehouse = $letterRetur->WName?->img ?: "N/A";
         $fileNameMarketing = $letterRetur->MName?->img ?: "N/A";
-        $fileNamePpicMarketing = $letterRetur->MPName?->img ?: "N/A";
+        $fileNameScm = $letterRetur->SCMName?->img ?: "N/A";
         $signature_sales= 'assetsgambar/file/' . $fileNameSales;
         $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
         $signature_marketing = 'assetsgambar/file/' . $fileNameMarketing;
-        $signature_marketing_ppic = 'assetsgambar/file/' . $fileNamePpicMarketing;
+        $signature_scm = 'assetsgambar/file/' . $fileNameScm;
 
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $letterRetur->user?->name ?: "N/A",
             'warehouse_name' => $letterRetur->WName?->name ?: "N/A",
             'marketing_name' => $letterRetur->MName?->name ?: "N/A",
-            'marketing_ppic_name' => $letterRetur->MPName?->name ?: "N/A",
+            'scm_name' => $letterRetur->SCMName?->name ?: "N/A",
             'signature_sales' => $signature_sales,
             'signature_warehouse' => $signature_warehouse,
             'signature_marketing' => $signature_marketing,
-            'signature_marketing_ppic' => $signature_marketing_ppic,
+            'signature_scm' => $signature_scm,
         ];
         $pdf = Pdf::loadView('letter_retur.pdf.letter_retur', $data);
 
@@ -59,7 +59,7 @@ class PdfLetterReturController extends Controller
         File::delete($tempPdf);
 
         $outputFilename = 'Surat-Retur.pdf';
-        $pdf->Output($outputFilename, 'D');
+        $pdf->Output($outputFilename, 'I');
 
         return 'PDFs merged successfully.';
     }

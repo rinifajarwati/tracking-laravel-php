@@ -68,7 +68,7 @@ class PdfDeliveryOrderController extends Controller
         File::delete($tempPdf);
 
         $outputFilename = 'Delivery-Order.pdf';
-        $pdf->Output($outputFilename, 'D');
+        $pdf->Output($outputFilename, 'I');
 
         return 'PDFs merged successfully.';
     }

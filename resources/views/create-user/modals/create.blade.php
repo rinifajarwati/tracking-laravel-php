@@ -54,7 +54,7 @@
 
                         </div>
                         <div class="col-12 mb-3">
-                            <label>File</label>
+                            <label>Foto Tanda Tangan</label>
                             <img class="img-preview img-fluid mb-3 col-sm-5">
                             <input type="file" class="form-control @error('img') is-invalid @enderror"
                                 id="add_img" placeholder="img" name="img" required>

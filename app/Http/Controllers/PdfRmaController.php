@@ -56,7 +56,7 @@ class PdfRmaController extends Controller
         File::delete($tempPdf);
 
         $outputFilename = 'RMA.pdf';
-        $pdf->Output($outputFilename, 'D');
+        $pdf->Output($outputFilename, 'I');
 
         return 'PDFs merged successfully.';
     }
