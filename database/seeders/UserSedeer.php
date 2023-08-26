@@ -71,11 +71,11 @@ class UserSedeer extends Seeder
 
         User::create([
             'uid'=>'1616161616',
-            'name'=>'Qc',
-            'email'=>'qc@developer.com',
+            'name'=>'Superadmin',
+            'email'=>'superadmin@developer.com',
             'password'=>'developer',
             'position_uid'=>'coordinator',
-            'division_uid'=>'qc',
+            'division_uid'=>'superadmin',
         ]);
 
         User::create([
@@ -85,6 +85,15 @@ class UserSedeer extends Seeder
             'password'=>'developer',
             'position_uid'=>'coordinator',
             'division_uid'=>'marketing',
+        ]);
+
+        User::create([
+            'uid'=>'1818181818',
+            'name'=>'adminsales',
+            'email'=>'adminsales@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'coordinator',
+            'division_uid'=>'admin',
         ]);
 
     }

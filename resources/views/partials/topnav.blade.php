@@ -167,7 +167,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="account-user">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                    Account
+                    Add user signature
                 </a>
                 <form action="/logout" method="post">
                     <button type="submit" class="dropdown-item">

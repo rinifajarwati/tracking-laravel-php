@@ -54,5 +54,15 @@
                 Surat Retur
             </a>
         @endif
+        
+        @php $checks = ['developer','sales', 'warehouse']; @endphp
+        @if (count(array_intersect($checks, $permissions)) > 0)
+            <a class="nav-link {{ Request::is('soharga') ? 'active' : '' }}" href="/soharga">
+                <div class="nav-link-icon">
+                    <i class="fa-solid fa-users-between-lines"></i>
+                </div>
+                SO Harga
+            </a>
+        @endif
     </nav>
 </div>

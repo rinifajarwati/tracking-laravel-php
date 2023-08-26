@@ -87,11 +87,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_uid');
             $table->string('created_date');
-            $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Superadmin', 'Cancel', 'Reject'])->default('Created');
             $table->string('technician_name')->nullable();
             $table->string('technician_date')->nullable();
-            $table->string('qc_name')->nullable();
-            $table->string('qc_date')->nullable();
+            $table->string('superadmin_name')->nullable();
+            $table->string('superadmin_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -124,11 +124,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_uid');
             $table->string('created_date');
-            $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Security', 'Approval-Customer'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Superadmin', 'Approval-Logistics', 'Approval-Security', 'Approval-Customer'])->default('Created');
             $table->string('sales2_name')->nullable();
             $table->string('sales2_date')->nullable();
-            $table->string('qc_name')->nullable();
-            $table->string('qc_date')->nullable();
+            $table->string('superadmin_name')->nullable();
+            $table->string('superadmin_date')->nullable();
             $table->string('logistics_name')->nullable();
             $table->string('logistics_date')->nullable();
             $table->string('logistics_security_name')->nullable();
@@ -136,6 +136,23 @@ return new class extends Migration
             $table->string('logistics_customer_name')->nullable();
             $table->string('logistics_customer_date')->nullable();
 
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('sohargas', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->string('so_number');
+            $table->string('po_no');
+            $table->string('file');
+            $table->string('description');
+            $table->string('user_uid');
+            $table->string('created_date');
+            $table->string('sales_name')->nullable();
+            $table->string('sales_date')->nullable();
+            $table->string('adminsales_name')->nullable();
+            $table->string('adminsales_date')->nullable();
+            $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Adminsales'])->default('Created');
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
     }
