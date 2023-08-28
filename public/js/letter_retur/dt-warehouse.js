@@ -75,8 +75,8 @@ listDataLetterReturWarehouse.bootstrapTable({
                 if (value === "Approval-Marketing") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-PPIC-Marketing") {
-                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
+                if (value === "Approval-SCM") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
@@ -137,7 +137,7 @@ listDataLetterReturWarehouse.bootstrapTable({
         },
         {
             title: "SCM Name",
-            field: "",
+            field: "scm_name",
             formatter(value, row) {
                   return row.s_c_m_name ? row.s_c_m_name.name : null;
             },

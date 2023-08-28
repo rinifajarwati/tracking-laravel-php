@@ -9,13 +9,12 @@ class DeliveryOrder extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'SalesName2', 'QcName', 'LogisticsName', 'SecurityName', 'CustomerName'];
+    protected $with = ['user', 'CoorLogistics', 'QcName', 'LogisticsName', 'CustomerName'];
     protected $casts = [
         'created_date' => 'datetime',
-        'sales2_date' => 'datetime',
+        'coor_logistics_date' => 'datetime',
         'qc_date' => 'datetime',
         'logistics_date' => 'datetime',
-        'logistics_security_date' => 'datetime',
         'logistics_customer_date' => 'datetime',
     ];
     public $timestamps = false;
@@ -30,9 +29,9 @@ class DeliveryOrder extends Model
         return $this->belongsTo(User::class, 'user_uid', 'uid');
     }
 
-    public function SalesName2()
+    public function CoorLogistics()
     {
-        return $this->belongsTo(User::class, 'sales2_name', 'uid');
+        return $this->belongsTo(User::class, 'coor_logistics_name', 'uid');
     }
 
     public function QcName()
@@ -43,11 +42,6 @@ class DeliveryOrder extends Model
     public function LogisticsName()
     {
         return $this->belongsTo(User::class, 'logistics_name', 'uid');
-    }
-
-    public function SecurityName()
-    {
-        return $this->belongsTo(User::class, 'logistics_security_name', 'uid');
     }
 
     public function CustomerName()

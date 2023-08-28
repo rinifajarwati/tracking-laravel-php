@@ -21,8 +21,7 @@ class WarehouseControllers extends Controller
      */
     public function index()
     {
-        $getUser = User::where('division_uid', 'sales')->get();
-
+        $getUser = User::where('division_uid', 'sales')->where('position_uid', 'staff')->get()->toArray();
         $data = [
             "title" => "SO Gudang | IMI Tracking",
             "rowsUser" => $getUser,
@@ -58,6 +57,7 @@ class WarehouseControllers extends Controller
                 'created_date' => Carbon::now(),
                 'status' => 'Created',
             ];
+            // dd($payload);
 
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -82,7 +82,7 @@ class WarehouseControllers extends Controller
     {
         //
         $warehouseSN = WarehouseSn::where("warehouse_uid", $warehouse)->get();
-        $iniWarehouse = Warehouse::where("uid", $warehouse)->get();
+        $iniWarehouse = Warehouse::where("uid", $warehouse)->get()->toArray();
         $data = [
             "title" =>  "Details SN | IMI-Tracking",
             "warwhouseSN" => $warehouseSN,
@@ -118,7 +118,7 @@ class WarehouseControllers extends Controller
             'data.*.gdg' => 'required',
             'data.*.kubikasi' => 'required',
         ]);
-        
+
         $warehouseUid = $datatWarehouse['warehouse_uid'] = $uid;
         $user = auth()->user()->uid;
         // dd($datatWarehouse);    
@@ -148,17 +148,20 @@ class WarehouseControllers extends Controller
 
     public function datatables()
     {
-        return Warehouse::all();
+        $notFinished = Warehouse::whereNotIn('status', ['Finish'])->get();
+        return $notFinished;
+        // return Warehouse::all();
         // $user = auth()->user()->uid;
         // return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
     public function datatablesSales()
     {
+
         $auth = auth()->user()->uid;
-        return Warehouse::where('sales_name', $auth)->get()->toArray();
-        // $user = auth()->user()->uid;
-        // return Warehouse::where('user_uid', $user)->get()->toArray();
+        $data = Warehouse::where('sales_name', $auth)->where('status', '!=', 'Finish')->get()->toArray();
+        return $data;
+ 
     }
 
     public function approvedSalesCoor(string $uid)
@@ -179,7 +182,9 @@ class WarehouseControllers extends Controller
 
     public function datatablesPpic()
     {
-        return Warehouse::all();
+        $notFinished = Warehouse::whereNotIn('status', ['Finish'])->get();
+        return $notFinished;
+        // return Warehouse::all();
     }
 
     public function approved(string $uid)
@@ -199,7 +204,9 @@ class WarehouseControllers extends Controller
 
     public function datatablesWarehouse()
     {
-        return Warehouse::all();
+        $notFinished = Warehouse::whereNotIn('status', ['Finish'])->get();
+        return $notFinished;
+        // return Warehouse::all();
     }
 
     public function approvedWarehouse(string $uid)
@@ -238,6 +245,37 @@ class WarehouseControllers extends Controller
         }
     }
 
+    public function approvedPpicClose(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Finish',
+                'ppic_finish_name' => auth()->user()->uid,
+                'ppic_finish_date' => Carbon::now(),
+            ];
+            Warehouse::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+
+    public function datatablesFinish()
+    {
+
+        $finish = Warehouse::where('status', 'Finish')->get();
+        return $finish;
+    }
+
+    public function Finish()
+    {
+
+        $data = [
+            "title" => "Finish SO Gudang | IMI Tracking",
+        ];
+        return view('warehouse.finish', $data);
+    }
+
     public function showPdf(Warehouse $warehouse)
     {
         $fileNameCreated = $warehouse->user?->img ?: "N/A";
@@ -268,5 +306,14 @@ class WarehouseControllers extends Controller
             'delivery_notes_warehouse' => $delivery_notes,
         ];
         return view('warehouse.pdf.so_warehouse', $data);
+    }
+
+    public function cancel(string $uid){
+        $payload =[
+            'status' => 'Cancel'
+        ];
+        // dd($payload);
+        Warehouse::where('uid', $uid)->update($payload);
+        return redirect()->back()->with(['alertSuccess' => 'Successfully cancel SO gudang!']);
     }
 }

@@ -20,6 +20,8 @@ class DeliveryOrderControllers extends Controller
         //
         $data = [
             "title" => "Delivery Order | IMI Tracking",
+            "auth_pos" => auth()->user()->position_uid,
+            "auth_div" => auth()->user()->division_uid,
         ];
         return view('delivery_order.index', $data);
     }
@@ -107,9 +109,8 @@ class DeliveryOrderControllers extends Controller
 
     public function datatables()
     {
-        $user = auth()->user()->uid;
 
-        return DeliveryOrder::where('user_uid', $user)->get()->toArray();
+        return DeliveryOrder::all();
     }
 
     public function approvedSales(string $uid)
@@ -117,8 +118,8 @@ class DeliveryOrderControllers extends Controller
         try {
             $input = [
                 'status' => 'Approval-Coor',
-                'sales2_name' => auth()->user()->uid,
-                'sales2_date' => Carbon::now(),
+                'coor_logistics_name' => auth()->user()->uid,
+                'coor_logistics_date' => Carbon::now(),
             ];
 
             DeliveryOrder::where('uid', $uid)->update($input);
@@ -164,21 +165,6 @@ class DeliveryOrderControllers extends Controller
                 'status' => 'Approval-Logistics',
                 'logistics_name' => auth()->user()->uid,
                 'logistics_date' => Carbon::now(),
-            ];
-
-            DeliveryOrder::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved Delivery Order']);
-        } catch (Throwable $e) {
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
-    }
-    public function approvedSecurity(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Approval-Security',
-                'logistics_security_name' => auth()->user()->uid,
-                'logistics_security_date' => Carbon::now(),
             ];
 
             DeliveryOrder::where('uid', $uid)->update($input);

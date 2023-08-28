@@ -36,6 +36,11 @@ class UserPermissionSeeder extends Seeder
             'user_uid' => 121212121,
             'permission_id' => 3
         ]);
+
+        UserPermission::create([
+            'user_uid' => 92929292,
+            'permission_id' => 3
+        ]);
         
         UserPermission::create([
             'user_uid' => 9191919191,
@@ -49,6 +54,21 @@ class UserPermissionSeeder extends Seeder
 
         UserPermission::create([
             'user_uid' => 1313131313,
+            'permission_id' => 4
+        ]);
+
+        UserPermission::create([
+            'user_uid' => 4343434343,
+            'permission_id' => 4
+        ]);
+
+        UserPermission::create([
+            'user_uid' => 6433466464,
+            'permission_id' => 4
+        ]);
+
+        UserPermission::create([
+            'user_uid' => 6363636363,
             'permission_id' => 4
         ]);
 
@@ -69,6 +89,11 @@ class UserPermissionSeeder extends Seeder
 
         UserPermission::create([
             'user_uid' => 1616161616,
+            'permission_id' => 6
+        ]);
+
+        UserPermission::create([
+            'user_uid' => 5858585858,
             'permission_id' => 6
         ]);
 

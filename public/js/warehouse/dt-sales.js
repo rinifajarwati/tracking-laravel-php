@@ -73,10 +73,10 @@ listDataWarehouseSales.bootstrapTable({
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
                 }
                 if(value === "Approved-By"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`
                 }
                 if(value === "Approval-PPIC"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`
                 }
                 if(value === "Approval-Warehouse"){
                     buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
@@ -87,8 +87,8 @@ listDataWarehouseSales.bootstrapTable({
                 if(value === "Cancel"){
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`
                 }
-                if(value === "Reject"){
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`
+                if(value === "Finish"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
                 if(value === "Closed"){
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`

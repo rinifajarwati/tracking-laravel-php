@@ -32,15 +32,18 @@ warehouseApproved.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
                 <i class="fas fa-book-medical fa-fw"></i>
                 </button>`;
-                if (row.status === "Approval-PPIC" && auth_ === "coordinator") {
+                if (row.status === "Approval-PPIC" && auth === "coordinator") {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
 
+                }else if(row.status === "Approval-PPIC" && auth === "staff"){
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_warehouse_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
-                <i class="far fa-edit fa-fw"></i>
-                </button>`;
-                } else {
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
+                }
+                else{
+
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
@@ -73,10 +76,10 @@ warehouseApproved.bootstrapTable({
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>`;
                 }
                 if (value === "Approved-By") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`;
                 }
                 if (value === "Approval-PPIC") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`;
                 }
                 if (value === "Approval-Warehouse") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
@@ -87,8 +90,8 @@ warehouseApproved.bootstrapTable({
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
                 }
-                if (value === "Reject") {
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`;
+                if (value === "Finish") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
                 }
                 if (value === "Closed") {
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`;

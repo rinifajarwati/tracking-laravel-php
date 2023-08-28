@@ -23,7 +23,7 @@
             </a>
         @endif
 
-        @php $checks = ['developer', 'sales', 'technician', 'qc']; @endphp
+        @php $checks = ['developer', 'technician', 'qc']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
             <a class="nav-link {{ Request::is('rma') ? 'active' : '' }}" href="/rma">
                 <div class="nav-link-icon">
@@ -33,7 +33,7 @@
             </a>
         @endif
 
-        @php $checks = ['developer', 'sales', 'qc', 'logistics']; @endphp
+        @php $checks = ['developer', 'qc', 'logistics']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
             <a class="nav-link {{ Request::is('delivery-order') ? 'active' : '' }}" href="/delivery-order">
                 <div class="nav-link-icon">

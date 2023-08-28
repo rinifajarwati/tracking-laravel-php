@@ -34,7 +34,14 @@ listDataWarehouse.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
                 <i class="fas fa-book-medical fa-fw"></i>
                 </button>`
-                return `<div class="d-flex space-x">${buttons}</div>`;
+
+                if (row.status === "Created") {
+                    buttons += `<button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="cancelBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cancel">
+                <i class="fa-solid fa-xmark"></i>
+                </button> `;
+                } else {
+                }
+                return `<div class="d-flex space-x">${buttons}</div>`;  
             }
         },
         {
@@ -65,10 +72,10 @@ listDataWarehouse.bootstrapTable({
                     buttonHtml = `<button class="badge bg-info" style="border:none">${value}</button>` 
                 }
                 if(value === "Approved-By"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`
                 }
                 if(value === "Approval-PPIC"){
-                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`
                 }
                 if(value === "Approval-Warehouse"){
                     buttonHtml =`<button class="badge bg-primary" style="border:none">${value}</button>`
@@ -79,8 +86,8 @@ listDataWarehouse.bootstrapTable({
                 if(value === "Cancel"){
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`
                 }
-                if(value === "Reject"){
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`
+                if(value === "Finish"){
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
                 if(value === "Closed"){
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`

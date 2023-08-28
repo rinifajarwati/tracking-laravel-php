@@ -18,6 +18,7 @@
             <div class="nav accordion" id="accordionSidenav">
                 @include('partials.sidenav.partials.data-master')
                 @include('partials.sidenav.partials.word-place')
+                @include('partials.sidenav.partials.finish-file')
             </div>
         </div>
 

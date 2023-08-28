@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (auth()->user()->division_uid === 'sales')
+                    @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
                         <button
                             class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
                             type="button" data-bs-toggle="modal" data-bs-target="#add_new_rma_modal">
@@ -84,12 +84,12 @@
     <script src="/js/rma/pdf.js"></script>
     <script src="/js/functions/spinner.js"></script>
 
-    @if (auth()->user()->division_uid === 'sales')
+    @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
         <script src="/js/rma/dt.js"></script>
-    @elseif(auth()->user()->division_uid === 'technician')
+    @elseif(auth()->user()->division_uid === 'technician'  && auth()->user()->position_uid === 'staff')
         <script src="/js/rma/dt-technician.js"></script>
         <script src="/js/rma/approval-technician.js"></script>
-    @elseif(auth()->user()->division_uid === 'qc')
+    @elseif(auth()->user()->division_uid === 'technician'  && auth()->user()->position_uid === 'qc')
         <script src="/js/rma/dt-qc.js"></script>
         <script src="/js/rma/approval-qc.js"></script>
     @endif
