@@ -105,5 +105,15 @@ class UserPermissionSeeder extends Seeder
             'user_uid' => 7575757575,
             'permission_id' => 7
         ]);
+
+        UserPermission::create([
+            'user_uid' => 7575757575,
+            'permission_id' => 2
+        ]);
+
+        UserPermission::create([
+            'user_uid' => 1919191919,
+            'permission_id' => 2
+        ]);
     }
 }

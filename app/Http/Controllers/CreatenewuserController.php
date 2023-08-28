@@ -11,6 +11,8 @@ use Throwable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Helper\HelperController;
+use App\Models\UserPermission;
+use App\Models\Permission;
 use Illuminate\Support\Str;
 
 class CreatenewuserController extends Controller
@@ -22,12 +24,14 @@ class CreatenewuserController extends Controller
     {
         $posisition= Position::all(); 
         $devision = Division::all();
+        $permissions = Permission::all();
         // dd($posisition);
         $data = user::all();
         $data = [
             "title" => "Create User | IMI - Tracking",
             "position" => $posisition,
-            "devision" => $devision
+            "devision" => $devision,
+            "permissions" => $permissions
         ];   
         return view('create-user.index',$data);
     }
@@ -61,7 +65,15 @@ class CreatenewuserController extends Controller
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_img')->put($fileName, file_get_contents($file));
             $payload['img'] = $fileName;
-            User::create($payload);
+            // dd($payload);
+            $users = User::create($payload);
+            // $UserPermission = ['user_uid'];
+            $permission = request('permission_id');
+            $payloadPermission = [
+                'user_uid' => $users->uid,
+                'permission_id' => $permission,
+            ];
+            UserPermission::create($payloadPermission);
             return back()->with(['alertSuccess' => 'Successfully create account!']);
         } catch (Throwable $th) {
             dd($th);

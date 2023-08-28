@@ -52,5 +52,15 @@
                 Surat Retur
             </a>
         @endif
+        
+        @php $checks = ['developer','sales']; @endphp
+        @if (count(array_intersect($checks, $permissions)) > 0)
+            <a class="nav-link {{ Request::is('soharga') ? 'active' : '' }}" href="/soharga">
+                <div class="nav-link-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                SO Harga
+            </a>
+        @endif
     </nav>
 </div>

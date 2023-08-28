@@ -157,6 +157,23 @@ return new class extends Migration
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
+
+        Schema::create('sohargas', function(Blueprint $table){
+            $table->id();
+            $table->string('uid');
+            $table->string('so_number');
+            $table->string('po_no');
+            $table->string('file');
+            $table->string('description');
+            $table->string('user_uid');
+            $table->string('created_date');
+            $table->string('sales_name')->nullable();
+            $table->string('sales_date')->nullable();
+            $table->string('adminsales_name')->nullable();
+            $table->string('adminsales_date')->nullable();
+            $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Adminsales'])->default('Created');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
     }
 
     /**

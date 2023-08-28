@@ -184,5 +184,23 @@ class UserSedeer extends Seeder
             'position_uid'=>'coordinator',
             'division_uid'=>'scm',
         ]);
+
+        User::create([
+            'uid'=>'1919191919',
+            'name'=>'adminsales',
+            'email'=>'adminsales@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'admin',
+            'division_uid'=>'sales',
+        ]);
+        User::create([
+            'uid'=>'2020202020',
+            'name'=>'Superadmin',
+            'email'=>'superadmin@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'coordinator',
+            'division_uid'=>'superadmin',
+        ]);
+
     }
 }

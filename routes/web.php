@@ -1,22 +1,21 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Models\Rma;
-use App\Models\DeliveryOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RmaControllers;
 use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\PdfRmaController;
 use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
-use App\Http\Controllers\addsignaturecontroller;
-use App\Http\Controllers\AdduserController;
+// use App\Http\Controllers\addsignaturecontroller;
 use App\Http\Controllers\CreatenewuserController;
 use App\Http\Controllers\LetterReturControllers;
 use App\Http\Controllers\PdfWarehouseController;
 use App\Http\Controllers\DeliveryOrderControllers;
 use App\Http\Controllers\PdfLetterReturController;
 use App\Http\Controllers\PdfDeliveryOrderController;
+use App\Http\Controllers\PdfSohargaController;
+use App\Http\Controllers\SohargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,11 +69,23 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf/{warehouse}', [PdfWarehouseController::class, 'generatePDF']);
 
-    // route table selected sales
-    Route::get('/datatables/warehouse-sales', [WarehouseControllers::class, 'datatablesSales']);
-    Route::get('/datatables/warehouse-ppic', [WarehouseControllers::class, 'datatablesPpic']);
-    Route::get('/datatables/warehouse-finish', [WarehouseControllers::class, 'datatablesFinish']);
-    Route::get('/warehouse-finish', [WarehouseControllers::class, 'Finish']);
+     // route table selected sales
+     Route::get('/datatables/warehouse-sales', [WarehouseControllers::class, 'datatablesSales']);
+     Route::get('/datatables/warehouse-ppic', [WarehouseControllers::class, 'datatablesPpic']);
+     Route::get('/datatables/warehouse-finish', [WarehouseControllers::class, 'datatablesFinish']);
+     Route::get('/warehouse-finish', [WarehouseControllers::class, 'Finish']);
+    // so harga
+    Route::resource('soharga', SohargaController::class);
+    Route::get('/datatables/soharga', [SohargaController::class, 'datatables']);
+    Route::put('/soharga-approved-sales/{uid}', [SohargaController::class, 'approvedSalesPrice']);
+    Route::get('/datatables/soharga-approved-sales', [SohargaController::class, 'datatablesSales']);
+    Route::get('/datatables/soharga-approved-adminsales', [SohargaController::class, 'datatablesAdminsales']);
+    Route::put('/soharga-approved-adminsales/{uid}', [SohargaController::class, 'approvedAdminsalesPrice']);
+    Route::get('/pdf-soharga/{soharga}', [SohargaController::class, 'showPdf']);
+
+    // Route::get('/generate-pdf/{soharga}', [PdfSohargaController::class, 'generatePDF']);  
+    Route::get('/generate-pdf-soharga/{soharga}', [PdfSohargaController::class, 'generatePDF']);  
+
 
     //rma
     Route::resource('rma', RmaControllers::class);
@@ -117,10 +128,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf-delivery-order/{deliveryOrder}', [PdfDeliveryOrderController::class, 'generatePDF']);
 
-    //account 
-    Route::resource('signatureuser', addsignaturecontroller::class);  
-    Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
-    Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
+    // //account 
+    // Route::resource('signatureuser', addsignaturecontroller::class);  
+    // Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    // Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
 
     //create signatture
     Route::resource('account-user', AccountController::class);
