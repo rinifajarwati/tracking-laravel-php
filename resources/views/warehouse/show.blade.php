@@ -64,9 +64,14 @@
                             @foreach ($iniWarehouse as $data)
                                 <table height="100px">
                                     <tr>
+                                        <td >Nama Sales</td>
+                                        <td class="col-1">:</td>
+                                        <td >{{ $data['sales_name']['name'] }}</td>
+                                    </tr>
+                                    <tr>
                                         <td >Description</td>
                                         <td class="col-1">:</td>
-                                        <td >{{ $data->description }}</td>
+                                        <td >{{ $data['description'] }}</td>
                                     </tr>
                                 </table>
                             @endforeach

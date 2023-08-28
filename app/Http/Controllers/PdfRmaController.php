@@ -19,7 +19,8 @@ class PdfRmaController extends Controller
         $signature_sales = 'assetsgambar/file/' . $fileNameSales;
         $signature_technician = 'assetsgambar/file/' . $fileNameTechnician;
         $signature_qc = 'assetsgambar/file/' . $fileNameQc;
-
+        $warranty = $rma->warranty;
+        $description_rma = $rma->description;
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $rma->user?->name ?: "N/A",
@@ -28,6 +29,8 @@ class PdfRmaController extends Controller
             'signature_sales' => $signature_sales,
             'signature_technician' => $signature_technician,
             'signature_qc' => $signature_qc,
+            'warranty' => $warranty,
+            'description_rma' => $description_rma,
         ];
         $pdf = Pdf::loadView('rma.pdf.rma', $data);
 

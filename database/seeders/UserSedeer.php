@@ -59,6 +59,15 @@ class UserSedeer extends Seeder
         ]);
 
         User::create([
+            'uid'=>'92929292',
+            'name'=>'fajar',
+            'email'=>'warehouse_coor@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'coordinator',
+            'division_uid'=>'warehouse',
+        ]);
+
+        User::create([
             'uid'=>'9191919191',
             'name'=>'Girindra',
             'email'=>'warehouse_staff@developer.com',
@@ -75,13 +84,41 @@ class UserSedeer extends Seeder
             'position_uid'=>'admin',
             'division_uid'=>'warehouse',
         ]);
+        User::create([
+            'uid'=>'6433466464',
+            'name'=>'Mita',
+            'email'=>'logistics_coor@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'coordinator',
+            'division_uid'=>'logistics',
+        ]);
 
         User::create([
             'uid'=>'1313131313',
             'name'=>'Martania Melani',
-            'email'=>'logistics@developer.com',
+            'email'=>'logistics_staff@developer.com',
             'password'=>'developer',
             'position_uid'=>'staff',
+            'division_uid'=>'logistics',
+        ]);
+
+        User::create([
+            'uid'=>'4343434343',
+            'name'=>'Melly Nia',
+            'email'=>'logistics_admin@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'admin',
+            'division_uid'=>'logistics',
+        ]);
+
+     
+        
+        User::create([
+            'uid'=>'6363636363',
+            'name'=>'Nurul',
+            'email'=>'logistics_qc@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'qc',
             'division_uid'=>'logistics',
         ]);
 
@@ -108,16 +145,25 @@ class UserSedeer extends Seeder
             'name'=>'Rahma Annisa',
             'email'=>'technician_qc@developer.com',
             'password'=>'developer',
-            'position_uid'=>'staff',
+            'position_uid'=>'qc',
             'division_uid'=>'technician',
         ]);
 
         User::create([
             'uid'=>'1818181818',
             'name'=>'Nadya',
-            'email'=>'technician_staff@developer.com',
+            'email'=>'technician_admin@developer.com',
             'password'=>'developer',
             'position_uid'=>'admin',
+            'division_uid'=>'technician',
+        ]);
+        
+        User::create([
+            'uid'=>'5858585858',
+            'name'=>'Meilia',
+            'email'=>'technician_staff@developer.com',
+            'password'=>'developer',
+            'position_uid'=>'staff',
             'division_uid'=>'technician',
         ]);
 

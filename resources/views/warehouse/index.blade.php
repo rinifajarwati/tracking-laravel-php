@@ -79,22 +79,30 @@
     @include('warehouse.modals.approval_ppic_warehouse')
     @include('warehouse.modals.approval_warehouse')
     @include('warehouse.modals.approval_logistics_warehouse')
+    @include('warehouse.modals.approval_ppic_finish')
+    @include('warehouse.modals.cancel_warehouse')
     @include('warehouse.modals.edit_warehouse')
 
     <script src="/js/warehouse/_init.js"></script>
     <script src="/js/warehouse/pdf.js"></script>
     <script src="/js/warehouse/details.js"></script>
     <script src="/js/functions/spinner.js"></script>
-    <script> const auth = {!! json_encode($auth, JSON_HEX_TAG) !!}</script>
+    <script>
+        const auth = {!! json_encode($auth) !!}
+    </script>
     @if (auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'admin')
         <script src="/js/warehouse/dt.js"></script>
-    @elseif(auth()->user()->division_uid === 'sales')
+        <script src="/js/warehouse/cancel.js"></script>
+    @elseif(auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'coordinator')
+        <script src="/js/warehouse/dt.js"></script>
+    @elseif(auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'staff')
         <script src="/js/warehouse/dt-sales.js"></script>
         <script src="/js/warehouse/approval-sales-coor.js"></script>
         <script src="/js/warehouse/details.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse' && auth()->user()->position_uid === 'admin')
         <script src="/js/warehouse/dt-ppic.js"></script>
         <script src="/js/warehouse/approval.js"></script>
+        <script src="/js/warehouse/approval-ppic-finish.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse' && auth()->user()->position_uid === 'staff')
         <script src="/js/warehouse/dt-warehouse.js"></script>
         <script src="/js/warehouse/add.js"></script>
@@ -103,7 +111,7 @@
     @elseif(auth()->user()->division_uid === 'warehouse' && auth()->user()->position_uid === 'coordinator')
         <script src="/js/warehouse/dt-warehouse.js"></script>
         <script src="/js/warehouse/approval_warehouse.js"></script>
-    @elseif(auth()->user()->division_uid === 'logistics')
+    @elseif(auth()->user()->division_uid === 'logistics' && auth()->user()->position_uid === 'staff')
         <script src="/js/warehouse/dt-logistics.js"></script>
         <script src="/js/warehouse/approval_logistics.js"></script>
     @endif

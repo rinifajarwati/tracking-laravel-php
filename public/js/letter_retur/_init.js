@@ -17,3 +17,6 @@ const approvedMarketingListModal = $("#approved_marketing_item_modal");
 // Approved Marketing
 const approvedMarketingPpicForm = $("#approved_marketing_ppic_item_form");
 const approvedMarketingPpicListModal = $("#approved_marketing_ppic_item_modal");
+
+//finish
+const listDataFinishLetterRetur = $("#letter_retur_finish_list_data_table");

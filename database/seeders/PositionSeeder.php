@@ -28,5 +28,10 @@ class PositionSeeder extends Seeder
             'uid' => 'admin',
             'name'=> 'Admin'
         ]);
+
+        Position::create([
+            'uid' => 'qc',
+            'name'=> 'Qc'
+        ]);
     }
 }

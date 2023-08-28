@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/warehouse-approved-warehouse/{uid}', [WarehouseControllers::class, 'approvedWarehouse']);
     Route::get('/datatables/warehouse-approved-logistics', [WarehouseControllers::class, 'datatablesLogistics']);
     Route::put('/warehouse-approved-logistics/{uid}', [WarehouseControllers::class, 'approvedLogistics']);
+    Route::put('/warehouse-approved-ppic-finish/{uid}', [WarehouseControllers::class, 'approvedPpicClose']);
+    Route::put('/warehouse-cancel/{uid}', [WarehouseControllers::class, 'cancel']);
     Route::get('/pdf-warehouse/{warehouse}', [WarehouseControllers::class, 'showPdf']);
 
     Route::get('/generate-pdf/{warehouse}', [PdfWarehouseController::class, 'generatePDF']);
@@ -70,7 +72,8 @@ Route::group(['middleware' => ['auth']], function () {
      // route table selected sales
      Route::get('/datatables/warehouse-sales', [WarehouseControllers::class, 'datatablesSales']);
      Route::get('/datatables/warehouse-ppic', [WarehouseControllers::class, 'datatablesPpic']);
-     
+     Route::get('/datatables/warehouse-finish', [WarehouseControllers::class, 'datatablesFinish']);
+     Route::get('/warehouse-finish', [WarehouseControllers::class, 'Finish']);
     // so harga
     Route::resource('soharga', SohargaController::class);
     Route::get('/datatables/soharga', [SohargaController::class, 'datatables']);
@@ -106,6 +109,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
     Route::put('/letter-retur-approved-scm/{uid}', [LetterReturControllers::class, 'approvedSCM']);
     Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
+    Route::get('/datatables/letter-retur-finish', [LetterReturControllers::class, 'datatablesFinish']);
+    Route::get('/letter-retur-finish', [LetterReturControllers::class, 'Finish']);
 
     Route::get('/generate-pdf-letter-retur/{letterRetur}', [PdfLetterReturController::class, 'generatePDF']);
 
@@ -118,7 +123,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/do-qc-approved/{uid}', [DeliveryOrderControllers::class, 'approvedQc']);
     Route::get('/datatables/delivery-order-logistics', [DeliveryOrderControllers::class, 'datatablesLogistics']);
     Route::put('/do-logistics-approved/{uid}', [DeliveryOrderControllers::class, 'approvedLogistics']);
-    Route::put('/do-logistics-security-approved/{uid}', [DeliveryOrderControllers::class, 'approvedSecurity']);
     Route::put('/do-logistics-customer-approved/{uid}', [DeliveryOrderControllers::class, 'approvedCustomer']);
     Route::get('/pdf-delivery-order/{deliveryOrder}', [DeliveryOrderControllers::class, 'showPdf']);
 

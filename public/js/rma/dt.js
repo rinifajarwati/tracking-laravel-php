@@ -28,7 +28,6 @@ listDataRma.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
-
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
         },
@@ -40,6 +39,11 @@ listDataRma.bootstrapTable({
         {
             title: "Description",
             field: "description",
+            sortable: true,
+        },
+        {
+            title: "Status Garansi",
+            field: "warranty",
             sortable: true,
         },
         {

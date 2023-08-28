@@ -88,7 +88,7 @@ listDataLetterReturMarketing.bootstrapTable({
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Approval-SCM") {
-                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-success" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;

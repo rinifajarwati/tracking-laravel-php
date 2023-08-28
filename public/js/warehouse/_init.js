@@ -38,3 +38,14 @@ const logisticsApproved = $("#warehouse_list_data_table");
 // Approved Warehouse
 const approvedLogisticsForm = $("#approved_logistics_level_item_form");
 const approvedLogisticsListModal = $("#approved_logistics_item_modal");
+
+// Approved PPIC Finish
+const approvedPPICFinishForm = $("#approved_ppic_finish_level_item_form");
+const approvedPPICFinishListModal = $("#approved_ppic_finish_item_modal");
+
+// Cancel warehouse
+const cancelWarehouseForm = $("#cancel_warehosue_item_form");
+const cancelWarehouseListModal = $("#cancel_warehouse_item_modal");
+
+// Finish
+const listDataWarehouseFinish = $("#warehouse_finish_list_data_table");

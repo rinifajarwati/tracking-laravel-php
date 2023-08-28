@@ -91,14 +91,16 @@
     <script>
         const auth_division = {!! json_encode($auth_division, JSON_HEX_TAG) !!}
     </script>
-    @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
+    @if (auth()->user()->division_uid === 'technician')
         <script src="/js/letter_retur/dt.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse')
         <script src="/js/letter_retur/dt-warehouse.js"></script>
         <script src="/js/letter_retur/approval-warehouse.js"></script>
+    @elseif(auth()->user()->division_uid === 'sales')
+        <script src="/js/letter_retur/dt-marketing.js"></script>
+        <script src="/js/letter_retur/approval-marketing.js"></script>
+    @elseif(auth()->user()->division_uid === 'scm')
+        <script src="/js/letter_retur/dt-marketing.js"></script>
+        <script src="/js/letter_retur/approval-ppic-marketing.js"></script>
     @endif
-
-    <script src="/js/letter_retur/dt-marketing.js"></script>
-    <script src="/js/letter_retur/approval-marketing.js"></script>
-    <script src="/js/letter_retur/approval-ppic-marketing.js"></script>
 @endsection

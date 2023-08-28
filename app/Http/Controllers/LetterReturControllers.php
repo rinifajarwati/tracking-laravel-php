@@ -101,15 +101,15 @@ class LetterReturControllers extends Controller
 
     public function datatables()
     {
-        $user = auth()->user()->uid;
-
-        return LetterRetur::where('user_uid', $user)->get()->toArray();
+        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        return $notFinished;
     }
 
     //apporved warehouse
     public function datatablesWarehouse()
     {
-        return LetterRetur::all();
+        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        return $notFinished;
     }
 
     public function approvedWarehouse(string $uid)
@@ -132,7 +132,8 @@ class LetterReturControllers extends Controller
     //marketing
     public function datatablesMarketing()
     {
-        return LetterRetur::all();
+        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        return $notFinished;
     }
 
     public function approvedMarketing(string $uid)
@@ -165,6 +166,22 @@ class LetterReturControllers extends Controller
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
+    }
+
+    public function datatablesFinish()
+    {
+
+        $finish = LetterRetur::where('status', 'Approval-SCM')->get();
+        return $finish;
+    }
+
+    public function Finish()
+    {
+
+        $data = [
+            "title" => "Finish Surat Retur | IMI Tracking",
+        ];
+        return view('letter_retur.finish', $data);
     }
 
     //pdf letter retur

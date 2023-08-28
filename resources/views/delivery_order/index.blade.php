@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (auth()->user()->division_uid === 'sales')
+                    @if (auth()->user()->division_uid === 'logistics' && auth()->user()->position_uid === 'admin')
                         <button
                             class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
                             type="button" data-bs-toggle="modal" data-bs-target="#add_new_delivery_order_modal">
@@ -78,24 +78,28 @@
     @include('delivery_order.modals.approval_sales2_do')
     @include('delivery_order.modals.approval_qc_do')
     @include('delivery_order.modals.approval_logistics_do')
-    @include('delivery_order.modals.approval_security_do')
     @include('delivery_order.modals.approval_customer_do')
 
     <script src="/js/delivery_order/_init.js"></script>
     <script src="/js/delivery_order/pdf.js"></script>
-    @if (auth()->user()->division_uid === 'sales')
+    <script>
+        const auth_position = {!! json_encode($auth_pos) !!}
+    </script>
+    <script>
+        const auth_division = {!! json_encode($auth_div) !!}
+    </script>
+    @if (auth()->user()->division_uid === 'logistics'  && auth()->user()->position_uid === 'admin')
         <script src="/js/delivery_order/dt.js"></script>
         <script src="/js/delivery_order/approval-sales-coor.js"></script>
-    @elseif(auth()->user()->division_uid === 'qc' && auth()->user()->position_uid === 'staff')
+    @elseif (auth()->user()->division_uid === 'logistics'  && auth()->user()->position_uid === 'coordinator')
         <script src="/js/delivery_order/dt.js"></script>
         <script src="/js/delivery_order/approval-sales-coor.js"></script>
-    @elseif(auth()->user()->division_uid === 'qc')
+    @elseif(auth()->user()->division_uid === 'logistics' && auth()->user()->position_uid === 'qc')
         <script src="/js/delivery_order/dt-qc.js"></script>
         <script src="/js/delivery_order/approval-qc.js"></script>
-    @elseif(auth()->user()->division_uid === 'logistics')
+    @elseif(auth()->user()->division_uid === 'logistics'  && auth()->user()->position_uid === 'staff')
         <script src="/js/delivery_order/dt-logistics.js"></script>
         <script src="/js/delivery_order/approval-logistics.js"></script>
         <script src="/js/delivery_order/approval-customer.js"></script>
-        <script src="/js/delivery_order/approval-security.js"></script>
     @endif
 @endsection
