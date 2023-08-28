@@ -40,7 +40,6 @@ class SohargaController extends Controller
         //
         try {
             $uid = (new HelperController)->getUid();
-
             $payload = [
                 'uid' => $uid,
                 'user_uid' => auth()->user()->uid,
@@ -55,6 +54,7 @@ class SohargaController extends Controller
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_file')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
+            // dd($payload);
             Soharga::create($payload);
             return back()->with(['alertSuccess' => 'Successfully create file!']);
         } catch (Throwable $th) {
@@ -100,41 +100,15 @@ class SohargaController extends Controller
 
     public function datatables()
     {
-        $user = auth()->user()->uid;
-        return Soharga::where('user_uid', $user)->get()->toArray();
+       return Soharga::all();
     }
     
-    public function datatablesSales()
-    {
-        return Soharga::all();
-    }
-
-    public function approvedSales(string $uid)
-    {
-        try {
-            $input = [
-                'status' => 'Approved-By',
-                'sales_name' => auth()->user()->uid,
-                'sales_date' => Carbon::now(),
-            ];
-
-            // dd($input);
-            Soharga::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
-        } catch (Throwable $e) {
-            dd($e);
-            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
-        }
-    }
-
-    
-
     public function datatablesAdminsales()
     {
         return Soharga::all();
     }
 
-    public function approvedAdminsales(string $uid)
+    public function approvedAdminsalesPrice(string $uid)
     {
         try {
             $input = [
@@ -144,33 +118,47 @@ class SohargaController extends Controller
             ];
 
             Soharga::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file Soharga']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
     }
 
+    //Approved Qc
+    public function datatablesSales()
+    {
+        return Soharga::all();
+    }
+
+    public function approvedSalesPrice(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Approval-Sales',
+                'sales_name' => auth()->user()->uid,
+                'sales_date' => Carbon::now(),
+            ];
+            // dd($input);
+            Soharga::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file Soharga']);
+        } catch (Throwable $e) {
+            dd($e);
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+
+
     public function showPdf(Soharga $soharga)
     {
-        $fileNameCreated = $soharga->user?->img ?: "N/A";
-        $fileNameApproved = $soharga->SCName?->img ?: "N/A";
-        $fileName = $soharga->PName?->img ?: "N/A";
-        $fileNameSales = $soharga->WName?->img ?: "N/A";
-        $fileNameAdminsales = $soharga->LName?->img ?: "N/A";
-        $signature_created = 'assetsgambar/file/' . $fileNameCreated;
-        $signature_approved = 'assetsgambar/file/' . $fileNameApproved;
-        $signature_path = 'assetsgambar/file/' . $fileName;
+        $fileNameSales = $soharga->user?->img ?: "N/A";
+        $fileNameAdminsales = $soharga->AName?->img ?: "N/A";
+
         $signature_sales = 'assetsgambar/file/' . $fileNameSales;
         $signature_adminsales = 'assetsgambar/file/' . $fileNameAdminsales;
 
         $data = [
-            'title' => 'Contoh PDF',
-            'created_name' => $soharga->user?->name ?: "N/A",
-            'sales_name' => $soharga->SName?->name ?: "N/A",
+            'sales_name' => $soharga->user?->name ?: "N/A",
             'adminsales_name' => $soharga->AName?->name ?: "N/A",
-            'signature_created' => $signature_created,
-            'signature_approved' => $signature_approved,
-            'signature_path' => $signature_path,
             'signature_sales' => $signature_sales,
             'signature_adminsales' => $signature_adminsales,
         ];

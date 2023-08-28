@@ -15,19 +15,15 @@ class PdfSohargaController extends Controller
     public function generatePDF(Soharga $soharga)
     {
         // dd($soharga);
-        $fileNameCreated = $soharga->user?->img ?: "N/A";
-        $fileNameSales = $soharga->SName?->img ?: "N/A";
-        $fileNameAdminsales = $soharga->AName?->img ?: "N/A";
-        $signature_created = 'assetsgambar/file/' . $fileNameCreated;
+        $fileNameSales = $soharga->user?->img ?: "N/A";
+        $fileNameAdminsales = $soharga->SName?->img ?: "N/A";
         $signature_sales = 'assetsgambar/file/' . $fileNameSales;
         $signature_adminsales = 'assetsgambar/file/' . $fileNameAdminsales;
 
         $data = [
             'title' => 'Contoh PDF',
-            'created_name' => $soharga->user?->name ?: "N/A",
-            'sales_name' => $soharga->SName?->name ?: "N/A",
-            'adminsales_name' => $soharga->AName?->name ?: "N/A",
-            'signature_created' => $signature_created,
+            'sales_name' => $soharga->user?->name ?: "N/A",
+            'adminsales_name' => $soharga->SName?->name ?: "N/A",
             'signature_sales' => $signature_sales,
             'signature_adminsales' => $signature_adminsales,
         ];
@@ -57,7 +53,7 @@ class PdfSohargaController extends Controller
 
         File::delete($tempPdf);
 
-        $outputFilename = 'SO-Gudang.pdf';
+        $outputFilename = 'SO-Harga.pdf';
         $pdf->Output($outputFilename, 'I');
 
         return 'PDFs merged successfully.';

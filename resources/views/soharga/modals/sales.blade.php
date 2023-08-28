@@ -5,8 +5,8 @@
                 <h5 class="modal-title">approved data SO Harga</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
             </div>
-            <form action="/soharga-approval/{uid}" method="post" autocomplete="off"
-                id="approved_sales_level_item_form">
+            <form action="soharga-approved-sales/{uid}" method="post" autocomplete="off"
+                id="approved_sales_item_form">
                 @method('put')
                 @csrf
                 <div class="modal-body">

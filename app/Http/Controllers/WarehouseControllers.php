@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Throwable;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Helper\HelperController;
-use App\Models\User;
+use App\Models\WarehouseSn;
+use Symfony\Component\Console\Input\Input;
 
 class WarehouseControllers extends Controller
 {
@@ -18,9 +21,12 @@ class WarehouseControllers extends Controller
      */
     public function index()
     {
+        $getUser = User::where('division_uid', 'sales')->get();
 
         $data = [
             "title" => "SO Gudang | IMI Tracking",
+            "rowsUser" => $getUser,
+            "auth" => auth()->user()->position_uid
         ];
         return view('warehouse.index', $data);
     }
@@ -41,23 +47,27 @@ class WarehouseControllers extends Controller
         //
         try {
             $uid = (new HelperController)->getUid();
-
             $payload = [
                 'uid' => $uid,
                 'user_uid' => auth()->user()->uid,
                 'no_so' => request('no_so'),
                 'description' => request('description'),
                 'file' => request('file'),
+                'sales_name' => request('sales_name'),
+                'delivery_notes' => request('delivery_notes'),
                 'created_date' => Carbon::now(),
                 'status' => 'Created',
             ];
+
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_file')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
             Warehouse::create($payload);
+
             return back()->with(['alertSuccess' => 'Successfully create file!']);
         } catch (Throwable $th) {
+            dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
                 return back()->with(['alertError' => 'file already Registered!']);
             }
@@ -68,9 +78,17 @@ class WarehouseControllers extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Warehouse $warehouse)
+    public function show(string $warehouse)
     {
         //
+        $warehouseSN = WarehouseSn::where("warehouse_uid", $warehouse)->get();
+        $iniWarehouse = Warehouse::where("uid", $warehouse)->get();
+        $data = [
+            "title" =>  "Details SN | IMI-Tracking",
+            "warwhouseSN" => $warehouseSN,
+            "iniWarehouse" => $iniWarehouse,
+        ];
+        return view('warehouse.show', $data);
     }
 
     /**
@@ -84,9 +102,40 @@ class WarehouseControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Warehouse $warehouse)
+    public function update(Request $request, $uid)
     {
         //
+        // dd($uid);
+        $warehouse = Warehouse::where('uid', $uid)->first();
+        $warehousesn = WarehouseSn::where('warehouse_uid', $warehouse->uid)->get()->toArray();
+        // dd($warehousesn);
+        // dump($payload);
+
+        $datatWarehouse = request()->validate([
+            'data.*.serial_number' => 'required',
+            'data.*.weight' => 'required',
+            'data.*.koli' => 'required',
+            'data.*.gdg' => 'required',
+            'data.*.kubikasi' => 'required',
+        ]);
+        
+        $warehouseUid = $datatWarehouse['warehouse_uid'] = $uid;
+        $user = auth()->user()->uid;
+        // dd($datatWarehouse);    
+        // $warehouseUid = $payload['uid'];
+
+        DB::transaction(function () use ($datatWarehouse, $warehouseUid, $user) {
+            foreach ($datatWarehouse['data'] as $dataInput) {
+                $dataInput['uid'] = (new HelperController)->getUid();
+                $dataInput['warehouse_uid'] = $warehouseUid;
+                $dataInput['user_uid'] = $user;
+                // dump($dataInput);
+                WarehouseSn::create($dataInput);
+                // return redirect('/warehouse')->with(['alertSuccess' => 'Successfully']);
+            }
+        });
+        return redirect('/warehouse')->with(['alertSuccess' => 'Successfully']);
+        // dd("success");
     }
 
     /**
@@ -99,8 +148,17 @@ class WarehouseControllers extends Controller
 
     public function datatables()
     {
-        $user = auth()->user()->uid;
-        return Warehouse::where('user_uid', $user)->get()->toArray();
+        return Warehouse::all();
+        // $user = auth()->user()->uid;
+        // return Warehouse::where('user_uid', $user)->get()->toArray();
+    }
+
+    public function datatablesSales()
+    {
+        $auth = auth()->user()->uid;
+        return Warehouse::where('sales_name', $auth)->get()->toArray();
+        // $user = auth()->user()->uid;
+        // return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
     public function approvedSalesCoor(string $uid)
@@ -117,6 +175,11 @@ class WarehouseControllers extends Controller
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
+    }
+
+    public function datatablesPpic()
+    {
+        return Warehouse::all();
     }
 
     public function approved(string $uid)
@@ -182,13 +245,15 @@ class WarehouseControllers extends Controller
         $fileName = $warehouse->PName?->img ?: "N/A";
         $fileNameWarehouse = $warehouse->WName?->img ?: "N/A";
         $fileNameLogistics = $warehouse->LName?->img ?: "N/A";
-        
+
         $signature_created = 'assetsgambar/file/' . $fileNameCreated;
         $signature_approved = 'assetsgambar/file/' . $fileNameApproved;
         $signature_path = 'assetsgambar/file/' . $fileName;
         $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
         $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
 
+        $description = $warehouse->description;
+        $delivery_notes = $warehouse->delivery_notes;
         $data = [
             'ppic_name' => $warehouse->PName?->name ?: "N/A",
             'warehouse_name' => $warehouse->WName?->name ?: "N/A",
@@ -198,7 +263,10 @@ class WarehouseControllers extends Controller
             'signature_path' => $signature_path,
             'signature_warehouse' => $signature_warehouse,
             'signature_logistics' => $signature_logistics,
+
+            'description_warehouse' => $description,
+            'delivery_notes_warehouse' => $delivery_notes,
         ];
-        return view('warehouse.pdf.so_warehouse',$data);
+        return view('warehouse.pdf.so_warehouse', $data);
     }
 }

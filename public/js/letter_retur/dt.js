@@ -130,16 +130,16 @@ listDataLetterRetur.bootstrapTable({
             },
         },
         {
-            title: "Marketing PPIC Name",
-            field: "ppic_marketing_name",
+            title: "SCM Name",
+            field: "",
             formatter(value, row) {
-                  return row.m_p_name ? row.m_p_name.name : null;
+                  return row.s_c_m_name ? row.s_c_m_name.name : null;
             },
             sortable: true,
         },
         {
-            title: "Marketing PPIC Date",
-            field: "ppic_marketing_date",
+            title: "SCM Date",
+            field: "scm_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\PdfRmaController;
 use App\Http\Controllers\DivisionControllers;
 use App\Http\Controllers\WarehouseControllers;
-use App\Http\Controllers\addsignaturecontroller;
+// use App\Http\Controllers\addsignaturecontroller;
 use App\Http\Controllers\CreatenewuserController;
 use App\Http\Controllers\LetterReturControllers;
 use App\Http\Controllers\PdfWarehouseController;
@@ -67,15 +67,17 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf/{warehouse}', [PdfWarehouseController::class, 'generatePDF']);
 
+     // route table selected sales
+     Route::get('/datatables/warehouse-sales', [WarehouseControllers::class, 'datatablesSales']);
+     Route::get('/datatables/warehouse-ppic', [WarehouseControllers::class, 'datatablesPpic']);
+     
     // so harga
     Route::resource('soharga', SohargaController::class);
     Route::get('/datatables/soharga', [SohargaController::class, 'datatables']);
-    Route::put('/soharga-approved/{uid}', [SohargaController::class, 'approved']);
-    Route::put('/soharga-approved-sales/${uid}', [SohargaController::class, 'approvedSales']);
+    Route::put('/soharga-approved-sales/{uid}', [SohargaController::class, 'approvedSalesPrice']);
     Route::get('/datatables/soharga-approved-sales', [SohargaController::class, 'datatablesSales']);
-    Route::put('/soharga-approved-soharga/{uid}', [SohargaController::class, 'approvedSoharga']);
-    Route::get('/datatables/soharga-approved-adminsales', [SohargaController::class, 'datatablesSuperadmin']);
-    Route::put('/soharga-approved-adminsales/${uid}', [SohargaController::class, 'approvedSuperadmin']);
+    Route::get('/datatables/soharga-approved-adminsales', [SohargaController::class, 'datatablesAdminsales']);
+    Route::put('/soharga-approved-adminsales/{uid}', [SohargaController::class, 'approvedAdminsalesPrice']);
     Route::get('/pdf-soharga/{soharga}', [SohargaController::class, 'showPdf']);
 
     // Route::get('/generate-pdf/{soharga}', [PdfSohargaController::class, 'generatePDF']);  
@@ -102,7 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/letter-retur-approved-warehouse/{uid}', [LetterReturControllers::class, 'approvedWarehouse']);
     Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
-    Route::put('/letter-retur-approved-marketing-ppic/{uid}', [LetterReturControllers::class, 'approvedMarketingPPIC']);
+    Route::put('/letter-retur-approved-scm/{uid}', [LetterReturControllers::class, 'approvedSCM']);
     Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
 
     Route::get('/generate-pdf-letter-retur/{letterRetur}', [PdfLetterReturController::class, 'generatePDF']);
@@ -122,10 +124,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf-delivery-order/{deliveryOrder}', [PdfDeliveryOrderController::class, 'generatePDF']);
 
-    //account 
-    Route::resource('signatureuser', addsignaturecontroller::class);  
-    Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
-    Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
+    // //account 
+    // Route::resource('signatureuser', addsignaturecontroller::class);  
+    // Route::get('signatureuser', [addsignaturecontroller::class, 'uploadPDF']);
+    // Route::post('signatureuser', [addsignaturecontroller::class, 'show']);
 
     //create signatture
     Route::resource('account-user', AccountController::class);

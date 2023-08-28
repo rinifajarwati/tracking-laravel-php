@@ -44,18 +44,18 @@ class DivisionSeeder extends Seeder
         ]);
 
         Division::create([
-            'uid' => 'superadmin',
-            'name'=> 'Superadmin'
-        ]);
-
-        Division::create([
-            'uid' => 'marketing',
-            'name'=> 'Marketing'
+            'uid' => 'scm',
+            'name'=> 'Scm'
         ]);
 
         Division::create([
             'uid' => 'admin',
             'name'=> 'admin'
+        ]);
+        
+        Division::create([
+            'uid' => 'superadmin',
+            'name'=> 'Superadmin'
         ]);
 
     }

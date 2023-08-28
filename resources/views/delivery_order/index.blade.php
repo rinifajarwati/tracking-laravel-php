@@ -8,7 +8,7 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
-                                <div class="page-header-icon"> <i class="fa-solid fa-users-between-lines"></i></div>
+                                <div class="page-header-icon"><i data-feather="activity"></i></div>
                                 Delivery Order
                             </h1>
                             <div class="page-header-subtitle">
@@ -84,6 +84,9 @@
     <script src="/js/delivery_order/_init.js"></script>
     <script src="/js/delivery_order/pdf.js"></script>
     @if (auth()->user()->division_uid === 'sales')
+        <script src="/js/delivery_order/dt.js"></script>
+        <script src="/js/delivery_order/approval-sales-coor.js"></script>
+    @elseif(auth()->user()->division_uid === 'qc' && auth()->user()->position_uid === 'staff')
         <script src="/js/delivery_order/dt.js"></script>
         <script src="/js/delivery_order/approval-sales-coor.js"></script>
     @elseif(auth()->user()->division_uid === 'qc')

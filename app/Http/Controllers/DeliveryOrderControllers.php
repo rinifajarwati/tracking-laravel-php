@@ -48,6 +48,7 @@ class DeliveryOrderControllers extends Controller
                 'no_sj' => request('no_sj'),
                 'description' => request('description'),
                 'file' => request('file'),
+                'img' => request('img'),
                 'created_date' => Carbon::now(),
                 'status' => 'Created',
             ];
@@ -55,6 +56,12 @@ class DeliveryOrderControllers extends Controller
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_delivery_order')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
+
+            $img = request()->file('img');
+            $fileImg = Str::random(40) . '.' .$img->getClientOriginalExtension();
+            Storage::disk('public_uploads_img_resi')->put($fileImg, file_get_contents($img));
+            $payload['img'] = $fileImg;
+
             DeliveryOrder::create($payload);
             return back()->with(['alertSuccess' => 'Successfully create file!']);
         } catch (Throwable $th) {

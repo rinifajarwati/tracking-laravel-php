@@ -10,7 +10,14 @@ class DeliveryOrder extends Model
     use HasFactory;
     protected $guarded = ["id"];
     protected $with = ['user', 'SalesName2', 'QcName', 'LogisticsName', 'SecurityName', 'CustomerName'];
-   
+    protected $casts = [
+        'created_date' => 'datetime',
+        'sales2_date' => 'datetime',
+        'qc_date' => 'datetime',
+        'logistics_date' => 'datetime',
+        'logistics_security_date' => 'datetime',
+        'logistics_customer_date' => 'datetime',
+    ];
     public $timestamps = false;
 
     public function getRouteKeyName()

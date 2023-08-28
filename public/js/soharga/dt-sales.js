@@ -1,5 +1,5 @@
 listDataSoharga.bootstrapTable({
-    url: "/datatables/soharga-approved-sales'",
+    url: "/datatables/soharga",
     showColumns: true,
     showColumnsToggleAll: true,
     showRefresh: true,
@@ -27,7 +27,7 @@ listDataSoharga.bootstrapTable({
                 };
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
-                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
+                buttons += `<button class="btn btn-warning btn-blank btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`
                 if(row.status === "Created"){
@@ -85,7 +85,7 @@ listDataSoharga.bootstrapTable({
                     buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`
                 }
                 if(value === "Approval-Sales"){
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`
+                    buttonHtml = `<button class="badge bg-primary" style="border:none;">${value}</button>`
                 }
                 return buttonHtml;
             }
@@ -108,28 +108,13 @@ listDataSoharga.bootstrapTable({
             field: "sales_name",
             sortable: true,
             formatter(value, row){
-                return row.s_c_name ? row.s_c_name.name : null;
+                // console.log(row);
+                return row.s_name ? row.s_name.name : null;
             },
         },
         {
             title: "Approved Date sales",
             field: "sales_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Adminsales Name",
-            field: "adminsales_name",
-            formatter(value, row){
-                return row.p_name ? row.p_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Approved Date",
-            field: "adminsales_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

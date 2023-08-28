@@ -4,8 +4,6 @@ ListDataTable.bootstrapTable({
     showColumnsToggleAll: true,
     showRefresh: true,
     sortable: true,
-    search: true,
-    searchOnEnterKey: false,
     searchHighlight: true,
     pagination: true,
     pageSize: 50,

@@ -24,17 +24,15 @@
 
                     {{-- signature --}}
                     <tr>
-                        <td><img src="{{ asset($signature_created) }}" alt="Signature" class="signature-img"
+                        <td><img src="{{ asset($signature_sales) }}" alt="Signature" class="signature-img"
                                 style="width: 100px; height: auto;"></td>
                         <td><img src="{{ asset($signature_adminsales) }}" alt="Signature" class="signature-img"
-                                style="width: 100px; height: auto;"></td>
-                        <td><img src="{{ asset($signature_sales) }}" alt="Signature" class="signature-img"
                                 style="width: 100px; height: auto;"></td>
                     </tr>
 
                     <tr>
-                        <td>{{ $adminsales_name }}</td>
                         <td>{{ $sales_name }}</td>
+                        <td>{{ $adminsales_name }}</td>
                     </tr>
                 </table>
             </div>

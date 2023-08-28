@@ -32,7 +32,13 @@
                             <label>File</label>
                             <img class="img-preview img-fluid mb-3 col-sm-5">
                             <input type="file" class="form-control @error('file') is-invalid @enderror"
-                                id="add_file" placeholder="file" name="file" required>
+                                id="add_file" placeholder="file" name="file" accept="application/pdf" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>Image Number Resi</label>
+                            <img class="img-preview img-fluid mb-3 col-sm-5">
+                            <input type="file" class="form-control @error('img') is-invalid @enderror"
+                                id="add_img" placeholder="Number Resi" name="img" required>
                         </div>
                     </div>
                 </div>

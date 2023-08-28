@@ -9,8 +9,13 @@ class LetterRetur extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'WName', 'MName', 'MPName'];
-    
+    protected $with = ['user', 'WName', 'MName', 'SCMName'];
+    protected $casts = [
+        'created_date' => 'datetime',
+        'warehouse_date' => 'datetime',
+        'marketing_date' => 'datetime',
+        'scm_date' => 'datetime',
+    ];
     public $timestamps = false;
 
     public function getRouteKeyName()
@@ -30,7 +35,7 @@ class LetterRetur extends Model
     public function MName(){
         return $this->belongsTo(User::class, 'marketing_name', 'uid');
     }
-    public function MPName(){
-        return $this->belongsTo(User::class, 'ppic_marketing_name', 'uid');
+    public function SCMName(){
+        return $this->belongsTo(User::class, 'scm_name', 'uid');
     }
 }

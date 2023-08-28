@@ -25,7 +25,7 @@ class Soharga extends Model
 
     public function SName()
     {
-        return $this->belongsTo(User::class, 'sales', 'uid');
+        return $this->belongsTo(User::class, 'sales_name', 'uid');
     }
 
     public function AName(){

@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (auth()->user()->division_uid === 'sales')
+                    @if (auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'admin')
                         <button
                             class="btn btn-primary btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
                             type="button" data-bs-toggle="modal" data-bs-target="#add_new_soharga_modal">
@@ -79,15 +79,15 @@
     @include('soharga.modals.adminsales')
 
     <script src="/js/soharga/_init.js"></script>
-    <script src="/js/soharga/dt.js"></script>
     <script src="/js/soharga/pdf.js"></script>
     <script src="/js/functions/spinner.js"></script>
 
-    @if (auth()->user()->division_uid === 'sales')
-        <script src="/js/soharga/dt.js"></script>
-        <script src="/js/soharga/approval.js"></script>
+    @if (auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'staff')
+        <script src="/js/soharga/dt-sales.js"></script>
+        {{-- <script src="/js/soharga/approval.js"></script> --}}
         <script src="/js/soharga/approval-sales.js"></script>
-    @elseif(auth()->user()->division_uid === 'adminsales')
+
+    @elseif(auth()->user()->division_uid === 'sales' && auth()->user()->position_uid === 'admin')
         <script src="/js/soharga/approval-adminsales.js"></script>
         <script src="/js/soharga/dt-adminsales.js"></script>
     @endif

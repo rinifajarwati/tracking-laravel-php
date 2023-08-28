@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SB Admin Pro</title>
+        <title>Login-imi-tracking</title>
         <link href="css/styles.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="assets/img/logo_interskala.jpeg" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -37,22 +37,16 @@
                                                 <input class="form-control" id="inputPassword" type="password" name = 'password' placeholder="Enter password" />
                                             </div>
                                             <!-- Form Group (remember password checkbox)-->
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
-                                                    <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
-                                                </div>
-                                            </div>
+                                        
                                             <!-- Form Group (login box)-->
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="auth-password-basic.html">Forgot Password?</a>
+                                            <div class="d-grid gap-2">
                                                 <button class="btn btn-primary" type="submit">Login</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
+                                    {{-- <div class="card-footer text-center">
                                         <div class="small"><a href="auth-register-basic.html">Need an account? Sign up!</a></div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
