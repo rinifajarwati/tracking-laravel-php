@@ -67,7 +67,7 @@ return new class extends Migration
             $table->string('sales_name');
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Approved-By', 'Approval-PPIC', 'Approval-Warehouse', 'Approval-Logistics', 'Cancel', 'Finish'])->default('Created');
             $table->string('sales_coor_name')->nullable();
             $table->timestamp('sales_coor_date')->nullable();
             $table->string('ppic_name')->nullable();
@@ -76,6 +76,8 @@ return new class extends Migration
             $table->timestamp('warehouse_date')->nullable();
             $table->string('logistics_name')->nullable();
             $table->timestamp('logistics_date')->nullable();
+            $table->string('ppic_finish_name')->nullable();
+            $table->timestamp('ppic_finish_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -101,6 +103,8 @@ return new class extends Migration
             $table->string('no_spk');
             $table->string('file');
             $table->string('description');
+            $table->string('purchasing')->nullable();
+            $table->enum('warranty', ['Garansi', 'Non-Garansi'])->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Reject'])->default('Created');
@@ -120,7 +124,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Cancel'])->default('Created');
             $table->string('warehouse_name')->nullable();
             $table->timestamp('warehouse_date')->nullable();
             $table->string('marketing_name')->nullable();
@@ -137,19 +141,17 @@ return new class extends Migration
             $table->string('no_so');
             $table->string('no_sj');
             $table->string('file');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('description');
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Security', 'Approval-Customer'])->default('Created');
-            $table->string('sales2_name')->nullable();
-            $table->timestamp('sales2_date')->nullable();
+            $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Customer'])->default('Created');
+            $table->string('coor_logistics_name')->nullable();
+            $table->timestamp('coor_logistics_date')->nullable();
             $table->string('qc_name')->nullable();
             $table->timestamp('qc_date')->nullable();
             $table->string('logistics_name')->nullable();
             $table->timestamp('logistics_date')->nullable();
-            $table->string('logistics_security_name')->nullable();
-            $table->timestamp('logistics_security_date')->nullable();
             $table->string('logistics_customer_name')->nullable();
             $table->timestamp('logistics_customer_date')->nullable();
 

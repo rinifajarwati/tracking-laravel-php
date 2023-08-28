@@ -28,7 +28,7 @@ listDataDo.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
-                if (row.status === "Created") {
+                if (row.status === "Created" && auth_position === "coordinator") {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnSales('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
@@ -38,7 +38,7 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "No SO",
+            title: "No SOa",
             field: "no_so",
             sortable: true,
         },
@@ -96,11 +96,8 @@ listDataDo.bootstrapTable({
                 if (value === "Approval-Logistics") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
-                if (value === "Approval-Security") {
-                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
-                }
                 if (value === "Approval-Customer") {
-                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-success" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
@@ -128,17 +125,17 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "Sales Coor Name",
-            field: "sales2_name",
+            title: "Coor Name",
+            field: "coor_logistics_name",
             formatter(value, row) {
-                console.log(row);
-                return row.sales_name2 ? row.sales_name2.name : null;
+                return row.coor_logistics ? row.coor_logistics.name : null;
+                // console.log(row);
             },
             sortable: true,
         },
         {
-            title: "Sales Coor Date",
-            field: "sales2_date",
+            title: "Coor Date",
+            field: "coor_logistics_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;
@@ -171,22 +168,6 @@ listDataDo.bootstrapTable({
         {
             title: "Logistics Date",
             field: "logistics_date",
-            sortable: true,
-            formatter: (value, row) => {
-                return value ? moment(value).format("LLL") : null;
-            },
-        },
-        {
-            title: "Logistics Security Name",
-            field: "logistics_security_name",
-            formatter(value, row) {
-                  return row.security_name ? row.security_name.name : null;
-            },
-            sortable: true,
-        },
-        {
-            title: "Logistics Security Date",
-            field: "logistics_security_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

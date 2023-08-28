@@ -48,6 +48,7 @@ class RmaControllers extends Controller
                 'no_spk' => request('no_spk'),
                 'description' => request('description'),
                 'file' => request('file'),
+                'warranty' => request('warranty'),
                 'created_date' => Carbon::now(),
                 'status' => 'Created',
             ];
@@ -58,6 +59,7 @@ class RmaControllers extends Controller
             Rma::create($payload);
             return back()->with(['alertSuccess' => 'Successfully create RMA!']);
         } catch (Throwable $th) {
+            dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
                 return back()->with(['alertError' => 'RMA already Registered!']);
             }

@@ -13,7 +13,20 @@
 <body>
     <main>
         <div class="container">
-
+            <div class="wrapper patient-data">
+                <table class="table-patient-data">
+                    <tr>
+                        <td class="col-1">Description</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $description_rma }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Status Garansi</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $warranty }}</td>
+                    </tr>
+                </table>
+            </div>
             <!-- Receipt signature -->
             <div class="wrapper">
 

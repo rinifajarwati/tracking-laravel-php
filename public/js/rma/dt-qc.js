@@ -48,6 +48,11 @@ listDataRmaQC.bootstrapTable({
             sortable: true,
         },
         {
+            title: "Status Garansi",
+            field: "warranty",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,

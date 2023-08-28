@@ -24,6 +24,14 @@
 
                         </div>
                         <div class="col-12 mb-3">
+                            <label>Status Garansi</label>
+                            <select class="form-select" id="add_warranty" name="warranty">
+                                <option value="">Choose...</option>
+                                <option value="Garansi">Garansi</option>
+                                <option value="Non-Garansi">Non Garansi</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-3">
                             <label>File</label>
                             <img class="img-preview img-fluid mb-3 col-sm-5">
                             <input type="file" class="form-control @error('file') is-invalid @enderror"

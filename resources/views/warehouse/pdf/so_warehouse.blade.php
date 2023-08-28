@@ -33,6 +33,7 @@
                             <th class="col-3">Koli</th>
                             <th class="col-4">GDG</th>
                             <th class="col-5">Kubikasi</th>
+                            <th class="col-5">Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,6 +44,7 @@
                                 <td class="col-3">{{ $item['koli'] }}</td>
                                 <td class="col-4">{{ $item['gdg'] }}</td>
                                 <td class="col-5">{{ $item['kubikasi'] }}</td>
+                                <td class="col-5">{{$item->user->name  }}</td>
                             </tr>
                         @endforeach
                     </tbody>

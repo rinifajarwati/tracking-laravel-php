@@ -25,7 +25,6 @@
                         <td>Jakarta</td>
                         <td>Jakarta</td>
                         <td>Jakarta</td>
-                        <td>Jakarta</td>
                     </tr>
                     {{-- Sign Text 2 --}}
                     <tr>
@@ -33,7 +32,6 @@
                         <td>Hormat Kami,</td>
                         <td>Qc,</td>
                         <td>Dikirim Oleh,</td>
-                        <td>Security,</td>
                         <td>Customer,</td>
                     </tr>
 
@@ -41,13 +39,11 @@
                     <tr>
                         <td> <img class="signature-img" src="{{ asset($signature_sales) }}" alt="Signature"
                                 style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_sales_coor) }}" alt="Signature"
+                        <td> <img class="signature-img" src="{{ asset($signature_logistics_coor) }}" alt="Signature"
                                 style="width: 100px; height: auto;"> </td>
                         <td> <img class="signature-img" src="{{ asset($signature_qc) }}" alt="Signature"
                                 style="width: 100px; height: auto;"> </td>
                         <td> <img class="signature-img" src="{{ asset($signature_logistics) }}" alt="Signature"
-                                style="width: 100px; height: auto;"> </td>
-                        <td> <img class="signature-img" src="{{ asset($signature_logistics_security) }}" alt="Signature"
                                 style="width: 100px; height: auto;"> </td>
                         <td> <img class="signature-img" src="{{ asset($signature_logistics_customer) }}" alt="Signature"
                                 style="width: 100px; height: auto;"> </td>
@@ -56,10 +52,9 @@
                       {{-- Sign Text 2 --}}
                       <tr>
                         <td>{{ $sales_name }}</td>
-                        <td>{{ $sales_coor_name }}</td>
+                        <td>{{ $logistics_coor }}</td>
                         <td>{{ $qc_name }}</td>
                         <td>{{ $logistics_name }}</td>
-                        <td>{{ $logistics_security_name }}</td>
                         <td>{{ $logistics_customer_name }}</td>
                     </tr>
                 </table>
