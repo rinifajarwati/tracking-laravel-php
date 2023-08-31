@@ -28,6 +28,12 @@ listDataLetterRetur.bootstrapTable({
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
+                if (row.status === "Approval-SCM") {
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnFinish('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`;
+                } else {
+                }
                 return `<div class="d-flex space-x">${buttons}</div>`;
             },
         },
@@ -75,13 +81,13 @@ listDataLetterRetur.bootstrapTable({
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Approval-SCM") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
                 }
-                if (value === "Reject") {
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`;
+                if (value === "Finish") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
                 }
                 if (value === "Closed") {
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`;

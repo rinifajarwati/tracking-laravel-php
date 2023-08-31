@@ -4,7 +4,7 @@
 {{-- Menu (Employees) --}}
 <a class="nav-link {{ Request::is('warehouse-finish') || Request::is('letter-retur-finish') || Request::is('rma-finish') || Request::is('delivery-order-finish') ? '' : 'collapsed' }}" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsFileFinish"
     aria-expanded="false" aria-controls="collapseLayoutsFileFinish">
-    <div class="nav-link-icon"><i class="fa-regular fa-folder-open"></i></div>
+    <div class="nav-link-icon"><i class="fa-solid fa-folder-closed"></i></div>
     Finish File
     <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 </a>
@@ -43,7 +43,7 @@
             </a>
         @endif
         {{-- Menu (letter retur) --}}
-        @php $checks = ['developer','sales', 'warehouse', 'scm', 'technician']; @endphp
+        @php $checks = ['developer','sales', 'warehouse', 'scm', 'technician', 'finance']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
             <a class="nav-link {{ Request::is('letter-retur-finish') ? 'active' : '' }}" href="/letter-retur-finish">
                 <div class="nav-link-icon">

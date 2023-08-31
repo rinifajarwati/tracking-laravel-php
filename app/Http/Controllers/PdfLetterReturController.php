@@ -21,6 +21,7 @@ class PdfLetterReturController extends Controller
         $signature_marketing = 'assetsgambar/file/' . $fileNameMarketing;
         $signature_scm = 'assetsgambar/file/' . $fileNameScm;
 
+        $information_letter_retur = $letterRetur->information;
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $letterRetur->user?->name ?: "N/A",
@@ -31,6 +32,7 @@ class PdfLetterReturController extends Controller
             'signature_warehouse' => $signature_warehouse,
             'signature_marketing' => $signature_marketing,
             'signature_scm' => $signature_scm,
+            'information_letter_retur' => $information_letter_retur,
         ];
         $pdf = Pdf::loadView('letter_retur.pdf.letter_retur', $data);
 

@@ -131,13 +131,15 @@ return new class extends Migration
             $table->string('information')->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Cancel'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Finish', 'Cancel'])->default('Created');
             $table->string('warehouse_name')->nullable();
             $table->timestamp('warehouse_date')->nullable();
             $table->string('marketing_name')->nullable();
             $table->timestamp('marketing_date')->nullable();
             $table->string('scm_name')->nullable();
             $table->timestamp('scm_date')->nullable();
+            $table->string('admin_finish_name')->nullable();
+            $table->timestamp('admin_finish_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });

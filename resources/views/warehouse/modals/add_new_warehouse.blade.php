@@ -18,7 +18,7 @@
                         <div class="col-12">
                             <label>Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Description" id="add_description"
-                                value="{{ old('description') }}" name="description" style="height: 100px" required></textarea>
+                                value="{{ old('description') }}" name="description" style="height: 100px"></textarea>
                             <label for="floatingTextarea2"></label>
                         </div>
                         <div class="col-12 mb-3">

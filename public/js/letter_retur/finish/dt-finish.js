@@ -75,13 +75,13 @@ listDataFinishLetterRetur.bootstrapTable({
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Approval-SCM") {
-                    buttonHtml = `<button class="badge bg-success" style="border:none">${value}</button>`;
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
                 }
-                if (value === "Reject") {
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`;
+                if (value === "Finish") {
+                    buttonHtml = `<button class="badge bg-success" style="border:none;">${value}</button>`;
                 }
                 if (value === "Closed") {
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`;

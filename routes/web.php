@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
     Route::put('/letter-retur-approved-scm/{uid}', [LetterReturControllers::class, 'approvedSCM']);
+    Route::put('/letter-retur-finish/{uid}', [LetterReturControllers::class, 'approvedFinish']);
     Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
     Route::get('/datatables/letter-retur-finish', [LetterReturControllers::class, 'datatablesFinish']);
     Route::get('/letter-retur-finish', [LetterReturControllers::class, 'Finish']);
