@@ -11,7 +11,7 @@
                     <div class="form-floating mb-3">
                         <div class="col-12 mb-3">
                             <label>Name</label>
-                            <input type="text" class="form-control @error('description') is-invalid @enderror"
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
                                 id="add_name" placeholder="Name user" name="name"
                                 value="{{ old('name') }}" maxlength="255" required>
 
@@ -54,7 +54,18 @@
 
                         </div>
                         <div class="col-12 mb-3">
-                            <label>Foto Tanda Tangan</label>
+                            <label>Permission </label>
+                            <select name="permission_id" class="form-control selectpicker @error('name') {{ session('validatorError') === 'add' ? 'is-invalid' : ''}} 
+                                @enderror" data-live-search="true" required>
+                                <option disabled selected>Select Permission 1</option>
+                                @foreach ($permissions as $item)
+                                    <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>Signature</label>
                             <img class="img-preview img-fluid mb-3 col-sm-5">
                             <input type="file" class="form-control @error('img') is-invalid @enderror"
                                 id="add_img" placeholder="img" name="img" required>

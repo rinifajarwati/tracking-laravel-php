@@ -15,47 +15,43 @@ class PermissionSeeder extends Seeder
     {
         //
         Permission::create([
-            'name'=>'developer',
-            'description'=>'Access to all pages'
+            'name' => 'developer',
+            'description' => 'Access to all pages'
         ]);
 
         Permission::create([
-            'name'=>'sales',
-            'description'=>'Access to all pages'
+            'name' => 'sales',
+            'description' => 'Access to all pages'
         ]);
 
         Permission::create([
-            'name'=>'warehouse',
-            'description'=>'Access to all pages'
+            'name' => 'warehouse',
+            'description' => 'Access to all pages'
         ]);
 
         Permission::create([
-            'name'=>'logistics',
-            'description'=>'Access to all pages'
+            'name' => 'logistics',
+            'description' => 'Access to all pages'
         ]);
 
         Permission::create([
-            'name'=>'finance',
-            'description'=>'Access to all pages'
+            'name' => 'finance',
+            'description' => 'Access to all pages'
         ]);
 
         Permission::create([
-            'name'=>'technician',
-            'description'=>'Access to minimal pages'
+            'name' => 'technician',
+            'description' => 'Access to minimal pages'
         ]);
 
         Permission::create([
-            'name'=>'scm',
-            'description'=>'Access to minimal pages'
+            'name' => 'scm',
+            'description' => 'Access to minimal pages'
+        ]);
+
+        Permission::create([
+            'name' => 'superadmin',
+            'description' => 'Access to minimal pages'
         ]);
     }
 }
-
-
-
-
-
-
-
-
-
