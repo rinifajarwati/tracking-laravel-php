@@ -29,7 +29,7 @@
                 <div class="nav-link-icon">
                     <i class="fa-solid fa-file-pdf"></i>
                 </div>
-                RMA
+                Surat Perintah Kerja
             </a>
         @endif
 

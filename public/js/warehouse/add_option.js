@@ -12,13 +12,13 @@ function addOptions1() {
         <td>
             <label>Weight</label>
             <input type="number" class="form-control @error('data[0][weight]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror" 
-            id="add_weight" placeholder="Weight" name="data[${index}][weight]"
+            id="add_weight" placeholder="Weight" name="data[${index}][weight]" step="0.01"
             maxlenght="255" required>
         </td>
         <td>
             <label>Koli</label>
             <input type="number" class="form-control @error('data[0][koli]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror" 
-            id="add_koli" placeholder="Koli" name="data[${index}][koli]"
+            id="add_koli" placeholder="Koli" name="data[${index}][koli]" step="0.01"
             maxlenght="255" required>
         </td>
         <td>

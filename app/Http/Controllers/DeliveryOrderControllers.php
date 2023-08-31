@@ -50,19 +50,16 @@ class DeliveryOrderControllers extends Controller
                 'no_sj' => request('no_sj'),
                 'description' => request('description'),
                 'file' => request('file'),
-                'img' => request('img'),
+                'no_resi' => request('no_resi'),
+                'jasa_ekspedisi' => request('jasa_ekspedisi'),
                 'created_date' => Carbon::now(),
                 'status' => 'Created',
             ];
+            // dd($payload);
             $file =  request()->file('file');
             $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
             Storage::disk('public_uploads_delivery_order')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
-
-            $img = request()->file('img');
-            $fileImg = Str::random(40) . '.' .$img->getClientOriginalExtension();
-            Storage::disk('public_uploads_img_resi')->put($fileImg, file_get_contents($img));
-            $payload['img'] = $fileImg;
 
             DeliveryOrder::create($payload);
             return back()->with(['alertSuccess' => 'Successfully create file!']);
@@ -78,7 +75,7 @@ class DeliveryOrderControllers extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeliveryOrder $devliveryOrder)
+    public function show(DeliveryOrder $deliveryOrder)
     {
         //
     }
@@ -86,7 +83,7 @@ class DeliveryOrderControllers extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeliveryOrder $devliveryOrder)
+    public function edit(DeliveryOrder $deliveryOrder)
     {
         //
     }
@@ -94,23 +91,39 @@ class DeliveryOrderControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DeliveryOrder $devliveryOrder)
+    public function update(DeliveryOrder $deliveryOrder)
     {
         //
+        try {
+            if (request()->hasFile('img')) {
+                $img = request()->file('img');
+                $fileImg = Str::random(40) . '.' . $img->getClientOriginalExtension();
+                Storage::disk('public_uploads_img_resi')->put($fileImg, file_get_contents($img));
+                $deliveryOrder['img'] = $fileImg;
+            }
+            $deliveryOrder->update(request()->except('img'));
+
+            return redirect('/delivery-order')->with(['alertSuccess' => 'Successfully updated delivery order!']);
+        } catch (Throwable $th) {
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/delivery-order')->with(['alertError' => 'Location already delivery order!']);
+            }
+            return redirect('/delivery-order')->with(['alertError' => 'Failed to updated delivery order!']);
+        };
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryOrder $devliveryOrder)
+    public function destroy(DeliveryOrder $deliveryOrder)
     {
         //
     }
 
     public function datatables()
     {
-
-        return DeliveryOrder::all();
+        $notFinished = DeliveryOrder::whereNotIn('status', ['Approval-Customer'])->get();
+        return $notFinished;
     }
 
     public function approvedSales(string $uid)
@@ -133,7 +146,8 @@ class DeliveryOrderControllers extends Controller
     //Approved Qc
     public function datatablesQc()
     {
-        return DeliveryOrder::all();
+        $notFinished = DeliveryOrder::whereNotIn('status', ['Approval-Customer'])->get();
+        return $notFinished;
     }
 
     public function approvedQc(string $uid)
@@ -155,7 +169,8 @@ class DeliveryOrderControllers extends Controller
     //Approved Qc
     public function datatablesLogistics()
     {
-        return DeliveryOrder::all();
+        $notFinished = DeliveryOrder::whereNotIn('status', ['Approval-Customer'])->get();
+        return $notFinished;
     }
 
     public function approvedLogistics(string $uid)
@@ -188,6 +203,24 @@ class DeliveryOrderControllers extends Controller
         }
     }
 
+
+    //finish
+
+    public function datatablesFinish()
+    {
+
+        $finish = DeliveryOrder::where('status', 'Approval-Customer')->get();
+        return $finish;
+    }
+
+    public function Finish()
+    {
+
+        $data = [
+            "title" => "Finish Delivery Order | IMI Tracking",
+        ];
+        return view('delivery_order.finish', $data);
+    }
     //pdf Delivery Order
     public function showPdf(DeliveryOrder $deliveryOrder)
     {
@@ -196,7 +229,7 @@ class DeliveryOrderControllers extends Controller
         $fileNameQc = $deliveryOrder->QcName?->img ?: "N/A";
         $fileNameLogistics = $deliveryOrder->LogisticsName?->img ?: "N/A";
         $fileNameLogisticsSecurity = $deliveryOrder->SecurityName?->img ?: "N/A";
-        $fileNameLogisticsCustomer =$deliveryOrder->CustomerName?->img ?: "N/A";
+        $fileNameLogisticsCustomer = $deliveryOrder->CustomerName?->img ?: "N/A";
 
         $signature_sales = 'assetsgambar/file/' . $fileNameSales;
         $signature_sales_coor = 'assetsgambar/file/' . $fileNameSalesCoor;

@@ -35,10 +35,16 @@
                                 id="add_file" placeholder="file" name="file" accept="application/pdf" required>
                         </div>
                         <div class="col-12 mb-3">
-                            <label>Image Number Resi</label>
-                            <img class="img-preview img-fluid mb-3 col-sm-5">
-                            <input type="file" class="form-control @error('img') is-invalid @enderror"
-                                id="add_img" placeholder="Number Resi" name="img" required>
+                            <label>No Resi</label>
+                            <input type="text" class="form-control @error('no_resi') is-invalid @enderror"
+                                id="add_no_resi" placeholder="No Resi" name="no_resi"
+                                value="{{ old('no_resi') }}" maxlength="255">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>Jasa Ekspedisi</label>
+                            <input type="text" class="form-control @error('jasa_ekspedisi') is-invalid @enderror"
+                                id="add_jasa_ekspedisi" placeholder="Jasa Ekspedisi" name="jasa_ekspedisi"
+                                value="{{ old('jasa_ekspedisi') }}" maxlength="255">
                         </div>
                     </div>
                 </div>

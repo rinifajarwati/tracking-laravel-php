@@ -63,7 +63,7 @@ return new class extends Migration
             $table->string('uid')->unique();
             $table->string('no_so');
             $table->string('file');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('sales_name');
             $table->string('user_uid');
             $table->timestamp('created_date');
@@ -78,7 +78,8 @@ return new class extends Migration
             $table->timestamp('logistics_date')->nullable();
             $table->string('ppic_finish_name')->nullable();
             $table->timestamp('ppic_finish_date')->nullable();
-
+            $table->double('total_weight')->nullable();
+            $table->double('total_koli')->nullable();
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
@@ -101,17 +102,22 @@ return new class extends Migration
             $table->id();
             $table->string('uid');
             $table->string('no_spk');
+            $table->string('no_sn');
             $table->string('file');
-            $table->string('description');
-            $table->string('purchasing')->nullable();
+            $table->string('description')->nullable();
+            $table->string('name_teknisi');
+            $table->string('kerusakan')->nullable();
+            $table->string('perbaikkan')->nullable();
             $table->enum('warranty', ['Garansi', 'Non-Garansi'])->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Reject'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Technician', 'Approval-Qc', 'Cancel', 'Finish'])->default('Created');
             $table->string('technician_name')->nullable();
             $table->timestamp('technician_date')->nullable();
             $table->string('qc_name')->nullable();
             $table->timestamp('qc_date')->nullable();
+            $table->string('admintech_finish_name')->nullable();
+            $table->timestamp('admintech_finish_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
@@ -121,7 +127,8 @@ return new class extends Migration
             $table->string('uid');
             $table->string('no_sj');
             $table->string('file');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->string('information')->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Cancel'])->default('Created');
@@ -141,8 +148,10 @@ return new class extends Migration
             $table->string('no_so');
             $table->string('no_sj');
             $table->string('file');
+            $table->string('no_resi')->nullable();
+            $table->string('jasa_ekspedisi')->nullable();
             $table->string('img')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
             $table->enum('status', ['Created', 'Approval-Coor', 'Approval-Qc', 'Approval-Logistics', 'Approval-Customer'])->default('Created');

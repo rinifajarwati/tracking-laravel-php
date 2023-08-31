@@ -28,7 +28,8 @@ class PdfWarehouseController extends Controller
         $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
 
         $description = $warehouse->description;
-        $delivery_notes = $warehouse->delivery_notes;
+        $total_weight = $warehouse->total_weight;
+        $total_koli = $warehouse->total_koli;
         $warehouseUid = $warehouse->uid;
         $warehouseSN = WarehouseSn::where("warehouse_uid", $warehouseUid)->get();
         $data = [
@@ -46,7 +47,8 @@ class PdfWarehouseController extends Controller
             'signature_logistics' => $signature_logistics,
 
             'description_warehouse' => $description,
-            'delivery_notes_warehouse' => $delivery_notes,
+            'total_weight_warehouse' => $total_weight,
+            'total_koli_warehouse' => $total_koli,
             'warehouseSN' => $warehouseSN,
         ];
         $pdf = Pdf::loadView('warehouse.pdf.so_warehouse', $data);

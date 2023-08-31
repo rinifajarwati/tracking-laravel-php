@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Throwable;
-use App\Models\Rma;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\Rma;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,10 @@ class RmaControllers extends Controller
     public function index()
     {
         //
+        $getUser = User::where('division_uid', 'technician')->where('position_uid', 'staff')->get()->toArray();
         $data = [
-            "title" => "RMA | IMI Tracking",
+            "title" => "Surat Perintah Kerja | IMI Tracking",
+            "getUser" => $getUser,
         ];
         return view('rma.index', $data);
     }
@@ -46,7 +49,11 @@ class RmaControllers extends Controller
                 'uid' => $uid,
                 'user_uid' => auth()->user()->uid,
                 'no_spk' => request('no_spk'),
+                'no_sn' => request('no_sn'),
                 'description' => request('description'),
+                'kerusakan' => request('kerusakan'),
+                'perbaikkan' => request('perbaikkan'),
+                'name_teknisi' => request('name_teknisi'),
                 'file' => request('file'),
                 'warranty' => request('warranty'),
                 'created_date' => Carbon::now(),
@@ -57,22 +64,30 @@ class RmaControllers extends Controller
             Storage::disk('public_uploads_rma')->put($fileName, file_get_contents($file));
             $payload['file'] = $fileName;
             Rma::create($payload);
-            return back()->with(['alertSuccess' => 'Successfully create RMA!']);
+            return back()->with(['alertSuccess' => 'Successfully create Surat Perintah Kerja!']);
         } catch (Throwable $th) {
             dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
-                return back()->with(['alertError' => 'RMA already Registered!']);
+                return back()->with(['alertError' => 'Surat Perintah Kerja already Registered!']);
             }
-            return back()->with(['alertError' => 'Failed to add new RMA!']);
+            return back()->with(['alertError' => 'Failed to add new Surat Perintah Kerja!']);
         };
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rma $rma)
+    public function show(string $rma)
     {
+
         //
+        $rma = Rma::where("uid", $rma)->get()->toArray();
+        $data = [
+            "title" =>  "Details SN | IMI-Tracking",
+            "rma" => $rma,
+        ];
+        // dd($rma);
+        return view('rma.show', $data);
     }
 
     /**
@@ -86,9 +101,18 @@ class RmaControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rma $rma)
+    public function update(Rma $rma)
     {
         //
+        try {
+            $rma->update(request()->all());
+            return redirect('/rma')->with(['alertSuccess' => 'Successfully updated Surat Perintah Kerja!']);
+        } catch (Throwable $th) {
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/rma')->with(['alertError' => 'Surat Perintah Kerja data already registered!']);
+            }
+            return redirect('/rma')->with(['alertError' => 'Failed to updated Surat Perintah Kerja!']);
+        };
     }
 
     /**
@@ -101,14 +125,16 @@ class RmaControllers extends Controller
     }
     public function datatables()
     {
-        $user = auth()->user()->uid;
-        return Rma::where('user_uid', $user)->get()->toArray();
+        $notFinished = rma::whereNotIn('status', ['Finish'])->get();
+        return $notFinished;
     }
 
     //approved technician
     public function datatablesTechnician()
     {
-        return rma::all();
+        $auth = auth()->user()->uid;
+        $data = rma::where('name_teknisi', $auth)->where('status', '!=', 'Finish')->get()->toArray();
+        return $data;
     }
 
     public function approvedTechnician(string $uid)
@@ -121,7 +147,7 @@ class RmaControllers extends Controller
             ];
 
             Rma::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file RMA']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file Surat Perintah Kerja']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
@@ -130,7 +156,8 @@ class RmaControllers extends Controller
     //Approved Qc
     public function datatablesQc()
     {
-        return Rma::all();
+        $notFinished = rma::whereNotIn('status', ['Finish'])->get();
+        return $notFinished;
     }
 
     public function approvedQc(string $uid)
@@ -143,10 +170,43 @@ class RmaControllers extends Controller
             ];
 
             Rma::where('uid', $uid)->update($input);
-            return back()->with(['alertSuccess' => 'Successfully For Approved file RMA']);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file Surat Perintah Kerja']);
         } catch (Throwable $e) {
             return back()->with(['alertError' => 'Error' . $e->getMessage()]);
         }
+    }
+
+
+    public function approvedFinish(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Finish',
+                'admintech_finish_name' => auth()->user()->uid,
+                'admintech_finish_date' => Carbon::now(),
+            ];
+
+            Rma::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved file Surat Perintah Kerja']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+
+    public function datatablesFinish()
+    {
+
+        $finish = Rma::where('status', 'Finish')->get();
+        return $finish;
+    }
+
+    public function Finish()
+    {
+
+        $data = [
+            "title" => "Finish Surat Perintah Kerja | IMI Tracking",
+        ];
+        return view('rma.finish', $data);
     }
 
     //pdf rma
@@ -170,5 +230,4 @@ class RmaControllers extends Controller
         ];
         return view('rma.pdf.rma', $data);
     }
-
 }

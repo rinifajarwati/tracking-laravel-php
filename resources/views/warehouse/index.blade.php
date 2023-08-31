@@ -74,6 +74,7 @@
             </div>
         </div>
     </main>
+ 
     @include('warehouse.modals.add_new_warehouse')
     @include('warehouse.modals.approval_sales_coor')
     @include('warehouse.modals.approval_ppic_warehouse')
@@ -82,6 +83,7 @@
     @include('warehouse.modals.approval_ppic_finish')
     @include('warehouse.modals.cancel_warehouse')
     @include('warehouse.modals.edit_warehouse')
+
 
     <script src="/js/warehouse/_init.js"></script>
     <script src="/js/warehouse/pdf.js"></script>

@@ -21,6 +21,16 @@
                         <td>{{ $description_rma }}</td>
                     </tr>
                     <tr>
+                        <td class="col-1">Kerusakan</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $kerusakan_rma }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Perbaikkan</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $perbaikkan_rma }}</td>
+                    </tr>
+                    <tr>
                         <td class="col-1">Status Garansi</td>
                         <td class="col-2">:</td>
                         <td>{{ $warranty }}</td>

@@ -20,3 +20,12 @@ const approvedDoSecurityListModal = $("#approved_do_security_item_modal");
 //logistics-security
 const approvedDoCustomerForm = $("#approved_do_customer_item_form");
 const approvedDoCustomerListModal = $("#approved_do_customer_item_modal");
+
+
+//edit
+const editDoForm = $("#edit_do_item_form");
+const editDoListModal = $("#edit_do_item_modal");
+const editDoModalSpinner = $("#edit_do_modal_spinner");
+
+//finish
+const listDataDoFinish = $("#delivery_order_finish_list_data_table");

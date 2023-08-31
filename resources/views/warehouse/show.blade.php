@@ -73,6 +73,16 @@
                                         <td class="col-1">:</td>
                                         <td >{{ $data['description'] }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Total Weight</td>
+                                        <td class ="col-1">:</td>
+                                        <td>{{ $data['total_weight'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Koli</td>
+                                        <td class ="col-1">:</td>
+                                        <td>{{ $data['total_koli'] }}</td>
+                                    </tr>
                                 </table>
                             @endforeach
                         </div>
@@ -87,6 +97,7 @@
                                         <th class="col-2">GDG</th>
                                         <th class="col-2">Kubikasi</th>
                                         <th class="col-2">Name Gudang</th>
+                                        <th class="col-2">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,6 +109,12 @@
                                             <td class="col-2">{{ $item['gdg'] }}</td>
                                             <td class="col-2">{{ $item['kubikasi'] }}</td>
                                             <td class="col-2">{{ $item->user->name }}</td>
+                                            <td class="col-6">
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <button type="button"class="btn  btn-outline-primary"
+                                                        onclick="deleteSerialModal('{{ $item['uid'] }}','{{ $item['serial_number'] }}')">Delete</button>
+                                                </div>
+                                            </td>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -107,4 +124,8 @@
             </div>
         </div>
     </main>
+    
+    @include('warehouse.modals.delete_warehouse')
+    <script src="/js/warehouse/_init.js"></script>
+    <script src="/js/warehouse/delete.js"></script>
 @endsection

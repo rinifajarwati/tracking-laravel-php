@@ -22,6 +22,16 @@
                         <td class="col-2">:</td>
                         <td>{{ $description_warehouse }}</td>
                     </tr>
+                    <tr>
+                        <td class="col-1">Weight</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $total_weight_warehouse }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Koli</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $total_koli_warehouse }}</td>
+                    </tr>
                 </table>
             </div>
             <div class="wrapper receipt-details">
@@ -33,7 +43,7 @@
                             <th class="col-3">Koli</th>
                             <th class="col-4">GDG</th>
                             <th class="col-5">Kubikasi</th>
-                            <th class="col-5">Name</th>
+                            <th class="col-6">Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +54,7 @@
                                 <td class="col-3">{{ $item['koli'] }}</td>
                                 <td class="col-4">{{ $item['gdg'] }}</td>
                                 <td class="col-5">{{ $item['kubikasi'] }}</td>
-                                <td class="col-5">{{$item->user->name  }}</td>
+                                <td class="col-5">{{ $item->user->name }}</td>
                             </tr>
                         @endforeach
                     </tbody>

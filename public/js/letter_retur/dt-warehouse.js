@@ -48,6 +48,11 @@ listDataLetterReturWarehouse.bootstrapTable({
             sortable: true,
         },
         {
+            title: "Information",
+            field: "information",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,

@@ -38,7 +38,7 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "No SOa",
+            title: "No SO",
             field: "no_so",
             sortable: true,
         },
@@ -50,6 +50,16 @@ listDataDo.bootstrapTable({
         {
             title: "Description",
             field: "description",
+            sortable: true,
+        },
+        {
+            title: "Jasa Ekspedisi",
+            field: "jasa_ekspedisi",
+            sortable: true,
+        },
+        {
+            title: "No Resi",
+            field: "no_resi",
             sortable: true,
         },
         {
@@ -66,15 +76,15 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "No Resi",
-            field: "uid",
+            title: "Delivery Photo",
+            field: "img",
             sortable: true,
             formatter: (value, row) => {
                 const urlFile = "/assets/img/no-resi/" + row.img;
                 return (
                     '<a href ="' +
                     urlFile +
-                    '" class="badge bg-info text-decoration-none" target="_blank">Lihat Foto</a>'
+                    '" class="badge bg-info text-decoration-none" target="_blank">Lihat File</a>'
                 );
             },
         },
@@ -158,7 +168,7 @@ listDataDo.bootstrapTable({
             },
         },
         {
-            title: "Logistics Name",
+            title: "Logistics Kurir Name",
             field: "logistics_name",
             formatter(value, row) {
                 return row.logistics_name ? row.logistics_name.name : null;
@@ -166,7 +176,7 @@ listDataDo.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Logistics Date",
+            title: "Logistics Kurir Date",
             field: "logistics_date",
             sortable: true,
             formatter: (value, row) => {

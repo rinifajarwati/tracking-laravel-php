@@ -22,7 +22,10 @@ listDataDoLogistics.bootstrapTable({
             field: "uid",
             sortable: true,
             formatter: (value, row) => {
-                const fields = {};
+                const fields = {
+                    "#edit_no_resi": row.no_resi,
+                    "#edit_jasa_ekspedisi" : row.jasa_ekspedisi
+                };
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
@@ -33,10 +36,17 @@ listDataDoLogistics.bootstrapTable({
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
+
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_do_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
                 }
                 else if(row.status === "Approval-Logistics"){
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnCustomer('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
+                    </button>`;
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_do_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
                     </button>`;
                 }
                 else {
@@ -60,11 +70,34 @@ listDataDoLogistics.bootstrapTable({
             sortable: true,
         },
         {
+            title: "Jasa Ekspedisi",
+            field: "jasa_ekspedisi",
+            sortable: true,
+        },
+        {
+            title: "No Resi",
+            field: "no_resi",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,
             formatter: (value, row) => {
                 const urlFile = "/assets/pdf/delivery-order/" + row.file;
+                return (
+                    '<a href ="' +
+                    urlFile +
+                    '" class="badge bg-info text-decoration-none" target="_blank">Lihat File</a>'
+                );
+            },
+        },
+        {
+            title: "Delivery Photo",
+            field: "img",
+            sortable: true,
+            formatter: (value, row) => {
+                const urlFile = "/assets/img/no-resi/" + row.img;
                 return (
                     '<a href ="' +
                     urlFile +
@@ -152,7 +185,7 @@ listDataDoLogistics.bootstrapTable({
             },
         },
         {
-            title: "Logistics Name",
+            title: "Logistics Kurir Name",
             field: "logistics_name",
             formatter(value, row) {
                 return row.logistics_name ? row.logistics_name.name : null;
@@ -160,7 +193,7 @@ listDataDoLogistics.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Logistics Date",
+            title: "Logistics kurir Date",
             field: "logistics_date",
             sortable: true,
             formatter: (value, row) => {

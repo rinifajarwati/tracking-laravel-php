@@ -86,9 +86,18 @@ class LetterReturControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LetterRetur $letterRetur)
+    public function update(LetterRetur $letterRetur)
     {
         //
+        try {
+            $letterRetur->update(request()->all());
+            return redirect('/letter-retur')->with(['alertSuccess' => 'Successfully updated information data!']);
+        } catch (Throwable $th) {
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/letter-retur')->with(['alertError' => 'Information data already registered!']);
+            }
+            return redirect('/letter-retur')->with(['alertError' => 'Failed to updated information !']);
+        };
     }
 
     /**

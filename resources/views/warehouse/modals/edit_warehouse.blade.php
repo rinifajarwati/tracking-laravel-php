@@ -26,14 +26,14 @@
                                     <label>Weight</label>
                                     <input type="number"
                                         class="form-control @error('data[0][weight]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
-                                        value="{{ old('wight') }}" id="edit_weight" placeholder="Weight" name="data[0][weight]" maxlength="255"
+                                        value="{{ old('wight') }}" id="edit_weight" placeholder="Weight" name="data[0][weight]" step="0.01" maxlength="255"
                                         required>
                                 </td>
                                 <td>
                                     <label>Koli</label>
                                     <input type="number"
                                         class="form-control @error('data[0][koli]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
-                                        value="{{ old('koli') }}" id="edit_koli" placeholder="Koli" name="data[0][koli]" maxlength="255" required>
+                                        value="{{ old('koli') }}" id="edit_koli" placeholder="Koli" name="data[0][koli]" step="0.01" maxlength="255" required>
                                 </td>
                                 <td>
                                     <label>GDG</label>

@@ -79,9 +79,11 @@
     @include('delivery_order.modals.approval_qc_do')
     @include('delivery_order.modals.approval_logistics_do')
     @include('delivery_order.modals.approval_customer_do')
+    @include('delivery_order.modals.edit_do')
 
     <script src="/js/delivery_order/_init.js"></script>
     <script src="/js/delivery_order/pdf.js"></script>
+    <script src="/js/functions/spinner.js"></script>
     <script>
         const auth_position = {!! json_encode($auth_pos) !!}
     </script>
@@ -100,6 +102,7 @@
     @elseif(auth()->user()->division_uid === 'logistics'  && auth()->user()->position_uid === 'staff')
         <script src="/js/delivery_order/dt-logistics.js"></script>
         <script src="/js/delivery_order/approval-logistics.js"></script>
+        <script src="/js/delivery_order/edit.js"></script>
         <script src="/js/delivery_order/approval-customer.js"></script>
     @endif
 @endsection
