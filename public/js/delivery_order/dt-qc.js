@@ -53,11 +53,34 @@ listDataDoQc.bootstrapTable({
             sortable: true,
         },
         {
+            title: "Jasa Ekspedisi",
+            field: "jasa_ekspedisi",
+            sortable: true,
+        },
+        {
+            title: "No Resi",
+            field: "no_resi",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,
             formatter: (value, row) => {
                 const urlFile = "/assets/pdf/delivery-order/" + row.file;
+                return (
+                    '<a href ="' +
+                    urlFile +
+                    '" class="badge bg-info text-decoration-none" target="_blank">Lihat File</a>'
+                );
+            },
+        },
+        {
+            title: "Delivery Photo",
+            field: "img",
+            sortable: true,
+            formatter: (value, row) => {
+                const urlFile = "/assets/img/no-resi/" + row.img;
                 return (
                     '<a href ="' +
                     urlFile +
@@ -145,7 +168,7 @@ listDataDoQc.bootstrapTable({
             },
         },
         {
-            title: "Logistics Name",
+            title: "Logistics Kurir Name",
             field: "logistics_name",
             formatter(value, row) {
                 return row.logistics_name ? row.logistics_name.name : null;
@@ -153,7 +176,7 @@ listDataDoQc.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Logistics Date",
+            title: "Logistics Kurir Date",
             field: "logistics_date",
             sortable: true,
             formatter: (value, row) => {

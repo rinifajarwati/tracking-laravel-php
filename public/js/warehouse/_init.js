@@ -11,11 +11,16 @@ const addWarehouseDataItemGdg = $("#add_gdg");
 const addWarehouseDataItemKubikasi = $("#add_kubikasi");
 const addWarehoseDataOptionsTbody = $("#add_warehouse_tbody");
 
-// Edit Role components
+// Edit SN
 const editWarehouseForm = $("#edit_warehouse_item_form");
 const editWarehouseListModal = $("#edit_warehouse_item_modal");
 const editWarehouseModalSpinner = $("#edit_overtime_application_modal_spinner");
 const editWarehouseNameInput = $("#edit_overtime_application_item_name");
+
+// Delete SN
+const deleteSNForm = $("#delete_serial_number_form");
+const deleteSNListModal = $("#delete_serial_number_item_modal");
+const deleteSNConfirmItem = $("#delete_serial_number_confirm_item");
 
 const listDataWarehouseSales = $("#warehouse_list_data_table");
 // Approved sales coordinator

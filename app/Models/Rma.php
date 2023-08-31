@@ -10,11 +10,12 @@ class Rma extends Model
     use HasFactory;
     protected $guarded = ["id"];
     
-    protected $with = ['user', 'SName', 'TName', 'QName'];
+    protected $with = ['user', 'SName', 'TName', 'QName', 'name_teknisi'];
     protected $casts = [
         'created_date' => 'datetime',
         'technician_date' => 'datetime',
         'qc_date' => 'datetime',
+        'admintech_finish_date',
     ];
     public $timestamps = false;
 
@@ -38,5 +39,10 @@ class Rma extends Model
 
     public function QName(){
         return $this->belongsTo(User::class, 'qc_name', 'uid');
+    }
+
+    public function name_teknisi()
+    {
+        return $this->belongsTo(User::class, 'name_teknisi', 'uid');
     }
 }

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">approved data RMA</h5>
+                <h5 class="modal-title">approved data Surat Perintah Kerja</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
             </div>
             <form action="/rma-approved-qc/${uid}" method="post" autocomplete="off"
@@ -10,7 +10,7 @@
                 @method('put')
                 @csrf
                 <div class="modal-body">
-                    Are you sure you want to approved RMA? <strong class="text-indigo"
+                    Are you sure you want to approved Surat Perintah Kerja? <strong class="text-indigo"
                         id="approved_qc_confirm_item"></strong>
                 </div>
                 <div class="modal-footer">

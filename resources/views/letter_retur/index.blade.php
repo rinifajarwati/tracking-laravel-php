@@ -81,9 +81,11 @@
     @include('letter_retur.modals.approval_warehouse_letter_retur')
     @include('letter_retur.modals.approval_marketing_letter_retur')
     @include('letter_retur.modals.approval_ppic_marketing_letter_retur')
+    @include('letter_retur.modals.edit_letter_retur')
 
     <script src="/js/letter_retur/_init.js"></script>
     <script src="/js/letter_retur/pdf.js"></script>
+    <script src="/js/functions/spinner.js"></script>
 
     <script>
         const auth_position = {!! json_encode($auth_position, JSON_HEX_TAG) !!}
@@ -99,6 +101,7 @@
     @elseif(auth()->user()->division_uid === 'sales')
         <script src="/js/letter_retur/dt-marketing.js"></script>
         <script src="/js/letter_retur/approval-marketing.js"></script>
+        <script src="/js/letter_retur/edit.js"></script>
     @elseif(auth()->user()->division_uid === 'scm')
         <script src="/js/letter_retur/dt-marketing.js"></script>
         <script src="/js/letter_retur/approval-ppic-marketing.js"></script>

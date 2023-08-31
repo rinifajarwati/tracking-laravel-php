@@ -22,15 +22,25 @@ listDataRmaTechnician.bootstrapTable({
             field: "uid",
             sortable: true,
             formatter: (value, row) => {
-                const fields = {};
+                const fields = {
+                    "#edit_kerusakan": row.kerusakan,
+                    "#edit_perbaikkan" : row.perbaikkan
+              
+                };
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
                 buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="pdfBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Pdf"> 
                 <i class="fa-solid fa-file-pdf"></i>
                 </button>`;
+                buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="DetailsBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details"> 
+                <i class="fas fa-book-medical fa-fw"></i>
+                </button>`
                 if (row.status === "Created") {
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
+                    </button>`;
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_rma_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
                     </button>`;
                 } else {
                 }
@@ -43,8 +53,8 @@ listDataRmaTechnician.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Description",
-            field: "description",
+            title: "Serial Number",
+            field: "no_sn",
             sortable: true,
         },
         {
@@ -83,8 +93,8 @@ listDataRmaTechnician.bootstrapTable({
                 if (value === "Cancel") {
                     buttonHtml = `<button class="badge bg-warning" style="border:none">${value}</button>`;
                 }
-                if (value === "Reject") {
-                    buttonHtml = `<button class="badge bg-danger" style="border:none;">${value}</button>`;
+                if (value === "Finish") {
+                    buttonHtml = `<button class="badge  bg-success" style="border:none;">${value}</button>`;
                 }
                 if (value === "Closed") {
                     buttonHtml = `<button class="badge bg-black" style="border:none;">${value}</button>`;

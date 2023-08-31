@@ -9,7 +9,7 @@
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                RMA
+                                Surat Perintah Kerja
                             </h1>
                             <div class="page-header-subtitle">
                             </div>
@@ -24,7 +24,7 @@
                 <div class="card-header py-2">
                     <div class="row">
                         <div class="me-auto col-auto my-auto">
-                            List RMA
+                            List Surat Perintah Kerja
                         </div>
                         <div class="ms-auto col-auto">
                             <div class="dropdown no-caret">
@@ -79,15 +79,20 @@
     @include('rma.modals.add_new_rma')
     @include('rma.modals.approval_technician_rma')
     @include('rma.modals.approval_qc_rma')
+    @include('rma.modals.approval_finish')
+    @include('rma.modals.edit_rma')
 
     <script src="/js/rma/_init.js"></script>
     <script src="/js/rma/pdf.js"></script>
+    <script src="/js/rma/details.js"></script>
     <script src="/js/functions/spinner.js"></script>
 
     @if (auth()->user()->division_uid === 'technician' && auth()->user()->position_uid === 'admin')
         <script src="/js/rma/dt.js"></script>
+        <script src="/js/rma/finish/approval_finish.js"></script>
     @elseif(auth()->user()->division_uid === 'technician'  && auth()->user()->position_uid === 'staff')
         <script src="/js/rma/dt-technician.js"></script>
+        <script src="/js/rma/edit.js"></script>
         <script src="/js/rma/approval-technician.js"></script>
     @elseif(auth()->user()->division_uid === 'technician'  && auth()->user()->position_uid === 'qc')
         <script src="/js/rma/dt-qc.js"></script>

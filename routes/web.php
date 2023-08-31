@@ -95,9 +95,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/rma-approved-technician/{uid}', [RmaControllers::class, 'approvedTechnician']);
     Route::get('/datatables/rma-qc', [RmaControllers::class, 'datatablesQc']);
     Route::put('/rma-approved-qc/{uid}', [RmaControllers::class, 'approvedQc']);
+    Route::put('/rma-finish/{uid}', [RmaControllers::class, 'approvedFinish']);
     Route::get('/pdf-rma/{rma}', [RmaControllers::class, 'showPdf']);
 
     Route::get('/generate-pdf-rma/{rma}', [PdfRmaController::class, 'generatePDF']);
+    Route::get('/datatables/rma-finish', [RmaControllers::class, 'datatablesFinish']);
+    Route::get('/rma-finish', [RmaControllers::class, 'Finish']);
 
     //letter retur (surat retur)
     Route::resource('letter-retur', LetterReturControllers::class);
@@ -125,6 +128,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/do-logistics-approved/{uid}', [DeliveryOrderControllers::class, 'approvedLogistics']);
     Route::put('/do-logistics-customer-approved/{uid}', [DeliveryOrderControllers::class, 'approvedCustomer']);
     Route::get('/pdf-delivery-order/{deliveryOrder}', [DeliveryOrderControllers::class, 'showPdf']);
+    Route::get('/datatables/delivery-order-finish', [DeliveryOrderControllers::class, 'datatablesFinish']);
+    Route::get('/delivery-order-finish', [DeliveryOrderControllers::class, 'Finish']);
 
     Route::get('/generate-pdf-delivery-order/{deliveryOrder}', [PdfDeliveryOrderController::class, 'generatePDF']);
 

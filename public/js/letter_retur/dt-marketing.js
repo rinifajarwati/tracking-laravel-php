@@ -36,6 +36,10 @@ listDataLetterReturMarketing.bootstrapTable({
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
+
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_letter_retur_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
                 } else if (
                     row.status === "Approval-Marketing" &&
                     auth_division === "scm" &&
@@ -57,6 +61,11 @@ listDataLetterReturMarketing.bootstrapTable({
         {
             title: "Description",
             field: "description",
+            sortable: true,
+        },
+        {
+            title: "Information",
+            field: "information",
             sortable: true,
         },
         {

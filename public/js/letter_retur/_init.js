@@ -20,3 +20,8 @@ const approvedMarketingPpicListModal = $("#approved_marketing_ppic_item_modal");
 
 //finish
 const listDataFinishLetterRetur = $("#letter_retur_finish_list_data_table");
+
+//edit
+const editLetterReturForm = $("#edit_letter_retur_item_form");
+const editLetterReturListModal = $("#edit_letter_retur_item_modal");
+const editLetterReturModalSpinner = $("#edit_letter_retur_modal_spinner");

@@ -104,13 +104,8 @@ class WarehouseControllers extends Controller
      */
     public function update(Request $request, $uid)
     {
-        //
-        // dd($uid);
         $warehouse = Warehouse::where('uid', $uid)->first();
         $warehousesn = WarehouseSn::where('warehouse_uid', $warehouse->uid)->get()->toArray();
-        // dd($warehousesn);
-        // dump($payload);
-
         $datatWarehouse = request()->validate([
             'data.*.serial_number' => 'required',
             'data.*.weight' => 'required',
@@ -121,38 +116,72 @@ class WarehouseControllers extends Controller
 
         $warehouseUid = $datatWarehouse['warehouse_uid'] = $uid;
         $user = auth()->user()->uid;
-        // dd($datatWarehouse);    
-        // $warehouseUid = $payload['uid'];
-
-        DB::transaction(function () use ($datatWarehouse, $warehouseUid, $user) {
+        $totalWeight = 0;
+        $totalKoli = 0;
+        DB::transaction(function () use ($datatWarehouse, $warehouseUid, $user, &$totalWeight, &$totalKoli) {
             foreach ($datatWarehouse['data'] as $dataInput) {
                 $dataInput['uid'] = (new HelperController)->getUid();
                 $dataInput['warehouse_uid'] = $warehouseUid;
                 $dataInput['user_uid'] = $user;
-                // dump($dataInput);
                 WarehouseSn::create($dataInput);
-                // return redirect('/warehouse')->with(['alertSuccess' => 'Successfully']);
+                $totalWeight += (float)$dataInput['weight'];
+                $totalKoli += (float)$dataInput['koli'];
+                // dump($totalKoli);
             }
         });
+        $getWarehouse = Warehouse::where('uid', $uid)->first();
+        $update = [
+            'total_weight' => $getWarehouse->total_weight + $totalWeight,
+            'total_koli' => $getWarehouse->total_koli +  $totalKoli,
+        ];
+        // dd($update);
+        Warehouse::where('uid', $uid)->update($update);
         return redirect('/warehouse')->with(['alertSuccess' => 'Successfully']);
-        // dd("success");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Warehouse $warehouse)
+    public function destroy(Request $request, $uid)
     {
-        //
+        try {
+            $getWarehouseSn = WarehouseSn::where('uid', $uid)->first(); 
+            $warehouse = Warehouse::where('uid', $getWarehouseSn->warehouse_uid)->first();
+    
+            $getWarehouseSn->delete(); // Hapus data WarehouseSn
+    
+            $remainingWarehouseSn = WarehouseSn::where('warehouse_uid', $warehouse->uid)->get();
+    
+            $totalWeight = 0;
+            $totalKoli = 0;
+    
+            foreach ($remainingWarehouseSn as $dataInput) {
+                $totalWeight += (float)$dataInput['weight'];
+                $totalKoli += (float)$dataInput['koli'];
+            }
+    
+            $update = [
+                'total_weight' => $totalWeight,
+                'total_koli' => $totalKoli,
+            ];
+    
+            Warehouse::where('uid', $warehouse->uid)->update($update);
+    
+            return redirect()->back()->with(['alertSuccess' => 'Successfully deleted and updated totals']);
+    
+        } catch (Throwable $th) {
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect()->back()->with(['alertError' => 'Serial Number already registered!']);
+            }
+            return redirect()->back()->with(['alertError' => 'Failed to delete Serial Number!']);
+        }
     }
+    
 
     public function datatables()
     {
         $notFinished = Warehouse::whereNotIn('status', ['Finish'])->get();
         return $notFinished;
-        // return Warehouse::all();
-        // $user = auth()->user()->uid;
-        // return Warehouse::where('user_uid', $user)->get()->toArray();
     }
 
     public function datatablesSales()
@@ -161,7 +190,6 @@ class WarehouseControllers extends Controller
         $auth = auth()->user()->uid;
         $data = Warehouse::where('sales_name', $auth)->where('status', '!=', 'Finish')->get()->toArray();
         return $data;
- 
     }
 
     public function approvedSalesCoor(string $uid)
@@ -308,8 +336,9 @@ class WarehouseControllers extends Controller
         return view('warehouse.pdf.so_warehouse', $data);
     }
 
-    public function cancel(string $uid){
-        $payload =[
+    public function cancel(string $uid)
+    {
+        $payload = [
             'status' => 'Cancel'
         ];
         // dd($payload);

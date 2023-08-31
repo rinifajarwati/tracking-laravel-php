@@ -49,7 +49,7 @@ warehouseApproved.bootstrapTable({
             },
         },
         {
-            title: "No SOa",
+            title: "No SO",
             field: "no_so",
             sortable: true,
         },
