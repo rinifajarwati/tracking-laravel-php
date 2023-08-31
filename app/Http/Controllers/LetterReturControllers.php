@@ -110,14 +110,14 @@ class LetterReturControllers extends Controller
 
     public function datatables()
     {
-        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        $notFinished = LetterRetur::whereNotIn('status', ['Finish'])->get();
         return $notFinished;
     }
 
     //apporved warehouse
     public function datatablesWarehouse()
     {
-        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        $notFinished = LetterRetur::whereNotIn('status', ['Finish'])->get();
         return $notFinished;
     }
 
@@ -141,7 +141,7 @@ class LetterReturControllers extends Controller
     //marketing
     public function datatablesMarketing()
     {
-        $notFinished = LetterRetur::whereNotIn('status', ['Approval-SCM'])->get();
+        $notFinished = LetterRetur::whereNotIn('status', ['Finish'])->get();
         return $notFinished;
     }
 
@@ -177,16 +177,30 @@ class LetterReturControllers extends Controller
         }
     }
 
+    public function approvedFinish(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Finish',
+                'admin_finish_name' => auth()->user()->uid,
+                'admin_finish_date' => Carbon::now(),
+            ];
+
+            LetterRetur::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Surat Retur']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+
     public function datatablesFinish()
     {
-
-        $finish = LetterRetur::where('status', 'Approval-SCM')->get();
+        $finish = LetterRetur::where('status', 'Finish')->get();
         return $finish;
     }
 
     public function Finish()
     {
-
         $data = [
             "title" => "Finish Surat Retur | IMI Tracking",
         ];
@@ -204,7 +218,7 @@ class LetterReturControllers extends Controller
         $signature_warehouse = 'assetsgambar/file/' . $fileNameWarehouse;
         $signature_marketing = 'assetsgambar/file/' . $fileNameMarketing;
         $signature_marketing_ppic = 'assetsgambar/file/' . $fileNamePpicMarketing;
-        
+
         $data = [
             'sales_name' => $letterRetur->user?->name ?: "N/A",
             'warehouse_name' => $letterRetur->WName?->name ?: "N/A",

@@ -81,6 +81,7 @@
     @include('letter_retur.modals.approval_warehouse_letter_retur')
     @include('letter_retur.modals.approval_marketing_letter_retur')
     @include('letter_retur.modals.approval_ppic_marketing_letter_retur')
+    @include('letter_retur.modals.approval_finish_letter_retur')
     @include('letter_retur.modals.edit_letter_retur')
 
     <script src="/js/letter_retur/_init.js"></script>
@@ -95,6 +96,7 @@
     </script>
     @if (auth()->user()->division_uid === 'technician')
         <script src="/js/letter_retur/dt.js"></script>
+        <script src="/js/letter_retur/finish/approval-finish.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse')
         <script src="/js/letter_retur/dt-warehouse.js"></script>
         <script src="/js/letter_retur/approval-warehouse.js"></script>

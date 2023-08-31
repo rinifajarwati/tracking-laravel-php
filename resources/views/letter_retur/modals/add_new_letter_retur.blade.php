@@ -20,7 +20,7 @@
                             <label>Description</label>
                             <input type="text" class="form-control @error('description') is-invalid @enderror"
                                 id="add_description" placeholder=" Description" name="description"
-                                value="{{ old('description') }}" maxlength="255" required>
+                                value="{{ old('description') }}" maxlength="255">
 
                         </div>
                         <div class="col-12 mb-3">

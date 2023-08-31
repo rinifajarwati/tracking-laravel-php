@@ -9,12 +9,13 @@ class LetterRetur extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'WName', 'MName', 'SCMName'];
+    protected $with = ['user', 'WName', 'MName', 'SCMName', 'AFName'];
     protected $casts = [
         'created_date' => 'datetime',
         'warehouse_date' => 'datetime',
         'marketing_date' => 'datetime',
         'scm_date' => 'datetime',
+        'admin_finish_date' => 'datetime',
     ];
     public $timestamps = false;
 
@@ -37,5 +38,8 @@ class LetterRetur extends Model
     }
     public function SCMName(){
         return $this->belongsTo(User::class, 'scm_name', 'uid');
+    }
+    public function AFName(){
+        return $this->belongsTo(User::class, 'admin_finish_name', 'uid');
     }
 }

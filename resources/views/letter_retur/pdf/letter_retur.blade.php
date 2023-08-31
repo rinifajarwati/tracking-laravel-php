@@ -13,8 +13,15 @@
 <body>
     <main>
         <div class="container">
-
-            <!-- Receipt signature -->
+            <div class="wrapper patient-data">
+                <table class="table-patient-data">
+                    <tr>
+                        <td class="col-1">Information</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $information_letter_retur }}</td>
+                    </tr>
+                </table>
+            </div>
             <div class="wrapper">
 
                 <table class="table">
