@@ -22,21 +22,19 @@ class PdfDeliveryOrderController extends Controller
         $signature_logistics_coor = 'assetsgambar/file/' . $fileNameLogisticsCoor;
         $signature_qc = 'assetsgambar/file/' . $fileNameQc;
         $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
-        $signature_logistics_customer = 'assetsgambar/file/' . $fileNameLogisticsCustomer;
-
+        $customer_name = $deliveryOrder->customer_name;
         $data = [
             'sales_name' => $deliveryOrder->user?->name ?: "N/A",
             'logistics_coor' => $deliveryOrder->CoorLogistics?->name ?: "N/A",
             'qc_name' => $deliveryOrder->QcName?->name ?: "N/A",
             'logistics_name' => $deliveryOrder->LogisticsName?->name ?: "N/A",
             'logistics_security_name' => $deliveryOrder->SecurityName?->name ?: "N/A",
-            'logistics_customer_name' => $deliveryOrder->CustomerName?->name ?: "N/A",
+            'customer_name' => $customer_name,
 
             'signature_sales' => $signature_sales,
             'signature_logistics_coor' => $signature_logistics_coor,
             'signature_qc' => $signature_qc,
             'signature_logistics' => $signature_logistics,
-            'signature_logistics_customer' => $signature_logistics_customer,
         ];
         $pdf = Pdf::loadView('delivery_order.pdf.delivery_order', $data);
 
@@ -51,6 +49,7 @@ class PdfDeliveryOrderController extends Controller
             public_path('/assets/pdf/delivery-order/' . $deliveryOrder->file),
             $tempPdf,
         ];
+        // dd($pdfFiles);
 
         foreach ($pdfFiles as $file) {
             $pageCount = $pdf->setSourceFile($file);

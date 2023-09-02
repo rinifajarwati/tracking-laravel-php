@@ -9,7 +9,7 @@ class DeliveryOrder extends Model
 {
     use HasFactory;
     protected $guarded = ["id"];
-    protected $with = ['user', 'CoorLogistics', 'QcName', 'LogisticsName', 'CustomerName'];
+    protected $with = ['user', 'CoorLogistics', 'QcName', 'LogisticsName', 'Customer'];
     protected $casts = [
         'created_date' => 'datetime',
         'coor_logistics_date' => 'datetime',
@@ -44,7 +44,7 @@ class DeliveryOrder extends Model
         return $this->belongsTo(User::class, 'logistics_name', 'uid');
     }
 
-    public function CustomerName()
+    public function Customer()
     {
         return $this->belongsTo(User::class, 'logistics_customer_name', 'uid');
     }

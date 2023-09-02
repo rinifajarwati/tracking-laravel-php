@@ -64,6 +64,7 @@ class PdfWarehouseController extends Controller
             public_path('/assets/pdf/file/' . $warehouse->file),
             $tempPdf,
         ];
+        
 
         foreach ($pdfFiles as $file) {
             $pageCount = $pdf->setSourceFile($file);

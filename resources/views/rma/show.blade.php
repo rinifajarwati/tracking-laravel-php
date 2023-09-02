@@ -101,6 +101,56 @@
                                 </table>
                             @endforeach
                         </div>
+                        <div class="mb-5">
+                            @foreach ($rmaType as $item)
+                                <table height="100px">
+                                    <tr>
+                                        <td>Type</td>
+                                        <td class="col-1">:</td>
+                                        <td >{{ $item['type']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SN</td>
+                                        <td class="col-1">:</td>
+                                        <td >{{ $item['sn']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>No. SPK</td>
+                                        <td class="col-1">:</td>
+                                        <td >{{ $item['no_spk']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td class="col-1">:</td>
+                                        <td >{{ $item['tgl']}}</td>
+                                    </tr>
+                                </table>
+                            @endforeach
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="col-1">No</th>
+                                        <th class="col-2">Kelengkapan </th>
+                                        <th class="col-3">Qty</th>
+                                        <th class="col-4">Tidak Ada</th>
+                                        <th class="col-4">Ada</th>
+                                        <th class="col-4">Fungsi</th>
+                                      </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($rmaQc as $qc)
+                                    <tr class="item-list text-center">
+                                        <td class="col-1">{{ $loop->iteration }}</td>
+                                        <td class="col-2">{{$qc['kelengkapan'] }}</td>
+                                        <td class="col-3">{{$qc['qty'] }}</td>
+                                        <td class="col-3">{{$qc['no'] }}</td>
+                                        <td class="col-3">{{$qc['yes'] }}</td>
+                                        <td class="col-3">{{$qc['fungsi'] }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

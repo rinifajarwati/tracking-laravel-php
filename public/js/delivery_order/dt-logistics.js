@@ -24,7 +24,8 @@ listDataDoLogistics.bootstrapTable({
             formatter: (value, row) => {
                 const fields = {
                     "#edit_no_resi": row.no_resi,
-                    "#edit_jasa_ekspedisi" : row.jasa_ekspedisi
+                    "#edit_jasa_ekspedisi" : row.jasa_ekspedisi,
+                    "#edit_customer_name" : row.customer_name,
                 };
                 const obj = encodeURIComponent(JSON.stringify(fields));
                 let buttons = "";
@@ -202,10 +203,7 @@ listDataDoLogistics.bootstrapTable({
         },
         {
             title: "Logistics Customer Name",
-            field: "logistics_customer_name",
-            formatter(value, row) {
-                  return row.customer_name ? row.customer_name.name : null;
-            },
+            field: "customer_name",
             sortable: true,
         },
         {

@@ -112,6 +112,9 @@
         <script src="/js/warehouse/edit.js"></script>
     @elseif(auth()->user()->division_uid === 'warehouse' && auth()->user()->position_uid === 'coordinator')
         <script src="/js/warehouse/dt-warehouse.js"></script>
+        <script src="/js/warehouse/add.js"></script>
+        <script src="/js/warehouse/add_option.js"></script>
+        <script src="/js/warehouse/edit.js"></script>
         <script src="/js/warehouse/approval_warehouse.js"></script>
     @elseif(auth()->user()->division_uid === 'logistics' && auth()->user()->position_uid === 'staff')
         <script src="/js/warehouse/dt-logistics.js"></script>

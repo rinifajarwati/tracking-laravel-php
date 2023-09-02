@@ -11,26 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-      
 
-        Schema::create('divisions', function(Blueprint $table){
+
+        Schema::create('divisions', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
             $table->string('name');
         });
 
-        Schema::create('positions', function(Blueprint $table){
+        Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
             $table->string('name');
         });
 
-        Schema::create('permissions', function(Blueprint $table){
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('description');
         });
-        
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
@@ -47,7 +47,7 @@ return new class extends Migration
             $table->foreign(['division_uid'])->references(['uid'])->on('divisions');
         });
 
-        Schema::create('user_permissions', function(Blueprint $table){
+        Schema::create('user_permissions', function (Blueprint $table) {
             $table->id();
             $table->string('user_uid');
             $table->unsignedBigInteger('permission_id');
@@ -58,7 +58,7 @@ return new class extends Migration
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
-        Schema::create('warehouses', function(Blueprint $table){
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
             $table->string('no_so');
@@ -83,9 +83,10 @@ return new class extends Migration
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
-        Schema::create('warehouse_sns', function(Blueprint $table){
+        Schema::create('warehouse_sns', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
+            $table->text('item_description');
             $table->text('serial_number');
             $table->double('weight');
             $table->double('koli');
@@ -98,9 +99,9 @@ return new class extends Migration
             $table->foreign(['warehouse_uid'])->references(['uid'])->on('warehouses');
         });
 
-        Schema::create('rmas', function(Blueprint $table){
+        Schema::create('rmas', function (Blueprint $table) {
             $table->id();
-            $table->string('uid');
+            $table->string('uid')->unique();
             $table->string('no_spk');
             $table->string('no_sn');
             $table->string('file');
@@ -122,29 +123,32 @@ return new class extends Migration
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
-        Schema::create('letter_returs', function(Blueprint $table){
+        Schema::create('letter_returs', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
             $table->string('no_sj');
             $table->string('file');
             $table->string('description')->nullable();
             $table->string('information')->nullable();
+            $table->string('no_sr')->nullable();
             $table->string('user_uid');
             $table->timestamp('created_date');
-            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Finish', 'Cancel'])->default('Created');
+            $table->enum('status', ['Created', 'Approval-Warehouse', 'Approval-Marketing', 'Approval-SCM', 'Approval-Admin', 'Finish', 'Cancel'])->default('Created');
             $table->string('warehouse_name')->nullable();
             $table->timestamp('warehouse_date')->nullable();
             $table->string('marketing_name')->nullable();
             $table->timestamp('marketing_date')->nullable();
             $table->string('scm_name')->nullable();
             $table->timestamp('scm_date')->nullable();
-            $table->string('admin_finish_name')->nullable();
-            $table->timestamp('admin_finish_date')->nullable();
+            $table->string('admin_name')->nullable();
+            $table->timestamp('admin_date')->nullable();
+            $table->string('finance_name')->nullable();
+            $table->timestamp('finance_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
-        Schema::create('delivery_orders', function(Blueprint $table){
+        Schema::create('delivery_orders', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
             $table->string('no_so');
@@ -164,12 +168,13 @@ return new class extends Migration
             $table->string('logistics_name')->nullable();
             $table->timestamp('logistics_date')->nullable();
             $table->string('logistics_customer_name')->nullable();
+            $table->string('customer_name')->nullable();
             $table->timestamp('logistics_customer_date')->nullable();
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
         });
 
-        Schema::create('sohargas', function(Blueprint $table){
+        Schema::create('sohargas', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
             $table->string('so_number');
@@ -184,6 +189,31 @@ return new class extends Migration
             $table->string('adminsales_date')->nullable();
             $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Adminsales'])->default('Created');
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
+        });
+
+        Schema::create('rma_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('uid')->unique();
+            $table->string('type')->nullable();
+            $table->string('sn')->nullable();
+            $table->string('no_spk')->nullable();
+            $table->date('tgl')->nullable();
+            $table->string('rmas_uid');
+
+            $table->foreign(['rmas_uid'])->references(['uid'])->on('rmas')->onDelete('cascade');
+        });
+
+        Schema::create('rma_qcs', function (Blueprint $table) {
+            $table->id();
+            $table->string('uid');
+            $table->string('kelengkapan')->nullable();
+            $table->string('qty')->nullable();
+            $table->string('no')->nullable();
+            $table->string('yes')->nullable();
+            $table->enum('fungsi', ['Yes', 'No'])->nullable();
+             $table->string('rma_types_uid');
+
+            $table->foreign(['rma_types_uid'])->references(['uid'])->on('rma_types')->onDelete('cascade');
         });
     }
 
@@ -201,5 +231,7 @@ return new class extends Migration
         Schema::dropIfExists('rmas');
         Schema::dropIfExists('letter_returs');
         Schema::dropIfExists('warehouse_sns');
+        Schema::dropIfExists('rma_types');
+        Schema::dropIfExists('rma_qcs');
     }
 };

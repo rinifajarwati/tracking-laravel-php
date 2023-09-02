@@ -47,6 +47,11 @@ listDataFinishLetterRetur.bootstrapTable({
             sortable: true,
         },
         {
+            title: "No Surat Retur",
+            field: "no_sr",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,
@@ -136,7 +141,7 @@ listDataFinishLetterRetur.bootstrapTable({
         },
         {
             title: "SCM Name",
-            field: "",
+            field: "scm_name",
             formatter(value, row) {
                   return row.s_c_m_name ? row.s_c_m_name.name : null;
             },
@@ -145,6 +150,38 @@ listDataFinishLetterRetur.bootstrapTable({
         {
             title: "SCM Date",
             field: "scm_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Admin Name",
+            field: "admin_name",
+            formatter(value, row) {
+                return row.a_name ? row.a_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Admin Date",
+            field: "admin_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Finance Name",
+            field: "finance_name",
+            formatter(value, row) {
+                return row.f_name ? row.f_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Finance Date",
+            field: "finance_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

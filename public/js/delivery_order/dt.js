@@ -185,10 +185,7 @@ listDataDo.bootstrapTable({
         },
         {
             title: "Logistics Customer Name",
-            field: "logistics_customer_name",
-            formatter(value, row) {
-                  return row.customer_name ? row.customer_name.name : null;
-            },
+            field: "customer_name",
             sortable: true,
         },
         {

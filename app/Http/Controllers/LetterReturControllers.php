@@ -177,13 +177,29 @@ class LetterReturControllers extends Controller
         }
     }
 
+    public function approvedAdmin(string $uid)
+    {
+        try {
+            $input = [
+                'status' => 'Approval-Admin',
+                'admin_name' => auth()->user()->uid,
+                'admin_date' => Carbon::now(),
+            ];
+
+            LetterRetur::where('uid', $uid)->update($input);
+            return back()->with(['alertSuccess' => 'Successfully For Approved Surat Retur']);
+        } catch (Throwable $e) {
+            return back()->with(['alertError' => 'Error' . $e->getMessage()]);
+        }
+    }
+
     public function approvedFinish(string $uid)
     {
         try {
             $input = [
                 'status' => 'Finish',
-                'admin_finish_name' => auth()->user()->uid,
-                'admin_finish_date' => Carbon::now(),
+                'finance_name' => auth()->user()->uid,
+                'finance_date' => Carbon::now(),
             ];
 
             LetterRetur::where('uid', $uid)->update($input);

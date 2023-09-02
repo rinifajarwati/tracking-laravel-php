@@ -6,9 +6,12 @@ use Throwable;
 use Carbon\Carbon;
 use App\Models\Rma;
 use App\Models\User;
+use App\Models\RmaQc;
+use App\Models\RmaType;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Helper\HelperController;
 
@@ -80,12 +83,20 @@ class RmaControllers extends Controller
     public function show(string $rma)
     {
 
-        //
-        $rma = Rma::where("uid", $rma)->get()->toArray();
+        // dd($rma['uid']);
+        $rmaGetData = Rma::where("uid", $rma)->first();
+        $rmas= Rma::where('uid', $rma)->get()->toArray();
+        $rmaType = RmaType::where("rmas_uid", $rmaGetData->uid)->get();
+        $uids = $rmaType->pluck('uid')->toArray();
+        $rmaQc = RmaQc::where("rma_types_uid", $uids)->get()->toArray();
+    
         $data = [
             "title" =>  "Details SN | IMI-Tracking",
-            "rma" => $rma,
+            "rma" => $rmas,
+            "rmaType" => $rmaType,
+            "rmaQc" => $rmaQc,
         ];
+
         // dd($rma);
         return view('rma.show', $data);
     }
@@ -93,9 +104,10 @@ class RmaControllers extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rma $rma)
+    public function edit(Request $request, $uid)
     {
         //
+        // dd($uid);
     }
 
     /**
@@ -113,6 +125,42 @@ class RmaControllers extends Controller
             }
             return redirect('/rma')->with(['alertError' => 'Failed to updated Surat Perintah Kerja!']);
         };
+    }
+
+    public function updateRmaQc(Request $request, $uid)
+    {
+        $rma = Rma::where('uid', $uid)->first();
+        // dd($rma->uid);
+
+        $dataIni = request()->validate([
+            'type' => 'nullable',
+            'sn' => 'nullable',
+            'no_spk' => 'nullable',
+            'tgl' => 'nullable',
+        ]);
+        $dataIni['rmas_uid'] = $rma->uid;
+        $dataIni['uid'] = (new HelperController)->getUid();
+
+        $rmaTypeUid = RmaType::create($dataIni);
+    //   dd($rmaTypeUid);
+        $datatRma = request()->validate([
+            'data.*.kelengkapan' => 'nullable',
+            'data.*.qty' => 'nullable',
+            'data.*.no' => 'nullable',
+            'data.*.yes' => 'nullable',
+            'data.*.fungsi' => 'nullable',
+
+        ]);
+
+        // $rmaUid = $datatrma['rma_type_uid'] = $uid;
+        DB::transaction(function () use ($datatRma, $rmaTypeUid) {
+            foreach ($datatRma['data'] as $dataInput) {
+                $dataInput['uid'] = (new HelperController)->getUid();
+                $dataInput['rma_types_uid'] = $rmaTypeUid->uid;
+                RmaQc::create($dataInput);
+            }
+        });
+        return redirect()->back()->with(['alertSuccess' => 'Successfully']);
     }
 
     /**

@@ -15,6 +15,13 @@
                         <tbody id="add_warehouse_tbody">
                             <tr>
                                 <td>
+                                    <label>Item Description</label>
+                                    <input type="text"
+                                        class="form-control @error('data[0][item_description]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
+                                        value="{{ old('item_description') }}" id="edit_item_description" placeholder="Item Description" name="data[0][item_description]"
+                                        maxlength="255" required>
+                                </td>
+                                <td>
                                     <label>Serial Number</label>
                                     <input type="text"
                                         class="form-control @error('data[0][serial_number]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"

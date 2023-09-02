@@ -43,7 +43,7 @@
             </a>
         @endif
 
-        @php $checks = ['developer','sales', 'warehouse', 'scm', 'technician']; @endphp
+        @php $checks = ['developer','sales', 'warehouse', 'scm', 'technician', 'finance']; @endphp
         @if (count(array_intersect($checks, $permissions)) > 0)
             <a class="nav-link {{ Request::is('letter-retur') ? 'active' : '' }}" href="/letter-retur">
                 <div class="nav-link-icon">

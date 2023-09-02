@@ -91,6 +91,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr class="text-center">
+                                        <th class="col-2">Item Description </th>
                                         <th class="col-2">Serial Number </th>
                                         <th class="col-2">Weight</th>
                                         <th class="col-2">Koli</th>
@@ -103,6 +104,7 @@
                                 <tbody>
                                     @foreach ($warwhouseSN as $item)
                                         <tr class="item-list text-center">
+                                            <td class="col-2">{{ $item['item_description'] }}</td>
                                             <td class="col-2">{{ $item['serial_number'] }}</td>
                                             <td class="col-2">{{ $item['weight'] }}</td>
                                             <td class="col-2">{{ $item['koli'] }}</td>

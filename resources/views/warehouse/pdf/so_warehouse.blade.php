@@ -38,6 +38,7 @@
                 <table class="table-receipt-details">
                     <thead>
                         <tr>
+                            <th class="col-2">Item Description </th>
                             <th class="col-2">Serial Number </th>
                             <th class="col-3">Weight</th>
                             <th class="col-3">Koli</th>
@@ -49,6 +50,7 @@
                     <tbody>
                         @foreach ($warehouseSN as $item)
                             <tr class="item-list">
+                                <td class="col-2">{{ $item['item_description'] }}</td>
                                 <td class="col-2">{{ $item['serial_number'] }}</td>
                                 <td class="col-3">{{ $item['weight'] }}</td>
                                 <td class="col-3">{{ $item['koli'] }}</td>
