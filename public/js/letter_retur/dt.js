@@ -32,6 +32,17 @@ listDataLetterRetur.bootstrapTable({
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnFinish('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
+                } else if (
+                    row.status === "Approval-Admin" &&
+                    auth_division === "finance"
+                ) {
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtnFinance('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
+                    <i class="fas fa-check fa-fw"></i>
+                    </button>`;
+
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_letter_retur_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
                 } else {
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;
@@ -50,6 +61,11 @@ listDataLetterRetur.bootstrapTable({
         {
             title: "Information",
             field: "information",
+            sortable: true,
+        },
+        {
+            title: "No Surat Retur",
+            field: "no_sr",
             sortable: true,
         },
         {
@@ -81,6 +97,9 @@ listDataLetterRetur.bootstrapTable({
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Approval-SCM") {
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
+                }
+                if (value === "Approval-Admin") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
@@ -151,6 +170,22 @@ listDataLetterRetur.bootstrapTable({
         {
             title: "SCM Date",
             field: "scm_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Admin Name",
+            field: "admin_name",
+            formatter(value, row) {
+                return row.a_name ? row.a_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Admin Date",
+            field: "admin_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

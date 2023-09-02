@@ -82,6 +82,7 @@
     @include('letter_retur.modals.approval_marketing_letter_retur')
     @include('letter_retur.modals.approval_ppic_marketing_letter_retur')
     @include('letter_retur.modals.approval_finish_letter_retur')
+    @include('letter_retur.modals.approval_finance')
     @include('letter_retur.modals.edit_letter_retur')
 
     <script src="/js/letter_retur/_init.js"></script>
@@ -107,5 +108,9 @@
     @elseif(auth()->user()->division_uid === 'scm')
         <script src="/js/letter_retur/dt-marketing.js"></script>
         <script src="/js/letter_retur/approval-ppic-marketing.js"></script>
+    @elseif(auth()->user()->division_uid === 'finance')
+        <script src="/js/letter_retur/dt.js"></script>
+        <script src="/js/letter_retur/finish/approval-finance.js"></script>
+        <script src="/js/letter_retur/edit.js"></script>
     @endif
 @endsection

@@ -104,9 +104,12 @@ class WarehouseControllers extends Controller
      */
     public function update(Request $request, $uid)
     {
+        // dd($uid);
         $warehouse = Warehouse::where('uid', $uid)->first();
         $warehousesn = WarehouseSn::where('warehouse_uid', $warehouse->uid)->get()->toArray();
+        // dd($warehousesn);
         $datatWarehouse = request()->validate([
+            'data.*.item_description' => 'required',
             'data.*.serial_number' => 'required',
             'data.*.weight' => 'required',
             'data.*.koli' => 'required',

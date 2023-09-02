@@ -22,3 +22,19 @@ const approvedFinishListModal = $("#approved_finish_item_modal");
 
 //finish
 const listDataRmaFinish = $("#rma_finish_list_data_table");
+
+//edit qc
+const editRmaQcForm = $("#edit_rma_qc_item_form");
+const editRmaQcListModal = $("#edit_rma_qc_item_modal");
+const editRmaQcModalSpinner = $("#edit_rma_qc_modal_spinner");
+const editRmaQcNameInput = $("#edit_rma_qc_item_name");
+
+
+// Add Qc
+const addRmaQcDataModal = $("#add_new_rma_qc_modal");
+const addRmaQcDataItemKelengkapan = $("#add_kelengkapan");
+const addRmaQcDataItemQty = $("#add_qty");
+const addRmaQcDataItemTdkAda = $("#add_no");
+const addRmaQcDataItemAda = $("#add_yes");
+const addRmaQcDataItemFungsi = $("#add_fungsi");
+const addRmaQcDataOptionsTbody = $("#add_rma_qc_tbody");

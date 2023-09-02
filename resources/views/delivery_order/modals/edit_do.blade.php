@@ -27,7 +27,13 @@
                         <label>Delivery Photo</label>
                         <img class="img-preview img-fluid mb-3 col-sm-5">
                         <input type="file" class="form-control @error('img') is-invalid @enderror"
-                            id="edit_img" placeholder="img" name="img"  required>
+                            id="edit_img" placeholder="img" name="img">
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label for="customer_name">Name Customer</label>
+                        <input type="text" class="form-control" id="edit_customer_name"
+                        placeholder="Name customer" name="customer_name" value="{{ old('customer_name') }}">
                     </div>
                 </div>
                 <div class="modal-footer">

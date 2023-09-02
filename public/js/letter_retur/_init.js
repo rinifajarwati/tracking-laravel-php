@@ -25,6 +25,10 @@ const listDataFinishLetterRetur = $("#letter_retur_finish_list_data_table");
 const approvedLetterReturFinishForm = $("#approved_finish_item_form");
 const approvedLetterReturFinishListModal = $("#approved_finish_item_modal");
 
+// Approved finance
+const approvedLetterReturFinanceForm = $("#approved_finance_item_form");
+const approvedLetterReturFinanceListModal = $("#approved_finance_item_modal");
+
 //edit
 const editLetterReturForm = $("#edit_letter_retur_item_form");
 const editLetterReturListModal = $("#edit_letter_retur_item_modal");

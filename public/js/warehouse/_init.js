@@ -2,8 +2,9 @@
 const listDataWarehouse = $("#warehouse_list_data_table");
 
 
-// Add FamiliesData
+// Add SN
 const addWarehouseDataModal = $("#add_new_warehouse_modal");
+const addWarehouseDataItemID = $("#add_item_description");
 const addWarehouseDataItemSN = $("#add_serial_number");
 const addWarehouseDataItemWeight = $("#add_weight");
 const addWarehouseDataItemKoli = $("#add_koli");

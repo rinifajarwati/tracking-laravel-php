@@ -210,6 +210,7 @@ class DeliveryOrderControllers extends Controller
     {
 
         $finish = DeliveryOrder::where('status', 'Approval-Customer')->get();
+        // dd($finish);
         return $finish;
     }
 

@@ -69,6 +69,11 @@ listDataLetterReturMarketing.bootstrapTable({
             sortable: true,
         },
         {
+            title: "No Surat Retur",
+            field: "no_sr",
+            sortable: true,
+        },
+        {
             title: "File",
             field: "uid",
             sortable: true,
@@ -97,6 +102,9 @@ listDataLetterReturMarketing.bootstrapTable({
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Approval-SCM") {
+                    buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
+                }
+                if (value === "Approval-Admin") {
                     buttonHtml = `<button class="badge bg-primary" style="border:none">${value}</button>`;
                 }
                 if (value === "Cancel") {
@@ -167,6 +175,22 @@ listDataLetterReturMarketing.bootstrapTable({
         {
             title: "SCM Date",
             field: "scm_date",
+            sortable: true,
+            formatter: (value, row) => {
+                return value ? moment(value).format("LLL") : null;
+            },
+        },
+        {
+            title: "Admin Name",
+            field: "admin_name",
+            formatter(value, row) {
+                return row.a_name ? row.a_name.name : null;
+            },
+            sortable: true,
+        },
+        {
+            title: "Admin Date",
+            field: "admin_date",
             sortable: true,
             formatter: (value, row) => {
                 return value ? moment(value).format("LLL") : null;

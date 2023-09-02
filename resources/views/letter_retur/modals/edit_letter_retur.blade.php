@@ -11,11 +11,19 @@
                 @method('put')
                 @csrf
                 <div class="modal-body">
+                    @if(auth()->user()->division_uid === 'sales')
                     <div class="col-12 mb-3">
                         <label for="information">Information</label>
                         <input type="text" class="form-control" id="edit_information"
                         placeholder="Information" name="information" value="{{ old('information') }}">
                     </div>
+                    @elseif (auth()->user()->division_uid === 'finance')
+                    <div class="col-12 mb-3">
+                        <label for="information">No Surat Retur</label>
+                        <input type="text" class="form-control" id="edit_no_sr"
+                        placeholder="No Surat Retur" name="no_sr" value="{{ old('no_sr') }}">
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Close</button>

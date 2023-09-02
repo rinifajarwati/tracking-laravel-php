@@ -37,6 +37,10 @@ listDataRmaQC.bootstrapTable({
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="approvedBtn('${row.uid}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Approval"> 
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
+
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtnQc('${row.uid}', '${obj}', 'edit_rma_qc_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
                 } else {
                 }
                 return `<div class="d-flex space-x">${buttons}</div>`;

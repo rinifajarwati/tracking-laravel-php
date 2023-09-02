@@ -37,6 +37,10 @@ warehouseApproved.bootstrapTable({
                     <i class="fas fa-check fa-fw"></i>
                     </button>`;
 
+                    buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_warehouse_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
+                    <i class="far fa-edit fa-fw"></i>
+                    </button>`;
+
                 }else if(row.status === "Approval-PPIC" && auth === "staff"){
                     buttons += `<button class="btn btn-warning btn-icon btn-transparent-dark my-auto" onclick="EditBtn('${row.uid}', '${obj}', 'edit_warehouse_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> 
                     <i class="far fa-edit fa-fw"></i>

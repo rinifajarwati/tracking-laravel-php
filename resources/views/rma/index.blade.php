@@ -81,6 +81,7 @@
     @include('rma.modals.approval_qc_rma')
     @include('rma.modals.approval_finish')
     @include('rma.modals.edit_rma')
+    @include('rma.modals.edit_qc_rma')
 
     <script src="/js/rma/_init.js"></script>
     <script src="/js/rma/pdf.js"></script>
@@ -96,6 +97,9 @@
         <script src="/js/rma/approval-technician.js"></script>
     @elseif(auth()->user()->division_uid === 'technician'  && auth()->user()->position_uid === 'qc')
         <script src="/js/rma/dt-qc.js"></script>
+        <script src="/js/rma/edit_qc/edit_qc.js"></script>
+        <script src="/js/rma/edit_qc/add.js"></script>
+        <script src="/js/rma/edit_qc/add_qc.js"></script>
         <script src="/js/rma/approval-qc.js"></script>
     @endif
 @endsection

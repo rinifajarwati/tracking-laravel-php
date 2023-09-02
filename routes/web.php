@@ -111,7 +111,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/datatables/letter-retur-marketing', [LetterReturControllers::class, 'datatablesMarketing']);
     Route::put('/letter-retur-approved-marketing/{uid}', [LetterReturControllers::class, 'approvedMarketing']);
     Route::put('/letter-retur-approved-scm/{uid}', [LetterReturControllers::class, 'approvedSCM']);
-    Route::put('/letter-retur-finish/{uid}', [LetterReturControllers::class, 'approvedFinish']);
+    Route::put('/letter-retur-finish/{uid}', [LetterReturControllers::class, 'approvedAdmin']);
+    Route::put('/letter-retur-finance/{uid}', [LetterReturControllers::class, 'approvedFinish']);
     Route::get('/pdf-letter-retur/{letterRetur}', [LetterReturControllers::class, 'showPdf']);
     Route::get('/datatables/letter-retur-finish', [LetterReturControllers::class, 'datatablesFinish']);
     Route::get('/letter-retur-finish', [LetterReturControllers::class, 'Finish']);
@@ -146,5 +147,8 @@ Route::group(['middleware' => ['auth']], function () {
     //create account
     Route::resource('create-user', CreatenewuserController::class);
     Route::get('/datatables/create-user', [CreatenewuserController::class, 'datatables']);
+
+    //RMA Edit Qc
+    Route::put('/rma-qc/{uid}', [RmaControllers::class, 'updateRmaQc']);
 
 });

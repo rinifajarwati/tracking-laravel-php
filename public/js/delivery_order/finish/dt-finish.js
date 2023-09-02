@@ -185,10 +185,7 @@ listDataDoFinish.bootstrapTable({
         },
         {
             title: "Logistics Customer Name",
-            field: "logistics_customer_name",
-            formatter(value, row) {
-                  return row.customer_name ? row.customer_name.name : null;
-            },
+            field: "customer_name",
             sortable: true,
         },
         {
@@ -196,6 +193,7 @@ listDataDoFinish.bootstrapTable({
             field: "logistics_customer_date",
             sortable: true,
             formatter: (value, row) => {
+                console.log(row);
                 return value ? moment(value).format("LLL") : null;
             },
         },
