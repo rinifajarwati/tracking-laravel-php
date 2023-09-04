@@ -43,8 +43,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('position_uid');
             $table->string('division_uid');
-            $table->foreign(['position_uid'])->references(['uid'])->on('positions');
-            $table->foreign(['division_uid'])->references(['uid'])->on('divisions');
+            $table->foreign(['position_uid'])->references(['uid'])->on('positions')->onDelete('cascade');
+            $table->foreign(['division_uid'])->references(['uid'])->on('divisions')->onDelete('cascade');
         });
 
         Schema::create('user_permissions', function (Blueprint $table) {
@@ -54,8 +54,8 @@ return new class extends Migration
         });
 
         Schema::table('user_permissions', function (Blueprint $table) {
-            $table->foreign(['permission_id'])->references(['id'])->on('permissions');
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['permission_id'])->references(['id'])->on('permissions')->onDelete('cascade');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('warehouses', function (Blueprint $table) {
@@ -80,23 +80,23 @@ return new class extends Migration
             $table->timestamp('ppic_finish_date')->nullable();
             $table->double('total_weight')->nullable();
             $table->double('total_koli')->nullable();
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('warehouse_sns', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
-            $table->text('item_description');
-            $table->text('serial_number');
-            $table->double('weight');
-            $table->double('koli');
-            $table->double('gdg');
-            $table->double('kubikasi');
+            $table->text('item_description')->nullable();
+            $table->text('serial_number')->nullable();
+            $table->double('weight')->nullable();
+            $table->double('koli')->nullable();
+            $table->double('gdg')->nullable();
+            $table->double('kubikasi')->nullable();
             $table->string('user_uid');
             $table->string('warehouse_uid');
 
             $table->foreign(['user_uid'])->references(['uid'])->on('users');
-            $table->foreign(['warehouse_uid'])->references(['uid'])->on('warehouses');
+            $table->foreign(['warehouse_uid'])->references(['uid'])->on('warehouses')->onDelete('cascade');
         });
 
         Schema::create('rmas', function (Blueprint $table) {
@@ -120,7 +120,7 @@ return new class extends Migration
             $table->string('admintech_finish_name')->nullable();
             $table->timestamp('admintech_finish_date')->nullable();
 
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('letter_returs', function (Blueprint $table) {
@@ -145,7 +145,7 @@ return new class extends Migration
             $table->string('finance_name')->nullable();
             $table->timestamp('finance_date')->nullable();
 
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('delivery_orders', function (Blueprint $table) {
@@ -171,7 +171,7 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->timestamp('logistics_customer_date')->nullable();
 
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('sohargas', function (Blueprint $table) {
@@ -188,7 +188,7 @@ return new class extends Migration
             $table->string('adminsales_name')->nullable();
             $table->string('adminsales_date')->nullable();
             $table->enum('status', ['Created', 'Approval-Sales', 'Approval-Adminsales'])->default('Created');
-            $table->foreign(['user_uid'])->references(['uid'])->on('users');
+            $table->foreign(['user_uid'])->references(['uid'])->on('users')->onDelete('cascade');
         });
 
         Schema::create('rma_types', function (Blueprint $table) {

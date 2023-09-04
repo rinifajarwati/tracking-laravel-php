@@ -13,6 +13,13 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $guarded = ['id'];
     protected $with = ['userPermissions','position', 'division'];
+
+    public $timestamps = false;
+
+    public function getRouteKeyName()
+    {
+        return 'uid';
+    }
     /**
      * The attributes that are mass assignable.
      *

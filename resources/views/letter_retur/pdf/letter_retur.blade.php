@@ -16,6 +16,16 @@
             <div class="wrapper patient-data">
                 <table class="table-patient-data">
                     <tr>
+                        <td class="col-1">No SJ</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_sj_letter_retur }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Description</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $description_letter_retur }}</td>
+                    </tr>
+                    <tr>
                         <td class="col-1">No Surat Retur</td>
                         <td class="col-2">:</td>
                         <td>{{ $no_sr_letter_retur }}</td>

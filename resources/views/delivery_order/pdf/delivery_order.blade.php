@@ -13,7 +13,36 @@
 <body>
     <main>
         <div class="container">
+            <div class="wrapper patient-data">
+                <table class="table-patient-data">
+                    <tr>
+                        <td class="col-1">Number SO</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_so_do }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">number SJ</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_sj_do }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Description</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $description_do }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">No Resi</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_resi_do }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Jasa Ekspedisi</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $jasa_ekspedisi_do }}</td>
+                    </tr>
 
+                </table>
+            </div>
             <!-- Receipt signature -->
             <div class="wrapper">
 

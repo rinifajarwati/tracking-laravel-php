@@ -76,7 +76,6 @@ class CreatenewuserController extends Controller
             UserPermission::create($payloadPermission);
             return back()->with(['alertSuccess' => 'Successfully create account!']);
         } catch (Throwable $th) {
-            dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
                 return back()->with(['alertError' => 'account already Registered!']);
             }
@@ -103,26 +102,41 @@ class CreatenewuserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(User $user)
     {
-    //     $user = User::find(Auth::id());
-    //     if (request()->hasFile('img')) {
-    //         $file = request()->file('img');
-    //         $fileName = Str::random(40) . '.' . $file->getClientOriginalExtension();
-    //         Storage::disk('public_uploads_img')->put($fileName, file_get_contents($file));
-    //         $user->img = $fileName;
-    //     }
-    // $user->save();
-
-    // return redirect()->back()->with('success', 'Gambar berhasil diupdate!');
+        try {
+            if (request()->hasFile('img')) {
+                $img = request()->file('img');
+                $fileImg = Str::random(40) . '.' . $img->getClientOriginalExtension();
+                Storage::disk('public_uploads_img')->put($fileImg, file_get_contents($img));
+                $user['img'] = $fileImg;
+            }
+            $user->update(request()->except('img'));
+            return redirect('/create-user')->with(['alertSuccess' => 'Successfully update user data!']);
+        } catch (Throwable $th) {
+            dd($th);
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/create-user')->with(['alertError' => 'User data already registered!']);
+            }
+            return redirect('/create-user')->with(['alertError' => 'Failed to update user!']);
+        };   
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(string $uid)
     {
-        
+       
+        try {
+            User::where('uid', $uid)->delete();
+            return redirect('/create-user')->with(['alertSuccess' => 'Successfully deleted user data!']);
+        } catch (Throwable $th) {
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/create-user')->with(['alertError' => 'User data already registered!']);
+            }
+            return redirect('/create-user')->with(['alertError' => 'Failed to deleted user!']);
+        };   
     }
 
     public function datatables(){

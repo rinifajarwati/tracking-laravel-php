@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Rma;
+use App\Models\RmaQc;
+use App\Models\RmaType;
 use setasign\Fpdi\Fpdi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\File;
@@ -19,10 +21,20 @@ class PdfRmaController extends Controller
         $signature_sales = 'assetsgambar/file/' . $fileNameSales;
         $signature_technician = 'assetsgambar/file/' . $fileNameTechnician;
         $signature_qc = 'assetsgambar/file/' . $fileNameQc;
+
+        $no_spk_rma = $rma->no_spk;
+        $no_sn_rma = $rma->no_sn;
         $warranty = $rma->warranty;
         $description_rma = $rma->description;
         $kerusakan_rma = $rma->kerusakan;
         $perbaikkan_rma = $rma->perbaikkan;
+
+        $rmaUid = $rma->uid;
+        $rmaTypes = RmaType::where("rmas_uid", $rmaUid)->get();
+        
+        $uids = $rmaTypes->pluck('uid')->toArray();
+        $rmaQc = RmaQc::where("rma_types_uid", $uids)->get();
+        
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $rma->user?->name ?: "N/A",
@@ -31,10 +43,15 @@ class PdfRmaController extends Controller
             'signature_sales' => $signature_sales,
             'signature_technician' => $signature_technician,
             'signature_qc' => $signature_qc,
+            'no_spk_rma' => $no_spk_rma,
+            'no_sn_rma' => $no_sn_rma,
             'warranty' => $warranty,
             'description_rma' => $description_rma,
             'kerusakan_rma' => $kerusakan_rma,
             'perbaikkan_rma' => $perbaikkan_rma,
+
+            'rmaTypes' => $rmaTypes,
+            'rmaQc' => $rmaQc,
         ];
         $pdf = Pdf::loadView('rma.pdf.rma', $data);
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\DeliveryOrderControllers;
 use App\Http\Controllers\PdfLetterReturController;
 use App\Http\Controllers\PdfDeliveryOrderController;
 use App\Http\Controllers\PdfSohargaController;
+use App\Http\Controllers\PositionControllers;
 use App\Http\Controllers\SohargaController;
 
 /*
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
     // division
     Route::resource('divisions', DivisionControllers::class);
     Route::get('/datatables/divisions', [DivisionControllers::class, 'datatables']);
+
+    // division
+    Route::resource('positions', PositionControllers::class);
+    Route::get('/datatables/positions', [PositionControllers::class, 'datatables']);
 
     // warehouse
     Route::resource('warehouse', WarehouseControllers::class);
@@ -151,4 +156,11 @@ Route::group(['middleware' => ['auth']], function () {
     //RMA Edit Qc
     Route::put('/rma-qc/{uid}', [RmaControllers::class, 'updateRmaQc']);
 
+});
+
+
+// Helper
+Route::controller(HelperController::class)->middleware('auth')->group(function () {
+    Route::get('/helper/get/divisions', 'getDivisions');
+    Route::get('/helper/get/positions', 'getPositions');
 });

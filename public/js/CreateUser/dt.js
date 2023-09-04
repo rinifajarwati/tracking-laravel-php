@@ -1,5 +1,5 @@
 ListDataTable.bootstrapTable({
-    url:"/datatables/create-user",
+    url: "/datatables/create-user",
     showColumns: true,
     showColumnsToggleAll: true,
     showRefresh: true,
@@ -16,7 +16,7 @@ ListDataTable.bootstrapTable({
         refresh: "fas fa-sync",
         columns: "fas fa-th-list",
     },
-    columns :[
+    columns: [
         {
             title: "Name",
             field: "name",
@@ -33,18 +33,51 @@ ListDataTable.bootstrapTable({
             sortable: true,
         },
         {
-            title: "Devisison",
+            title: "Division",
             field: "division.name",
             sortable: true,
         },
         {
-            title:"Signature User",
-            field:"uid",
+            title: "Signature User",
+            field: "uid",
             sortable: true,
-            formatter:(value, row) => {
-                const urlFile = '/assetsgambar/file/' +row.img;
-                return '<a href="'+ urlFile +'" class="badge bg-info text-decoration-none" target="_blank">Signature</a>' 
-            }
+            formatter: (value, row) => {
+                const urlFile = "/assetsgambar/file/" + row.img;
+                return (
+                    '<a href="' +
+                    urlFile +
+                    '" class="badge bg-info text-decoration-none" target="_blank">Signature</a>'
+                );
+            },
+        },
+        {
+            title: "Action",
+            field: "uid",
+            sortable: true,
+            formatter: (value, row) => {
+                const fields = {
+                    "#edit_position_item_name": row.name,
+                };
+                const obj = encodeURIComponent(JSON.stringify(fields));
+
+                let buttons = "";
+                buttons += `
+                <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="editUserModal('${row.uid}', '${obj}','${row?.division_uid}','${row?.position_uid}','edit_user_item_modal')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                    <i class="far fa-edit fa-fw"></i>
+                </button>
+                `;
+
+                buttons += `
+                    <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="deleteUserModal('${row.uid}', '${row.name}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                        <i class="far fa-trash-can fa-fw"></i>
+                    </button>
+                `;
+                return `
+                <div class="d-flex space-x">
+                    ${buttons}
+                </div>
+                `;
+            },
         },
     ],
     onPostBody: () => {

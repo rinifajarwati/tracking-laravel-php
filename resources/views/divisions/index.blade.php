@@ -75,10 +75,9 @@
     </main>
 
     @include('divisions.modals.add_new_division')
+    @include('divisions.modals.delete_division')
 
     <script src="/js/division/_init.js"></script>
     <script src="/js/division/dt.js"></script>
     <script src="/js/division/delete.js"></script>
-    <script src="/js/division/edit.js"></script>
-    <script src="/js/functions/spinner.js"></script>
 @endsection

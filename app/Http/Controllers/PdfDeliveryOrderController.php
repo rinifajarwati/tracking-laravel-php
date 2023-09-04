@@ -23,6 +23,12 @@ class PdfDeliveryOrderController extends Controller
         $signature_qc = 'assetsgambar/file/' . $fileNameQc;
         $signature_logistics = 'assetsgambar/file/' . $fileNameLogistics;
         $customer_name = $deliveryOrder->customer_name;
+
+        $no_sj_do = $deliveryOrder->no_sj;
+        $no_so_do = $deliveryOrder->no_so;
+        $description_do = $deliveryOrder->description;
+        $no_resi_do = $deliveryOrder->no_resi;
+        $jasa_ekspedisi_do = $deliveryOrder->jasa_ekspedisi;
         $data = [
             'sales_name' => $deliveryOrder->user?->name ?: "N/A",
             'logistics_coor' => $deliveryOrder->CoorLogistics?->name ?: "N/A",
@@ -35,6 +41,12 @@ class PdfDeliveryOrderController extends Controller
             'signature_logistics_coor' => $signature_logistics_coor,
             'signature_qc' => $signature_qc,
             'signature_logistics' => $signature_logistics,
+
+            'no_sj_do' => $no_sj_do,
+            'no_so_do' => $no_so_do,
+            'description_do' => $description_do,
+            'no_resi_do' => $no_resi_do,
+            'jasa_ekspedisi_do' => $jasa_ekspedisi_do,
         ];
         $pdf = Pdf::loadView('delivery_order.pdf.delivery_order', $data);
 

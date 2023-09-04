@@ -51,7 +51,7 @@ class PermissionSeeder extends Seeder
 
         Permission::create([
             'name' => 'superadmin',
-            'description' => 'Access to minimal pages'
+            'description' => 'Access to all pages'
         ]);
     }
 }

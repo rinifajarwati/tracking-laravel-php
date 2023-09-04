@@ -30,6 +30,8 @@ class PdfWarehouseController extends Controller
         $description = $warehouse->description;
         $total_weight = $warehouse->total_weight;
         $total_koli = $warehouse->total_koli;
+        $number_so = $warehouse->no_so;
+
         $warehouseUid = $warehouse->uid;
         $warehouseSN = WarehouseSn::where("warehouse_uid", $warehouseUid)->get();
         $data = [
@@ -47,6 +49,7 @@ class PdfWarehouseController extends Controller
             'signature_logistics' => $signature_logistics,
 
             'description_warehouse' => $description,
+            'number_so' => $number_so,
             'total_weight_warehouse' => $total_weight,
             'total_koli_warehouse' => $total_koli,
             'warehouseSN' => $warehouseSN,

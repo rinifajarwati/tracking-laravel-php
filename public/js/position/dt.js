@@ -1,5 +1,5 @@
-listDataDivision.bootstrapTable({
-    url: "/datatables/divisions",
+listDataPosition.bootstrapTable({
+    url: "/datatables/positions",
     showColumns: true,
     showColumnsToggleAll: true,
     showRefresh: true,
@@ -11,14 +11,14 @@ listDataDivision.bootstrapTable({
     pageSize: 50,
     pageList: [50, 100, 200],
     cookie: true,
-    cookieIdTable: "division_list_data_table",
+    cookieIdTable: "position_list_data_table",
     icons: {
         refresh: "fas fa-sync",
         columns: "fas fa-th-list",
     },
     columns: [
         {
-            title: "Division Name",
+            title: "Position Name",
             field: "name",
             sortable: true,
         },
@@ -28,13 +28,13 @@ listDataDivision.bootstrapTable({
             sortable: true,
             formatter: (value, row) => {
                 const fields = {
-                    "#edit_division_item_name": row.name
+                    "#edit_position_item_name": row.name
                 };
                 const obj = encodeURIComponent(JSON.stringify(fields));
 
                 let buttons = "";
                 buttons += `
-                    <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="deleteDivisionModal('${row.uid}', '${row.name}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                    <button class="btn btn-datatable btn-icon btn-transparent-dark my-auto" onclick="deletePositionModal('${row.uid}', '${row.name}')" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
                         <i class="far fa-trash-can fa-fw"></i>
                     </button>
                 `
