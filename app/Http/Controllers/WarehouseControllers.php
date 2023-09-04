@@ -112,9 +112,9 @@ class WarehouseControllers extends Controller
             'data.*.item_description' => 'required',
             'data.*.serial_number' => 'required',
             'data.*.weight' => 'required',
-            'data.*.koli' => 'required',
-            'data.*.gdg' => 'required',
-            'data.*.kubikasi' => 'required',
+            'data.*.koli' => 'nullable',
+            'data.*.gdg' => 'nullable',
+            'data.*.kubikasi' => 'nullable',
         ]);
 
         $warehouseUid = $datatWarehouse['warehouse_uid'] = $uid;

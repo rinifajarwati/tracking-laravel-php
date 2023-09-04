@@ -40,20 +40,20 @@
                                     <label>Koli</label>
                                     <input type="number"
                                         class="form-control @error('data[0][koli]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
-                                        value="{{ old('koli') }}" id="edit_koli" placeholder="Koli" name="data[0][koli]" step="0.01" maxlength="255" required>
+                                        value="{{ old('koli') }}" id="edit_koli" placeholder="Koli" name="data[0][koli]" step="0.01" maxlength="255">
                                 </td>
                                 <td>
                                     <label>GDG</label>
                                     <input type="text"
                                         class="form-control @error('data[0][gdg]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
-                                        value="{{ old('gdg') }}" id="edit_gdg" placeholder="GDG" name="data[0][gdg]" maxlength="255" required>
+                                        value="{{ old('gdg') }}" id="edit_gdg" placeholder="GDG" name="data[0][gdg]" maxlength="255">
                                 </td>
                                 <td>
                                     <label>Kubikasi</label>
                                     <input type="number"
                                         class="form-control @error('data[0][kubikasi]') {{ session('validatorError') === 'add' ? 'is-invalid' : '' }} @enderror"
                                         value="{{ old('kubikasi') }}" id="edit_kubikasi" placeholder="Kubikasi" name="data[0][kubikasi]"
-                                        maxlength="255" required>
+                                        maxlength="255">
                                 </td>
                                 <td class="ps-0 pe-0 pt-0 text-left align-middle"></td>
                             </tr>

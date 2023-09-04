@@ -21,20 +21,27 @@ class PdfLetterReturController extends Controller
         $signature_marketing = 'assetsgambar/file/' . $fileNameMarketing;
         $signature_scm = 'assetsgambar/file/' . $fileNameScm;
 
+        $description_letter_retur = $letterRetur->description;
         $information_letter_retur = $letterRetur->information;
         $no_sr_letter_retur = $letterRetur->no_sr;
+        $no_sj_letter_retur = $letterRetur->no_sj;
         $data = [
             'title' => 'Contoh PDF',
             'sales_name' => $letterRetur->user?->name ?: "N/A",
             'warehouse_name' => $letterRetur->WName?->name ?: "N/A",
             'marketing_name' => $letterRetur->MName?->name ?: "N/A",
             'scm_name' => $letterRetur->SCMName?->name ?: "N/A",
+
             'signature_sales' => $signature_sales,
             'signature_warehouse' => $signature_warehouse,
             'signature_marketing' => $signature_marketing,
             'signature_scm' => $signature_scm,
+
+            'description_letter_retur' => $description_letter_retur,
             'information_letter_retur' => $information_letter_retur,
             'no_sr_letter_retur' => $no_sr_letter_retur,
+            'no_sj_letter_retur' => $no_sj_letter_retur,
+           
         ];
         $pdf = Pdf::loadView('letter_retur.pdf.letter_retur', $data);
 

@@ -38,11 +38,12 @@ class DivisionControllers extends Controller
         try {
             $payload = [
                 'uid' => Str::slug(request('name')),
-                'name' => request('name')
+                'name' => request('name'),
             ];
             Division::create($payload);
             return redirect('/divisions')->with(['alertSuccess' => 'Successfully create division data!']);
         } catch (Throwable $th) {
+            dd($th);
             if (preg_match("/duplicate/i", $th->getMessage())) {
                 return redirect('/divisions')->with(['alertError' => 'Division data already registered!']);
             }
@@ -69,7 +70,7 @@ class DivisionControllers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Division $division)
     {
         //
     }
@@ -77,9 +78,19 @@ class DivisionControllers extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Division $division)
     {
         //
+        try {
+            $division->delete();
+            return redirect('/divisions')->with(['alertSuccess' => 'Successfully deleted division data!']);
+        } catch (Throwable $th) {
+            dd($th);
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/divisions')->with(['alertError' => 'Division data already registered!']);
+            }
+            return redirect('/divisions')->with(['alertError' => 'Failed to deleted division!']);
+        };
     }
 
     public function datatables()

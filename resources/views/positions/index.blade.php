@@ -9,7 +9,7 @@
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"> <i class="fa-solid fa-users-between-lines"></i></div>
-                                Account User
+                                Position
                             </h1>
                             <div class="page-header-subtitle">Example dashboard overview and content summary
                             </div>
@@ -24,7 +24,7 @@
                 <div class="card-header py-2">
                     <div class="row">
                         <div class="me-auto col-auto my-auto">
-                            List User
+                            List Positions
                         </div>
                         <div class="ms-auto col-auto">
                             <div class="dropdown no-caret">
@@ -58,40 +58,27 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @include('partials.alert')
                     <button
                         class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
-                        type="button" data-bs-toggle="modal" data-bs-target="#add_new_division_modal">
+                        type="button" data-bs-toggle="modal" data-bs-target="#add_new_position_modal">
                         <i class="fas fa-plus fa-fw"></i>
                     </button>
-                    <div class="card-body">
-                        <div class="col">
-                            <table id="signature_data_table" width="100%"></table>
-                        </div>  
-                    </div>
 
                     <div class="container">
-                        <button
-                        class="btn btn-success btn-xl btn-icon position-fixed end-0 me-5 lift floating-button bottom-0 mb-5"
-                        type="button" data-bs-toggle="modal" data-bs-target="#add_new_warehouse_modal">
-                        <i class="fas fa-plus fa-fw"></i>
-                    </button>
+                        @include('partials.alert')
+
+                        <table class="table small" width="100%" id="position_list_data_table">
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    @include('create-user.modals.create')
-    @include('create-user.modals.delete_user')
-    @include('create-user.modals.edit_user')
+    @include('positions.modals.add_new_position')
+    @include('positions.modals.delete_position')
 
-    <script src="/js/CreateUser/_init.js"></script>
-    <script src="/js/CreateUser/dt.js"></script>
-    <script src="/js/CreateUser/delete.js"></script>
-    <script src="/js/CreateUser/edit.js"></script>
-    <script src="/js/functions/spinner.js"></script>
-    <script src="/js/functions/divisions.js"></script>
-    <script src="/js/functions/positions.js"></script>
+    <script src="/js/position/_init.js"></script>
+    <script src="/js/position/dt.js"></script>
+    <script src="/js/position/delete.js"></script>
 @endsection
-

@@ -16,6 +16,16 @@
             <div class="wrapper patient-data">
                 <table class="table-patient-data">
                     <tr>
+                        <td class="col-1">No SPK</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_spk_rma }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-1">Serial Number</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $no_sn_rma }}</td>
+                    </tr>
+                    <tr>
                         <td class="col-1">Description</td>
                         <td class="col-2">:</td>
                         <td>{{ $description_rma }}</td>
@@ -35,6 +45,49 @@
                         <td class="col-2">:</td>
                         <td>{{ $warranty }}</td>
                     </tr>
+         
+                    @foreach ($rmaTypes as $item)
+                        <tr>
+                            <td class="col-2">Serial Number </td>
+                            <td class="col-2">:</td>
+                            <td class="col-2">{{ $item['sn'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Type </td>
+                            <td class="col-2">:</td>
+                            <td class="col-2">{{ $item['type'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-2">Date </td>
+                            <td class="col-2">:</td>
+                            <td class="col-2">{{ $item['tgl'] }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+
+            <div class="wrapper receipt-details">
+                <table class="table-receipt-details">
+                    <thead>
+                        <tr>
+                            <th class="col-2">Kelengkapan </th>
+                            <th class="col-2">Qty </th>
+                            <th class="col-3">Tidak Ada</th>
+                            <th class="col-3">Ada</th>
+                            <th class="col-4">Fungsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rmaQc as $qc)
+                            <tr class="item-list">
+                                <td class="col-2">{{ $qc['kelengkapan'] }}</td>
+                                <td class="col-2">{{ $qc['qty'] }}</td>
+                                <td class="col-3">{{ $qc['no'] }}</td>
+                                <td class="col-3">{{ $qc['yes'] }}</td>
+                                <td class="col-4">{{ $qc['fungsi'] }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             <!-- Receipt signature -->
@@ -65,8 +118,8 @@
 
                     </tr>
 
-                     {{-- Sign Text 2 --}}
-                     <tr>
+                    {{-- Sign Text 2 --}}
+                    <tr>
                         <td>{{ $sales_name }}</td>
                         <td>{{ $technician_name }}</td>
                         <td>{{ $qc_name }}</td>

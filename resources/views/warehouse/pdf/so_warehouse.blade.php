@@ -18,6 +18,11 @@
             <div class="wrapper patient-data">
                 <table class="table-patient-data">
                     <tr>
+                        <td class="col-1">Number SO</td>
+                        <td class="col-2">:</td>
+                        <td>{{ $number_so }}</td>
+                    </tr>
+                    <tr>
                         <td class="col-1">Description</td>
                         <td class="col-2">:</td>
                         <td>{{ $description_warehouse }}</td>

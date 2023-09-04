@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
 use App\Models\Position;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PositionControllers extends Controller
@@ -13,6 +15,10 @@ class PositionControllers extends Controller
     public function index()
     {
         //
+        $data = [
+            "title" => "Position | IMI Tracking",
+        ];
+        return view('positions.index', $data);
     }
 
     /**
@@ -26,9 +32,23 @@ class PositionControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
         //
+        try {
+            $payload = [
+                'uid' => Str::slug(request('name')),
+                'name' => request('name'),
+            ];
+            Position::create($payload);
+            return redirect('/positions')->with(['alertSuccess' => 'Successfully create position data!']);
+        } catch (Throwable $th) {
+            dd($th);
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/positions')->with(['alertError' => 'Position data already registered!']);
+            }
+            return redirect('/positions')->with(['alertError' => 'Failed to add new position!']);
+        };
     }
 
     /**
@@ -61,5 +81,19 @@ class PositionControllers extends Controller
     public function destroy(Position $position)
     {
         //
+        try {
+            $position->delete();
+            return redirect('/positions')->with(['alertSuccess' => 'Successfully deleted position data!']);
+        } catch (Throwable $th) {
+            dd($th);
+            if (preg_match("/duplicate/i", $th->getMessage())) {
+                return redirect('/positions')->with(['alertError' => 'Position data already registered!']);
+            }
+            return redirect('/positions')->with(['alertError' => 'Failed to deleted position!']);
+        };
+    }
+    public function datatables()
+    {
+        return Position::all();
     }
 }
